@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 
 // 🔹 Gradient line
 function GradientLine() {
@@ -51,12 +52,12 @@ export default function FaqAccordion() {
 
   return (
     <div className="relative w-full z-20">
-      <div className="mx-auto max-w-5xl mt-60">
+      <div className="mx-auto max-w-5xl mt-10">
         {/* --- HEADER --- */}
         <div className="relative mb-12">
           <GradientLine />
           <h1 className="archivo-expanded py-12 text-center font-serif text-4xl font-medium tracking-wide text-[#000A1D] md:text-5xl">
-            Frequently Asked Questions
+            FAQ’s
           </h1>
           <GradientLine />
         </div>
@@ -126,12 +127,14 @@ export default function FaqAccordion() {
 
         <div className="mt-20 flex justify-center pb-20">
           <motion.div whileHover={{ scale: 1.05 }}>
-            <button className="relative overflow-hidden px-8 py-3 rounded-full font-medium text-base text-[#000A1D] border border-[#000A1D]/30 hover:border-transparent bg-transparent transition-colors duration-300 group">
-              <span className="relative z-20 flex items-center justify-center w-full h-full group-hover:text-white transition-colors duration-300">
-                Contact Us
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-            </button>
+            <Link href="/contact">
+              <button className="relative overflow-hidden px-6 py-3 rounded-full font-medium text-base text-[#000A1D] border border-[#000A1D]/30 hover:border-transparent bg-transparent transition-colors duration-300 group">
+                <span className="relative z-20 flex items-center justify-center w-full h-full group-hover:text-white transition-colors duration-300">
+                  Contact Us
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+              </button>
+            </Link>
           </motion.div>
         </div>
       </div>

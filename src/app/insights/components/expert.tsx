@@ -5,7 +5,7 @@ import { useRef, useState } from "react"
 import Image from "next/image"
 
 // ============================================================================
-// 🔹 Component FilterTabs
+// 🔹 Component FilterTabs - ĐÃ FIX RESPONSIVE
 // ============================================================================
 const categories = ["All", "Websites", "SEO", "Paid Media", "Social Media"]
 
@@ -14,7 +14,8 @@ function FilterTabs() {
     const [hoveredTab, setHoveredTab] = useState<string | null>(null)
 
     return (
-        <div className="grid grid-cols-5 w-full max-w-7xl mx-auto mb-20 px-8 md:px-0">
+        // ✅ FIX 1: Chuyển sang flex + cuộn ngang trên mobile, giữ grid trên desktop
+        <div className="flex flex-row overflow-x-auto md:grid md:grid-cols-5 w-full max-w-7xl mx-auto mb-12 md:mb-20 px-4 sm:px-8 md:px-0">
             {categories.map((category) => {
                 const isActive = activeTab === category
                 const isHovered = hoveredTab === category
@@ -25,9 +26,11 @@ function FilterTabs() {
                         onClick={() => setActiveTab(category)}
                         onMouseEnter={() => setHoveredTab(category)}
                         onMouseLeave={() => setHoveredTab(null)}
-                        className="relative flex flex-col items-start cursor-pointer group"
+                        // ✅ FIX 2: Thêm flex-shrink-0 và padding để scroll
+                        className="relative flex flex-col items-start cursor-pointer group flex-shrink-0 pr-8 md:pr-0"
                     >
-                        <span className="text-lg text-[#444444] group-hover:text-[#000A1D] transition-colors duration-300 relative z-10 pb-3">
+                        {/* ✅ FIX 3: Giảm cỡ chữ trên mobile, thêm whitespace-nowrap */}
+                        <span className="text-base md:text-lg text-[#444444] group-hover:text-[#000A1D] transition-colors duration-300 relative z-10 pb-3 whitespace-nowrap">
                             {category}
                         </span>
 
@@ -35,7 +38,8 @@ function FilterTabs() {
                             className="absolute bottom-0 left-0 w-full bg-[#D1D1D1]"
                             initial={{ scaleX: 0 }}
                             animate={{
-                                scaleX: isActive || isHovered ? 0.9 : 0.9,
+                                // ✅ FIX 4 (Logic): Sửa 0.9 thành 0 để thanh gạch chân biến mất
+                                scaleX: isActive || isHovered ? 0.9 : 0,
                                 height: isActive || isHovered ? 2 : 1,
                                 backgroundColor: isActive || isHovered ? "#000A1D" : "#D1D1D1",
                             }}
@@ -50,7 +54,7 @@ function FilterTabs() {
 }
 
 // ============================================================================
-// 🔹 Định nghĩa Type và Dữ liệu
+// 🔹 Định nghĩa Type và Dữ liệu (Giữ nguyên)
 // ============================================================================
 interface CaseStudyItem {
     src: string
@@ -62,19 +66,19 @@ interface CaseStudyItem {
 const caseStudiesData: CaseStudyItem[][] = [
     [
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "What a Full-Service Marketing Agency Can Do for Your Brand",
             author: "Olma",
             year: "2025",
         },
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "Various ideas and creative concepts based on market research",
             author: "Olma",
             year: "2025",
         },
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "Understanding the Full Spectrum of Services Provided by Digital Agencies",
             author: "Olma",
             year: "2025",
@@ -82,19 +86,19 @@ const caseStudiesData: CaseStudyItem[][] = [
     ],
     [
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "What a Full-Service Marketing Agency Can Do for Your Brand",
             author: "Olma",
             year: "2025",
         },
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "Various ideas and creative concepts based on market research",
             author: "Olma",
             year: "2025",
         },
         {
-            src: "/assets/tag.png",
+            src: "/assets/expert.jpg",
             title: "Understanding the Full Spectrum of Services Provided by Digital Agencies",
             author: "Olma",
             year: "2025",
@@ -103,7 +107,7 @@ const caseStudiesData: CaseStudyItem[][] = [
 ]
 
 // ============================================================================
-// 🔹 Component CaseStudies chính
+// 🔹 Component CaseStudies chính - ĐÃ FIX RESPONSIVE
 // ============================================================================
 export default function ExpertSection() {
     const section4Ref = useRef<HTMLDivElement>(null)
@@ -115,14 +119,20 @@ export default function ExpertSection() {
     return (
         <motion.section
             ref={section4Ref}
-            className="relative justify-center -mt-10 z-10 bg-white pt-32 pb-32 px-8 md:px-16 lg:px-24"
+            // ✅ FIX 5: Giảm padding lề trên mobile
+            className="relative justify-center -mt-5 z-10 bg-white pt-32 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
         >
             <div className="max-w-7xl mx-auto">
-                <h2 className="archivo-expanded text-6xl font-medium text-center text-[#000A1D] mb-16">Expert Insights</h2>
+                {/* ✅ FIX 6: Giảm cỡ chữ và margin của tiêu đề trên mobile */}
+                <h2 className="archivo-expanded text-4xl sm:text-5xl md:text-6xl font-medium text-center text-[#000A1D] mb-12 md:mb-16">
+                    Expert Insights
+                </h2>
                 <FilterTabs />
-                <div className="flex flex-col gap-20">
+                {/* ✅ FIX 7: Giảm gap giữa các hàng trên mobile */}
+                <div className="flex flex-col gap-12 md:gap-20">
                     {caseStudiesData.map((row, rowIndex) => (
-                        <div key={rowIndex} className="relative grid md:grid-cols-3 gap-8">
+                        // ✅ FIX 8: Thêm 'grid-cols-1' cho mobile và 'gap-12'
+                        <div key={rowIndex} className="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
                             {row.map((item, i) => (
                                 <motion.div
                                     key={i}

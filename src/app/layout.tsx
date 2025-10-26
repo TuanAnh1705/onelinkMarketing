@@ -30,26 +30,21 @@ export default function RootLayout({
           type="image/png"
           sizes="32x20"
         />
-
-        {/* Sửa lỗi này: Bỏ check `typeof window` */}
         <ThemeModeScript />
-
         <link
           href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className={`${plus_jakarta_sans.className}`}>
-        <ThemeProvider theme={customTheme}>
-          {/* Thêm Navbar ở đây */}
-          <Navbar />
 
-          {/* Thêm main và class pt-20 để đẩy nội dung xuống */}
+      {/* THAY ĐỔI Ở ĐÂY: Thêm 'overflow-x-hidden'
+      */}
+      <body className={`${plus_jakarta_sans.className} overflow-x-hidden`}>
+        <ThemeProvider theme={customTheme}>
+          <Navbar />
           <main className="pt-20">
             {children}
           </main>
-
-          {/* Thêm Footer ở đây */}
           <Footer />
         </ThemeProvider>
       </body>

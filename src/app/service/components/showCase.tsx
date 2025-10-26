@@ -15,7 +15,7 @@ const slides = [
     subtitle: "Fitness",
     description: "Digital Asset Development",
     year: "2025",
-    image: "/assets/show1.png",
+    image: "/assets/tag4.jpg",
   },
   {
     id: 2,

@@ -34,11 +34,13 @@ export function CoreValuesSection() {
     const y = useTransform(smooth, [0, 1], ["-15%", "15%"])
 
     return (
-        <section className="bg-[#050B18] text-white py-20 md:py-32 px-8 overflow-hidden">
+        // THAY ĐỔI: Giảm padding 'px-8' xuống 'px-6' cho mobile
+        <section className="bg-[#050B18] text-white py-20 md:py-32 px-6 md:px-8 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 {/* ==================== CORE VALUES ==================== */}
                 <div className="text-center mb-20">
-                    <h2 className="archivo-expanded text-6xl md:text-7xl text-white font-medium">Our Core Values</h2>
+                    {/* THAY ĐỔI: Chỉnh lại cỡ chữ (mobile-first) */}
+                    <h2 className="archivo-expanded text-4xl sm:text-5xl md:text-7xl text-white font-medium">Our Core Values</h2>
                 </div>
 
                 {/* --- 3 CARD TRÊN --- */}
@@ -46,7 +48,8 @@ export function CoreValuesSection() {
                     {coreValuesData.map((value) => (
                         <div
                             key={value.title}
-                            className="relative rounded-2xl overflow-hidden p-8 h-64 bg-gradient-to-br from-[#0A4BE1] to-[#04205E]"
+                            // THAY ĐỔI: Giảm padding 'p-8' xuống 'p-6' cho mobile
+                            className="relative rounded-2xl overflow-hidden p-6 md:p-8 h-64 bg-gradient-to-br from-[#0A4BE1] to-[#04205E]"
                         >
                             <div className="absolute inset-0">
                                 <Image
@@ -59,19 +62,20 @@ export function CoreValuesSection() {
                             <div className="absolute inset-0 bg-[#0074E5]/70"></div>
                             {/* Vùng chứa text */}
                             <div className="relative z-10 flex flex-col justify-between h-full">
-                                {/* CHANGED: Điều chỉnh lại cỡ chữ cho phù hợp */}
-                                <h3 className="archivo-expanded text-5xl text-white font-bold">{value.title}</h3>
-                                {/* CHANGED: Xóa các class không cần thiết */}
-                                <p className="neulis-alt-regular font-medium text-white text-lg leading-snug">{value.description}</p>
+                                {/* THAY ĐỔI: Cỡ chữ h3 responsive */}
+                                <h3 className="archivo-expanded text-4xl md:text-5xl text-white font-bold">{value.title}</h3>
+                                {/* THAY ĐỔI: Cỡ chữ p responsive */}
+                                <p className="neulis-alt-regular font-medium text-white text-base md:text-lg leading-snug">{value.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* ==================== LEAD ENGINE ==================== */}
-                <div ref={parallaxRef} className="grid grid-cols-1 lg:grid-cols-3 gap-0 items-stretch  overflow-hidden">
+                <div ref={parallaxRef} className="grid grid-cols-1 lg:grid-cols-3 gap-0 items-stretch overflow-hidden">
                     {/* --- ẢNH PARALLAX --- */}
-                    <div className="relative h-[700px] lg:col-span-2 overflow-hidden">
+                    {/* THAY ĐỔI: Chiều cao ảnh responsive */}
+                    <div className="relative h-[350px] sm:h-[450px] lg:h-[560px] lg:col-span-1 overflow-hidden">
                         <motion.div style={{ y }} className="absolute inset-0 scale-120 will-change-transform">
                             <Image
                                 src="/assets/core.jpg"
@@ -84,12 +88,13 @@ export function CoreValuesSection() {
                     </div>
 
                     {/* --- CARD TEXT BÊN PHẢI --- */}
-                    <div className="bg-gradient-to-br from-[#0074E5] to-[#162660] p-10 md:p-14 flex flex-col justify-center">
-                        <div className="max-w-sm">
-                            <h2 className="archivo-expanded text-white text-3xl md:text-4xl font-medium leading-tight mb-8">
+                    {/* THAY ĐỔI: Padding responsive */}
+                    <div className="bg-gradient-to-br lg:col-span-2 from-[#0074E5] to-[#162660] p-6 sm:p-10 md:p-14 flex flex-col justify-start">
+                        <div className="max-w-3xl">
+                            <h2 className="archivo-expanded text-white text-3xl md:text-5xl font-medium leading-tight mb-8">
                                 From a Lifeless Website to a Lead Engine
                             </h2>
-                            <ul className="neulis-alt-regular font-medium space-y-4 text-base md:text-lg text-white">
+                            <ul className="neulis-alt-regular font-medium space-y-4 text-base md:text-xl text-white">
                                 <ListItem>
                                     An <span className="font-bold">SEO/UX-optimized website</span> that generates leads in the <span className="font-bold">US, UK, and AU markets.</span>
                                 </ListItem>
@@ -101,11 +106,10 @@ export function CoreValuesSection() {
                             </ul>
                             <a
                                 href="#"
-                                className="group relative inline-block mt-10 text-white border border-white rounded-full px-6 py-2 text-sm transition-colors duration-300 ease-in-out overflow-hidden hover:text-black"
+                                // THAY ĐỔI: Thêm 'mt-8' cho mobile
+                                className="group relative inline-block mt-8 md:mt-10 text-white border border-white rounded-full px-6 py-2 text-sm transition-colors duration-300 ease-in-out overflow-hidden hover:text-black"
                             >
-                                {/* Lớp nền trắng trượt lên */}
                                 <span className="absolute inset-0 w-full h-full bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
-                                {/* Text nằm ở trên */}
                                 <span className="neulis-alt-regular font-medium relative">Learn More</span>
                             </a>
                         </div>

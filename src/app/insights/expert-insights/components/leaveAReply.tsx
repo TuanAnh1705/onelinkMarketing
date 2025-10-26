@@ -30,7 +30,7 @@ function FormField({ placeholder, name, type = "text", isTextarea = false }: For
                 <input type={type} name={name} placeholder={placeholder} className={commonClasses} />
             )}
             {/* Gradient line với độ dày 0.5px */}
-            <div className="h-[0.5px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+            <div className="h-[0.8px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
         </div>
     )
 }
@@ -41,7 +41,7 @@ export function ReplyForm() {
         <section className="bg-white py-20 px-4">
             <div className="mx-auto max-w-7xl">
                 {/* Section Header */}
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-2">Leave a Reply</h2>
+                <h2 className="archivo-expanded text-4xl md:text-5xl font-medium text-slate-800 mb-2">Leave a Reply</h2>
                 <p className="neulis-alt-regular text-[#444444] mb-12 mt-10 text-xl">
                     Your email address will not be published. Required fields are marked <span className="text-red-500">*</span>
                 </p>

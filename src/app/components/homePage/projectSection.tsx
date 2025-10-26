@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
 import { useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function SectionProjects() {
   const section4Ref = useRef<HTMLDivElement>(null)
@@ -37,7 +38,7 @@ export default function SectionProjects() {
           scale: hoveredIndex !== null ? 1.1 : 0,
         }}
         // Bạn cũng có thể điều chỉnh transition cho scale ở đây nếu muốn nó xuất hiện/biến mất nhanh hơn
-        transition={{ type: "spring", stiffness: 300, damping: 25 }} 
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
       >
         View Project
       </motion.div>
@@ -46,15 +47,15 @@ export default function SectionProjects() {
       <div className="max-w-7xl mx-auto flex flex-col gap-20">
         {[
           [
-            { src: "/assets/tag.png", title: "Tag. Fitness" },
+            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
             { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
           ],
           [
-            { src: "/assets/tag.png", title: "Tag. Fitness" },
+            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
             { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
           ],
           [
-            { src: "/assets/tag.png", title: "Tag. Fitness" },
+            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
             { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
           ],
         ].map((row, rowIndex) => (
@@ -88,12 +89,14 @@ export default function SectionProjects() {
       {/* nút cuối */}
       <div className="flex justify-center mt-20 relative">
         <motion.div whileHover={{ scale: 1.05 }} style={{ opacity: buttonOpacity, y: buttonY }}>
-          <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-medium text-sm text-[#444444] border-[0.5px] border-[#444444] hover:border-transparent bg-white transition-colors duration-300 group">
-            <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-white">
-              View All Work
-            </span>
-            <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-          </button>
+          <Link href="/insights">
+            <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-medium text-sm text-[#444444] border-[0.5px] border-[#444444] hover:border-transparent bg-white transition-colors duration-300 group">
+              <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-white">
+                View All Work
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+            </button>
+          </Link>
         </motion.div>
       </div>
     </motion.section>

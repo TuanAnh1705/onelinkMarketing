@@ -2,8 +2,8 @@
 
 import { useRef } from "react"
 import TitleSection from "./components/title"
-import FaqAccordion from "../service/components/faqSection"
 import { ContactFormSection } from "./components/form"
+import Faq from "./components/faq"
 
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
         <div ref={containerRef}>
             <TitleSection/>
             <ContactFormSection/>
-            <FaqAccordion/>
+            <Faq/>
         </div>
     )
 }

@@ -48,8 +48,8 @@ export function ContactFormSection() {
 	return (
 		<section className="bg-white py-20 md:py-32 px-8 -mb-36 -mt-48">
 			<div className="max-w-7xl mx-auto">
-				<h2 className="archivo-expanded text-5xl md:text-5xl font-medium text-[#000A1D] text-center max-w-5xl mx-auto leading-tight">
-					Let&apos;s Drop Us A Line And <br/> Get The Project Started
+				<h2 className="archivo-expanded text-3xl md:text-5xl font-medium text-[#000A1D] text-center max-w-5xl mx-auto leading-tight">
+					Drop Us A Line To <br/> Get Your Project Started
 				</h2>
 
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-20">
@@ -58,8 +58,7 @@ export function ContactFormSection() {
 						<div>
 							<h3 className="archivo-expanded text-lg font-medium text-[#444444] mb-4">Get in touch</h3>
 							<p className="text-[#000A1D] neulis-alt-regular font-medium leading-relaxed mb-4">
-								We&apos;re excited to hear from you
-								<br /> and let&apos;s start something special <br /> together
+								We’re excited to hear from you! <br/> Let’s start something together.
 							</p>
 							<a
 								href="mailto:hello@onelinkmarketing.com"

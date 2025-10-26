@@ -1,7 +1,5 @@
 "use client"
 
-import { useRef, memo } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 
 
 
@@ -17,8 +15,8 @@ export default function TitleSection() {
             <div className="max-w-7xl mx-auto relative">
                 {/* Header */}
                 <div className="mb-16">
-                    <h1 className="archivo-expanded text-8xl md:text-8xl font-bold text-center tracking-wider bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent mb-8">
-                        CONTACT
+                    <h1 className="archivo-expanded text-4xl md:text-8xl font-bold text-center tracking-wider bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent mb-8">
+                        CONTACT US
                     </h1>
                     <GradientBorder />
                 </div>

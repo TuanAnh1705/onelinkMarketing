@@ -32,7 +32,7 @@ export default function AnimatedText() {
                         <span className="text-gray-400">Shaping</span> digital <br />
                         <span className="text-gray-400">experiences that</span> connect{" "}
                         <br />
-                        <span className="text-gray-400">and</span> perform{" "}
+                        <span className="text-gray-400">and</span> perform
                         <span className="text-gray-400">, for</span> growing <br />
                         <span className="text-gray-400">markets since</span>
                     </motion.h2>

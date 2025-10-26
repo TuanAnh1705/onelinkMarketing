@@ -162,7 +162,7 @@ export default function ExpertiseSection() {
                         EXPERTISE
                     </h1>
                     <GradientBorder />
-                    <p className="archivo-expanded font-medium text-[#000A1D] text-center text-xl md:text-5xl max-w-5xl mx-auto leading-tight py-8">
+                    <p className="archivo-expanded font-medium text-[#000A1D] text-center text-xl md:text-5xl max-w-5xl mx-auto leading-none py-8">
                         We provide a single, <br /> integrated roadmap to solve <br /> all your marketing challenges.
                     </p>
                     <GradientBorder />

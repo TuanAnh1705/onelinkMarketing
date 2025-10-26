@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import { useRef } from "react"
+import Link from "next/link" // 🚀 THÊM IMPORT LINK
 
 export default function SectionWork() {
     const section3Ref = useRef<HTMLDivElement>(null)
@@ -54,7 +55,7 @@ export default function SectionWork() {
                       - Desktop: Khôi phục lại right-24, bottom-64 và căn trái
                     */
                     className="absolute bottom-48 left-6 right-6 mx-auto text-center max-w-md font-medium
-                               lg:bottom-64 lg:right-24 lg:left-auto lg:mx-0 lg:text-left"
+                                  lg:bottom-64 lg:right-24 lg:left-auto lg:mx-0 lg:text-left"
                 >
                     <p className="text-lg leading-relaxed text-[#444444]">
                         We are <span className="font-bold">Onelink Marketing</span> - uniting strategy, 
@@ -74,22 +75,25 @@ export default function SectionWork() {
                       - Desktop: Khôi phục lại right-80, bottom-40
                     */
                     className="absolute bottom-24 left-1/2 -translate-x-1/2
-                               lg:bottom-44 lg:right-90 lg:left-auto lg:translate-x-0"
+                                  lg:bottom-44 lg:right-90 lg:left-auto lg:translate-x-0"
                 >
-                    <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
-                        
-                        {/* Lớp Chữ (Trên Cùng) */}
-                        <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
-                            Learn More About Us
-                        </span>
-                        
-                        {/* Lớp Nền Trắng Trượt Lên */}
-                        <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-                        
-                        {/* Lớp Viền Mới (Nằm trên lớp nền trắng) */}
-                        <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-300 z-10 pointer-events-none"></span>
+                    {/* ✅ BỌC NÚT BẰNG THẺ LINK */}
+                    <Link href="/about">
+                        <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                            
+                            {/* Lớp Chữ (Trên Cùng) */}
+                            <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
+                                Learn More About Us
+                            </span>
+                            
+                            {/* Lớp Nền Trắng Trượt Lên */}
+                            <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+                            
+                            {/* Lớp Viền Mới (Nằm trên lớp nền trắng) */}
+                            <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-300 z-10 pointer-events-none"></span>
 
-                    </button>
+                        </button>
+                    </Link>
                 </motion.div>
             </div>
         </section>

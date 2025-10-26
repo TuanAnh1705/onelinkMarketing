@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 
 export function PartnerSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -39,9 +40,8 @@ export function PartnerSection() {
               key={index}
               // [!code focus:4]
               // Căn giữa card + divider trên mobile, và áp dụng translate-x trên desktop
-              className={`flex flex-col lg:flex-row lg:items-stretch w-full items-center ${
-                index >= 1 ? "lg:-translate-x-2" : ""
-              }`}
+              className={`flex flex-col lg:flex-row lg:items-stretch w-full items-center ${index >= 1 ? "lg:-translate-x-2" : ""
+                }`}
             >
               <FeatureCard
                 iconSrc={feature.iconSrc}
@@ -113,12 +113,14 @@ export function PartnerSection() {
             <motion.div whileHover={{ scale: 1.05 }}>
               {/* [!code focus:2] */}
               {/* Giảm padding và font-size trên mobile */}
-              <button className="relative overflow-hidden px-10 py-3 md:px-5 md:py-2 rounded-full font-medium text-base md:text-sm text-white border border-white/30 hover:border-transparent bg-transparent transition-colors duration-300 group">
-                <span className="relative z-20 flex items-center justify-center w-full h-full">
-                  Contact Us
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-              </button>
+              <Link href="/contact">
+                <button className="relative overflow-hidden px-10 py-3 md:px-5 md:py-2 rounded-full font-medium text-base md:text-sm text-white border border-white/30 hover:border-transparent bg-transparent transition-colors duration-300 group">
+                  <span className="relative z-20 flex items-center justify-center w-full h-full">
+                    Contact Us
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+                </button>
+              </Link>
             </motion.div>
           </div>
         </div>

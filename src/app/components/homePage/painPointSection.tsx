@@ -9,25 +9,25 @@ const timelineItems = [
         title: "Fragmented Marketing",
         description:
             "Working with multiple agencies leads to inconsistent \n messaging and a lack of control.",
-        image: "/assets/mockup1.png",
+        image: "/assets/pp1.png",
     },
     {
         title: "High Costs, Low ROI",
         description:
             "You invest heavily, but campaigns lack synergy, \n resulting in an uncertain return on investment.",
-        image: "/assets/mockup1.png",
+        image: "/assets/pp2.png",
     },
     {
         title: "Weak Brand Identity",
         description:
             "Your brand's message is unclear, and your website \n fails to generate real leads or conversions.",
-        image: "/assets/mockup1.png",
+        image: "/assets/pp3.png",
     },
     {
         title: "Struggling to Scale Globally",
         description:
             "Lack of a cohesive strategy makes it difficult to \n compete and expand into international markets.",
-        image: "/assets/mockup1.png",
+        image: "/assets/pp4.png",
     },
 ]
 
@@ -88,7 +88,7 @@ export default function Page() {
                     {/* Right Side - Text List */}
                     {/* FIX: order-1 (hiển thị trước) trên mobile, lg:order-2 (hiển thị sau) trên desktop */}
                     {/* FIX: Bỏ pl-32 và translate-y trên mobile */}
-                    <div className="w-full flex-1 flex flex-col justify-center lg:pl-32 lg:translate-y-16 relative order-1 lg:order-2">
+                    <div className="w-full flex-1 flex flex-col justify-center lg:pl-28 lg:translate-y-16 relative order-1 lg:order-2">
                         <div className="relative">
                             {/* Line đầu */}
                             <div className="h-px bg-gradient-to-r from-[#0074E5] to-[#162660]" />
@@ -128,7 +128,7 @@ export default function Page() {
                                             {/* FIX: w-full trên mobile, lg:w-[520px] trên desktop, bỏ translate-x */}
                                             <p
                                                 className={cn(
-                                                    "neulis-alt-extralight font-semibold text-base leading-relaxed transition-all duration-300 w-full lg:w-[520px] lg:translate-x-8 whitespace-pre-line text-left",
+                                                    "neulis-alt-extralight font-semibold text-base leading-relaxed transition-all duration-300 w-full lg:w-[520px] lg:translate-x-2 whitespace-pre-line text-left",
                                                     hoveredIndex === index
                                                         ? "text-white"
                                                         : "text-[#444444]"

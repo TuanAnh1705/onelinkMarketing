@@ -26,7 +26,7 @@ const BlogSection = () => {
     }
 
 
-    const imageUrl = "/assets/hero.jpg"
+    const imageUrl = "/assets/tag1.jpg"
 
     return (
         <div className="bg-white font-sans text-gray-800">
@@ -36,7 +36,7 @@ const BlogSection = () => {
                     <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
                         Various ideas and creative concepts based on market research
                     </h1>
-                    <p className="text-gray-500">By Olma - 2025</p>
+                    <p className="neulis-alt-regular font-medium text-gray-500">By Olma - 2025</p>
                 </header>
             </div>
 
@@ -131,7 +131,7 @@ const BlogSection = () => {
 
                     {/* --- UX Principal Section --- */}
                     <section>
-                        <h2 className="archivo-expanded text-4xl medium text-[#000A1D] mb-6">UX Principal</h2>
+                        <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] mb-6">UX Principal</h2>
                         <p className="neulis-alt-regular font-medium mb-8 text-lg text-[#000A1D]">
                             Always ready to push the boundaries, especially when it comes to our own platform. Our analytical eye to
                             create a site that has minimum design but maximum performance. It also perfectly reflects the journey to
