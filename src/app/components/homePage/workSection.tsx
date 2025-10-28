@@ -12,7 +12,7 @@ export default function SectionWork() {
         target: section3Ref,
         offset: ["start start", "end start"],
     })
-    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["53%", "-37%"])
+    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["53%", "-35%"])
     const textX = useSpring(textXRaw, { stiffness: 60, damping: 20, mass: 1.2 })
     const yearsOpacity = useSpring(useTransform(scrollYProgress, [0.38, 0.42], [1, 0]), { stiffness: 80, damping: 25 })
     const workScale = useSpring(useTransform(scrollYProgress, [0.4, 0.7], [1, 0.3]), { stiffness: 80, damping: 25 })
@@ -42,7 +42,7 @@ export default function SectionWork() {
                         style={{ scale: workScale, opacity: workOpacity }}
                         className="text-[15vw] font-bold text-[#000A1D] leading-none tracking-tight"
                     >
-                        WORK
+                        WORKS
                     </motion.span>
                 </motion.div>
 

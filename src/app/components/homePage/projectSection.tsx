@@ -47,40 +47,35 @@ export default function SectionProjects() {
       <div className="max-w-7xl mx-auto flex flex-col gap-20">
         {[
           [
-            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
-            { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
-          ],
-          [
-            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
-            { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
-          ],
-          [
-            { src: "/assets/tag4.jpg", title: "Tag. Fitness" },
-            { src: "/assets/steel.jpg", title: "Steel Works Seattle" },
+            { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/case-studies/tag" },
+            { src: "/assets/steel.jpg", title: "Steel Works Seattle", href:"/case-studies/steel" },
           ],
         ].map((row, rowIndex) => (
           <div key={rowIndex} className="grid md:grid-cols-2 gap-16">
             {row.map((item, i) => (
-              <motion.div
-                key={i}
-                onMouseEnter={() => setHoveredIndex(rowIndex * 2 + i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className={`text-left ${hoveredIndex === rowIndex * 2 + i ? "cursor-none" : "cursor-pointer"}`}
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{
-                  duration: 2.4,
-                  ease: [0.25, 1, 0.3, 1],
-                  delay: i * 0.2, // 👈 hiệu ứng lan tỏa
-                }}
-                viewport={{ once: false, amount: 0.4 }}
-              >
-                <div className="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover object-center" />
-                </div>
-                <h3 className="mt-7 archivo-expanded font-medium text-xl text-[#000A1D]">{item.title}</h3>
-                <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">Digital Asset Development · 2025</p>
-              </motion.div>
+              // 💡 (1) BỌC BẰNG LINK VÀ DÙNG item.href
+              <Link key={i} href={item.href}> 
+                <motion.div
+                  // 💡 (2) KEY ĐÃ CHUYỂN LÊN <Link>
+                  onMouseEnter={() => setHoveredIndex(rowIndex * 2 + i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`text-left ${hoveredIndex === rowIndex * 2 + i ? "cursor-none" : ""}`} // 👈 Xóa 'cursor-pointer' vì Link đã xử lý
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{
+                    duration: 2.4,
+                    ease: [0.25, 1, 0.3, 1],
+                    delay: i * 0.2,
+                  }}
+                  viewport={{ once: false, amount: 0.4 }}
+                >
+                  <div className="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                    <Image src={item.src} alt={item.title} fill className="object-cover object-center" />
+                  </div>
+                  <h3 className="mt-7 archivo-expanded font-medium text-xl text-[#000A1D]">{item.title}</h3>
+                  <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">Digital Asset Development · 2025</p>
+                </motion.div>
+              </Link>
             ))}
           </div>
         ))}

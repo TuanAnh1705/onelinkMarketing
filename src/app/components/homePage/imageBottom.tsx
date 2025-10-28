@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react"
 
 export default function ImageBottomContainer() {
     const ref = useRef<HTMLDivElement>(null)
-    
+
     // --- 🚀 THAY ĐỔI RESPONSIVE ---
     const [isMobile, setIsMobile] = useState(false)
 
@@ -32,7 +32,7 @@ export default function ImageBottomContainer() {
     })
 
     // Sử dụng 'moveDistance' đã tính toán
-    const moveY = useTransform(scrollYProgress, [0, 0.7], [0, moveDistance])
+    const moveY = useTransform(scrollYProgress, [0, 0.6], [0, moveDistance])
     const smoothY = useSpring(moveY, { stiffness: 80, damping: 25 })
 
     // Nội dung cố định
@@ -43,7 +43,7 @@ export default function ImageBottomContainer() {
     return (
         <section
             ref={ref}
-            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-96"
+            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-80 md:-top-[1000px]"
         >
             {/* Example Background image */}
             <div
@@ -72,7 +72,7 @@ export default function ImageBottomContainer() {
             {/* 🔸 Bottom Left Text (Không thay đổi) */}
             <motion.div
                 style={{ y: smoothY }}
-                className="absolute bottom-[30%] left-[5%] md:left-[8%] text-left"
+                className="absolute bottom-[50%] left-[5%] md:left-[8%] text-left"
             >
                 <p className="archivo-expanded text-5xl md:text-7xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
                     {bottomLeftText}

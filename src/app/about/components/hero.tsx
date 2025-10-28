@@ -18,7 +18,7 @@ export default function Hero() {
                         MADE IN
                     </h1>
                     {/* THAY ĐỔI TẠI ĐÂY: Thay 'to-[60%]' thành 'to-[30%]' */}
-                    <h1 className="archivo-expanded text-5xl md:text-8xl font-bold text-center tracking-wider bg-gradient-to-r from-[#FFDE1F] to-[#FC0000] to-[60%] bg-clip-text text-transparent mb-8">
+                    <h1 className="archivo-expanded text-5xl md:text-8xl font-bold text-center tracking-wider bg-[#FC0000] bg-clip-text text-transparent mb-8">
                         VIETNAM
                     </h1>
                     <GradientBorder />

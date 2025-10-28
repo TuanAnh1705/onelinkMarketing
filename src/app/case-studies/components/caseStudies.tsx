@@ -67,16 +67,8 @@ interface CaseStudyItem {
 
 const caseStudiesData: CaseStudyItem[][] = [
     [
-        { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/insights/tag" },
-        { src: "/assets/steel.jpg", title: "Steel Works Seattle", href: "/insights/steel" },
-    ],
-    [
-        { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/insights/tag" },
-        { src: "/assets/steel.jpg", title: "Steel Works Seattle", href: "/insights/steel" },
-    ],
-    [
-        { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/insights/tag" },
-        { src: "/assets/steel.jpg", title: "Steel Works Seattle", href: "/insights/steel" },
+        { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/case-studies/tag" },
+        { src: "/assets/steel.jpg", title: "Steel Works Seattle", href: "/case-studies/steel" },
     ],
 ];
 

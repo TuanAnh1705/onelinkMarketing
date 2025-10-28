@@ -4,24 +4,20 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-// 🚀 CẬP NHẬT: Thêm DropdownMenuSub
+// 🚀 CẬP NHẬT: Xóa Sub (không còn dùng)
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu"
-// THÊM MỚI: Imports cho Collapsible
+// THÊM MỚI: Imports cho Collapsible (vẫn dùng cho Services)
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { ChevronDown } from "lucide-react"
-// 🚀 FIX 1: Thêm SheetTitle vào import
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -72,15 +68,13 @@ function GradientMenuIcon() {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  // THÊM MỚI: State cho accordions
+  // 🚀 CẬP NHẬT: Xóa state của Insights và Case Studies
   const [servicesOpen, setServicesOpen] = useState(false)
-  const [insightsOpen, setInsightsOpen] = useState(false)
-  // 🚀 CẬP NHẬT: Thêm state cho Case Studies accordion
-  const [caseStudiesOpen, setCaseStudiesOpen] = useState(false)
 
   const [showNavbar, setShowNavbar] = useState(true)
   const lastScrollY = useRef(0)
 
+  // Dữ liệu Services (giữ nguyên)
   const servicesItems = [
     "All Services",
     "Strategy Consulting",
@@ -90,25 +84,7 @@ export default function Navbar() {
     "Social Media Management",
   ]
 
-  // 🚀 CẬP NHẬT: Thay đổi cấu trúc dữ liệu cho Insights
-  const insightsNavigation = [
-    { title: "All Insights", href: "/insights" },
-    {
-      title: "Case Studies",
-      // Không có href, vì nó là trigger
-      children: [
-        { title: "Tag. Fitness", href: "/insights/tag" },
-        { title: "Steel Works Seattle", href: "/insights/steel" },
-      ],
-    },
-    { 
-      title: "Expert Insights", 
-      // Giữ nguyên logic link cũ
-      href: `/insights/${"Expert Insights"
-            .toLowerCase()
-            .replace(/\s+/g, "-")}` 
-    },
-  ]
+  // 🚀 CẬP NHẬT: Xóa insightsNavigation (không còn dùng)
 
 
   // ... (useEffect cho scroll không đổi) ...
@@ -138,11 +114,8 @@ export default function Navbar() {
   // Hàm đóng sheet và reset accordions
   const closeSheet = () => {
     setIsOpen(false)
-    // Đóng accordions khi đóng sheet
     setServicesOpen(false)
-    setInsightsOpen(false)
-    // 🚀 CẬP NHẬT: Reset case studies accordion
-    setCaseStudiesOpen(false)
+    // 🚀 CẬP NHẬT: Xóa reset state không còn tồn tại
   }
 
   return (
@@ -168,7 +141,7 @@ export default function Navbar() {
                 />
               </Link>
 
-              {/* Desktop Navigation (giữ nguyên) */}
+              {/* Desktop Navigation */}
               <div className="hidden lg:flex items-center gap-8">
                 <Link
                   href="/"
@@ -190,11 +163,11 @@ export default function Navbar() {
                         <DropdownMenuItem
                           key={item}
                           className={`group neulis-alt-regular text-white cursor-pointer py-2.5 px-3 rounded-sm transition-all 
-                                               ${
-                                                 isAll
-                                                   ? "hover:bg-white/10"
-                                                   : "pl-6 hover:bg-white/10"
-                                               }`}
+                                        ${
+                                          isAll
+                                            ? "hover:bg-white/10"
+                                            : "pl-6 hover:bg-white/10"
+                                        }`}
                         >
                           {!isAll && (
                             <span className="absolute left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -228,93 +201,13 @@ export default function Navbar() {
                   About Us
                 </Link>
 
-                {/* 🚀 CẬP NHẬT: Insights Dropdown với Sub-Menu */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="neulis-alt-regular flex items-center gap-1 text-[#000a1d] hover:text-[#0066FF] transition-colors font-medium outline-none">
-                    Insights
-                    <ChevronDown className="h-4 w-4" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56 bg-[#000a1d] border-none p-4">
-                    {insightsNavigation.map((item) => {
-                      const isAll = item.title === "All Insights"
-
-                      // Nếu có children, dùng DropdownMenuSub
-                      if (item.children) {
-                        return (
-                          <DropdownMenuSub key={item.title}>
-                            <DropdownMenuSubTrigger
-                              className={`group neulis-alt-regular text-white cursor-pointer py-2.5 px-3 rounded-sm transition-all flex justify-between items-center w-full outline-none
-                                ${
-                                  isAll
-                                    ? "hover:bg-white/10"
-                                    : "pl-6 hover:bg-white/10"
-                                }`}
-                            >
-                              {!isAll && (
-                                <span className="absolute left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                  ▶
-                                </span>
-                              )}
-                              <span
-                                className={`transition-all duration-200 ${
-                                  isAll ? "" : "group-hover:translate-x-1"
-                                }`}
-                              >
-                                {item.title}
-                              </span>
-                              {/* Shadcn tự động thêm ChevronRight */}
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent className="w-56 bg-[#000a1d] border-none p-4 text-white">
-                              {item.children.map((child) => (
-                                <DropdownMenuItem
-                                  key={child.title}
-                                  className="group neulis-alt-regular text-white cursor-pointer py-2.5 px-3 rounded-sm transition-all pl-6 hover:bg-white/10"
-                                >
-                                  <span className="absolute left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                    ▶
-                                  </span>
-                                  <Link
-                                    href={child.href}
-                                    className="block w-full transition-all duration-200 group-hover:translate-x-1"
-                                  >
-                                    {child.title}
-                                  </Link>
-                                </DropdownMenuItem>
-                              ))}
-                            </DropdownMenuSubContent>
-                          </DropdownMenuSub>
-                        )
-                      }
-
-                      // Nếu không có children, dùng DropdownMenuItem như cũ
-                      return (
-                        <DropdownMenuItem
-                          key={item.title}
-                          className={`group neulis-alt-regular text-white cursor-pointer py-2.5 px-3 rounded-sm transition-all 
-                            ${
-                              isAll
-                                ? "hover:bg-white/10"
-                                : "pl-6 hover:bg-white/10"
-                            }`}
-                        >
-                          {!isAll && (
-                            <span className="absolute left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                              ▶
-                            </span>
-                          )}
-                          <Link
-                            href={item.href}
-                            className={`block w-full transition-all duration-200 ${
-                              isAll ? "" : "group-hover:translate-x-1"
-                            }`}
-                          >
-                            {item.title}
-                          </Link>
-                        </DropdownMenuItem>
-                      )
-                    })}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {/* 🚀 CẬP NHẬT: Insights đã đổi thành Case Studies (Link đơn) */}
+                <Link
+                  href="/case-studies"
+                  className="neulis-alt-regular text-[#000a1d] hover:text-[#0066FF] transition-colors font-medium"
+                >
+                  Case Studies
+                </Link>
               </div>
 
               {/* CTA Button and Mobile Menu (giữ nguyên) */}
@@ -329,7 +222,7 @@ export default function Navbar() {
                   </button>
                 </Link>
 
-                {/* --- MENU MOBILE ĐÃ THAY ĐỔI --- */}
+                {/* --- MENU MOBILE --- */}
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                   <SheetTrigger asChild className="lg:hidden">
                     <Button
@@ -344,12 +237,11 @@ export default function Navbar() {
                     </Button>
                   </SheetTrigger>
 
-                  {/* --- NỘI DUNG SHEET ĐÃ THIẾT KẾ LẠI --- */}
+                  {/* --- NỘI DUNG SHEET --- */}
                   <SheetContent
                     side="right"
                     className="w-[300px] sm:w-[350px] bg-white p-6 flex flex-col"
                   >
-                    {/* 🚀 FIX 2: Thêm SheetTitle bị thiếu và ẩn nó đi */}
                     <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
                     {/* 1. Header Logo trong Sheet */}
@@ -365,7 +257,7 @@ export default function Navbar() {
                       </Link>
                     </div>
 
-                    {/* 2. Danh sách Links (flex-grow để đẩy CTA xuống) */}
+                    {/* 2. Danh sách Links */}
                     <div className="flex-grow mt-6 flex flex-col gap-2">
                       <Link
                         href="/"
@@ -375,7 +267,7 @@ export default function Navbar() {
                         Home
                       </Link>
 
-                      {/* Mobile Services (Accordion) */}
+                      {/* Mobile Services (Accordion - giữ nguyên) */}
                       <Collapsible
                         open={servicesOpen}
                         onOpenChange={setServicesOpen}
@@ -390,7 +282,6 @@ export default function Navbar() {
                         </CollapsibleTrigger>
                         <CollapsibleContent className="flex flex-col gap-1 pl-6 pt-2 pb-2">
                           {servicesItems.map((item) => {
-                            // SỬA LỖI LINK: Logic giống hệt desktop
                             const isAll = item === "All Services"
                             const href = isAll
                               ? "/service"
@@ -420,71 +311,17 @@ export default function Navbar() {
                         About Us
                       </Link>
 
-                      {/* 🚀 CẬP NHẬT: Mobile Insights (Accordion lồng nhau) */}
-                      <Collapsible
-                        open={insightsOpen}
-                        onOpenChange={setInsightsOpen}
+                      {/* 🚀 CẬP NHẬT: Insights đã đổi thành Case Studies (Link đơn) */}
+                      <Link
+                        href="/case-studies"
+                        className="neulis-alt-regular text-[#000a1d] hover:text-[#0066FF] transition-colors font-semibold text-xl py-3"
+                        onClick={closeSheet}
                       >
-                        <CollapsibleTrigger className="flex items-center justify-between w-full neulis-alt-regular text-[#000a1d] hover:text-[#0066FF] transition-colors font-semibold text-xl py-3">
-                          <span>Insights</span>
-                          <ChevronDown
-                            className={`h-5 w-5 transition-transform ${
-                              insightsOpen ? "rotate-180" : ""
-                            }`}
-                          />
-                        </CollapsibleTrigger>
-                        <CollapsibleContent className="flex flex-col gap-1 pl-6 pt-2 pb-2">
-                          {insightsNavigation.map((item) => {
-                            // Nếu có children, render một Collapsible con
-                            if (item.children) {
-                              return (
-                                <Collapsible
-                                  key={item.title}
-                                  open={caseStudiesOpen}
-                                  onOpenChange={setCaseStudiesOpen}
-                                  className="w-full"
-                                >
-                                  <CollapsibleTrigger className="flex items-center justify-between w-full neulis-alt-regular text-[#444444] hover:text-[#0066FF] transition-colors py-2 text-base">
-                                    <span>{item.title}</span>
-                                    <ChevronDown
-                                      className={`h-4 w-4 transition-transform ${
-                                        caseStudiesOpen ? "rotate-180" : ""
-                                      }`}
-                                    />
-                                  </CollapsibleTrigger>
-                                  <CollapsibleContent className="flex flex-col gap-1 pl-6 pt-2 pb-2">
-                                    {item.children.map((child) => (
-                                      <Link
-                                        key={child.title}
-                                        href={child.href}
-                                        className="neulis-alt-regular text-[#444444] hover:text-[#0066FF] transition-colors py-2 text-base"
-                                        onClick={closeSheet}
-                                      >
-                                        {child.title}
-                                      </Link>
-                                    ))}
-                                  </CollapsibleContent>
-                                </Collapsible>
-                              )
-                            }
-                            
-                            // Nếu không, render Link như bình thường
-                            return (
-                              <Link
-                                key={item.title}
-                                href={item.href}
-                                className="neulis-alt-regular text-[#444444] hover:text-[#0066FF] transition-colors py-2 text-base"
-                                onClick={closeSheet}
-                              >
-                                {item.title}
-                              </Link>
-                            )
-                          })}
-                        </CollapsibleContent>
-                      </Collapsible>
+                        Case Studies
+                      </Link>
                     </div>
 
-                    {/* 3. Nút CTA "Let's Talk" (mt-auto để đẩy xuống) */}
+                    {/* 3. Nút CTA "Let's Talk" */}
                     <div className="mt-8 mb-4">
                       <Link
                         href="/contact"

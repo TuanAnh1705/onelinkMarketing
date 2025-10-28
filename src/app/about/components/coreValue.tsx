@@ -105,7 +105,7 @@ export function CoreValuesSection() {
                                 <ListItem><span className="font-bold">Optimized costs</span> with high-performance results.</ListItem>
                             </ul>
                             <a
-                                href="#"
+                                href="/case-studies"
                                 // THAY ĐỔI: Thêm 'mt-8' cho mobile
                                 className="group relative inline-block mt-8 md:mt-10 text-white border border-white rounded-full px-6 py-2 text-sm transition-colors duration-300 ease-in-out overflow-hidden hover:text-black"
                             >

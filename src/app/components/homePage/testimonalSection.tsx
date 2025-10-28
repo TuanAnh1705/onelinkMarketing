@@ -26,37 +26,23 @@ type Logo = {
 
 const testimonials: Testimonial[] = [
     {
-        text: "Design is a team effort, and we believe in a true partnership, working closely with you.",
-        author: "Lance Petter",
-        role: "Web Designer",
-        isSquare: false,
-        avatarSrc: "/assets/avatar-1.png",
-    },
-    {
-        text: "Redox always eager to collaborate with forward-thinking individuals, using the power of design and technology.",
-        author: "Tom Banton",
-        role: "Digital Marketer",
+        text: "Partnering with OneLink Marketing was the best decision we made for our launch. We came to them with an idea, and they built our entire D2C platform from scratch. The results are phenomenal—our conversion rates are 110% above the industry benchmark, and our site is exceptionally fast. They didn't just build a website; they built the foundation of our business.",
+        author: "Elliot Dyke",
+        role: "Owner of Tag. Fitness",
         isSquare: true,
-        avatarSrc: "/assets/avatar-1.png",
+        avatarSrc: "/assets/taglogo.jpg",
     },
     {
-        text: "Their mission is to empower the brands we believe in with tailor-made approaches that ignite creativity.",
-        author: "Daryl Mitchell",
-        role: "Lead Developer",
+        text: "Working with OneLink Marketing was a pivotal decision for my advisory firm. Their team didn't just build a website; they engineered a strategic client acquisition platform. Their understanding of the high-net-worth market is exceptional, and the results speak for themselves. They are a true strategic partner.",
+        author: "Lewis",
+        role: "Owner of LSJ | TAX",
         isSquare: false,
-        avatarSrc: "/assets/avatar-1.png",
+        avatarSrc: "/assets/taxlogo.png",
     },
     {
-        text: "They took the time to understand my brand and target audience perfectly, delivering exceptional results.",
-        author: "Chip Mahanay",
-        role: "CEO",
-        isSquare: true,
-        avatarSrc: "/assets/avatar-1.png",
-    },
-    {
-        text: "This is a new testimonial to demonstrate the flexibility of the component.",
-        author: "Jane Doe",
-        role: "Project Manager",
+        text: "Before OneLink, our website was confusing. It failed to speak to our commercial clients and our residential customers. OneLink Marketing didn't just give us a redesign; they delivered a brilliant brand strategy. They understood our dual audience and built a custom site that speaks perfectly to both. The new platform is now a critical sales tool and has directly led to a significant increase in qualified bids.",
+        author: "Benjamin Thomas",
+        role: "Owner of Steel Works Seattle",
         isSquare: false,
         avatarSrc: "/assets/avatar-1.png",
     },
@@ -163,7 +149,7 @@ export default function TestimonialsSection() {
 
     return (
         // Thay đổi: Giảm padding mobile (py-16)
-        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-32 -top-96 z-10 flex flex-col items-center justify-center min-h-screen">
+        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-3 -top-96 z-10 flex flex-col items-center justify-center min-h-screen">
             <div className="container mx-auto px-6 lg:px-8 flex flex-col items-center justify-center">
                 {/* Thay đổi: Giảm margin bottom mobile (mb-16) */}
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium archivo-expanded text-center text-white leading-tight mb-16 sm:mb-24 max-w-4xl mx-auto">
@@ -212,7 +198,7 @@ export default function TestimonialsSection() {
                                     <FaQuoteLeft className={`absolute bottom-8 right-8 text-8xl ${cardStyle.quoteColor}`} />
                                     
                                     {/* Thay đổi: Giảm cỡ chữ mobile: text-base sm:text-lg */}
-                                    <p className={`archivo-expanded font-medium relative z-10 leading-relaxed mb-6 text-base sm:text-lg ${cardStyle.textColor}`}>
+                                    <p className={`archivo-expanded font-medium relative z-10 leading-relaxed mb-6 text-base sm:text-sm ${cardStyle.textColor}`}>
                                         {testimonial.text}
                                     </p>
                                     <div className="relative z-10 mt-auto flex items-center gap-4">
