@@ -56,56 +56,56 @@ const teamMembers = [
 
 // ==================== COMPONENT ====================
 export function TeamSection() {
-    // 1. Khởi tạo Embla Carousel VỚI CÁC TÙY CHỌN MỚI
     const [emblaRef] = useEmblaCarousel(
         {
-            loop: false,        // 2. Đổi thành false: Không lặp lại khi kéo tay
+            loop: false,
             align: "start",
-            dragFree: true,     // 1. Thêm: Kéo mượt hơn (có quán tính)
+            dragFree: true,
         },
         [
             Autoplay({
                 delay: 2000,
                 stopOnInteraction: false,
-                stopOnLastSnap: false, // 3. Thêm: Autoplay sẽ tự quay về đầu khi đến slide cuối
+                stopOnLastSnap: false,
             }),
         ]
     )
 
     return (
-        <section className="bg-white py-20 md:py-32 px-8">
-            <div className="max-w-7xl mx-auto">
+        <section className="bg-white py-20 md:py-32"> {/* Loại bỏ 'px-8' khỏi section */}
+            <div className="max-w-7xl mx-auto px-8"> {/* Giữ 'px-8' cho div này để tiêu đề vẫn căn giữa */}
                 {/* --- Tiêu đề --- */}
                 <div className="text-center mb-16">
                     <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">Meet Our Team</h2>
                 </div>
+            </div>
 
-                {/* --- Carousel Container --- */}
-                <div className="embla w-full overflow-hidden" ref={emblaRef}>
-                    <div className="embla__container flex -ml-8">
-                        {teamMembers.map((member, index) => (
-                            <div
-                                className="embla__slide relative min-w-0 flex-shrink-0 flex-grow-0 
-                                           basis-full pl-8 sm:basis-1/2 lg:basis-1/4"
-                                key={index}
-                            >
-                                <div className="group text-left">
-                                    {/* Container chứa ảnh */}
-                                    <div className="relative w-full aspect-[3/4] bg-gray-300 overflow-hidden mb-4 shadow-md">
-                                        <Image
-                                            src={member.imageUrl}
-                                            alt={`Photo of ${member.name}`}
-                                            fill
-                                            className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
-                                        />
-                                    </div>
-                                    {/* Tên và Chức vụ */}
-                                    <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">{member.name}</h3>
-                                    <p className="neulis-alt-regular font-medium text-[#444444]">{member.role}</p>
+            {/* --- Carousel Container --- */}
+            {/* Di chuyển carousel ra khỏi div có max-w-7xl mx-auto và px-8 */}
+            <div className="embla w-full overflow-hidden" ref={emblaRef}>
+                <div className="embla__container flex -ml-8">
+                    {teamMembers.map((member, index) => (
+                        <div
+                            className="embla__slide relative min-w-0 flex-shrink-0 flex-grow-0
+                                       basis-full pl-8 sm:basis-1/2 lg:basis-1/4"
+                            key={index}
+                        >
+                            <div className="group text-left">
+                                {/* Container chứa ảnh */}
+                                <div className="relative w-full aspect-[3/4] bg-gray-300 overflow-hidden mb-4 shadow-md">
+                                    <Image
+                                        src={member.imageUrl}
+                                        alt={`Photo of ${member.name}`}
+                                        fill
+                                        className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+                                    />
                                 </div>
+                                {/* Tên và Chức vụ */}
+                                <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">{member.name}</h3>
+                                <p className="neulis-alt-regular font-medium text-[#444444]">{member.role}</p>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
