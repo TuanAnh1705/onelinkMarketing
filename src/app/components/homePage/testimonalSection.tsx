@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
         author: "Elliot Dyke",
         role: "Owner of Tag. Fitness",
         isSquare: true,
-        avatarSrc: "/assets/taglogo.jpg",
+        avatarSrc: "/assets/taglogo.png",
     },
     {
         text: "Working with OneLink Marketing was a pivotal decision for my advisory firm. Their team didn't just build a website; they engineered a strategic client acquisition platform. Their understanding of the high-net-worth market is exceptional, and the results speak for themselves. They are a true strategic partner.",

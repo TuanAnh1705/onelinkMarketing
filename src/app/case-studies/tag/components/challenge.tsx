@@ -46,7 +46,7 @@ function ParallaxImage({
 
 export default function ChallengeSection() {
     return (
-        <div className="min-h-screen bg-neutral-50 mt-12">
+        <div className="min-h-screen bg-white mt-12">
             {/* ✅ Top Section với đầy đủ text */}
             <section className="container mx-auto px-6 py-16 lg:py-24">
                 <div className="max-w-7xl mx-auto">

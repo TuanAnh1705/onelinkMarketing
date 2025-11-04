@@ -46,15 +46,15 @@ function ParallaxImage({
 
 export default function SolutionsSection() {
     return (
-        <div className="bg-neutral-50 py-24">
+        <div className="bg-white py-24">
             {/* ==================== PROBLEM SECTION (Phần 3) ==================== */}
             <section className="container mx-auto px-6 mb-14 -mt-72">
                 <div className="max-w-7xl mx-auto flex justify-start mb-14">
-                    <div className="w-full lg:w-full text-left"> 
+                    <div className="w-full lg:w-full text-left">
                         <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">
                             3. The Problem
                         </h2>
-                        
+
                         {/* ✅ SỬA LẠI: Dùng leading-relaxed cho dễ đọc */}
                         <div className="neulis-alt-regular font-medium text-lg leading-relaxed text-[#444444] space-y-4">
                             <p>
@@ -74,14 +74,14 @@ export default function SolutionsSection() {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* ==================== SOLUTIONS SECTION (Phần 4) ==================== */}
                 <div className="max-w-7xl mx-auto flex justify-start">
-                    <div className="w-full lg:w-full text-left"> 
+                    <div className="w-full lg:w-full text-left">
                         <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">
                             4. Our Solution
                         </h2>
-                        
+
                         {/* === ✅ NỘI DUNG MỚI TỪ HÌNH ẢNH === */}
                         {/* Sửa thành leading-relaxed và space-y-6 */}
                         <div className="neulis-alt-regular font-medium text-lg leading-relaxed text-[#444444] space-y-6">
@@ -156,27 +156,25 @@ export default function SolutionsSection() {
 
             {/* ==================== RESULTS SECTION ==================== */}
             {/* ✅ RESULTS LAYOUT: Xếp dọc, căn trái */}
-            <section className="container mx-auto px-3 mt-20 mb-16"> {/* Sửa lại px-3 thành px-6 cho nhất quán */}
-                 <div className="max-w-7xl mx-auto flex justify-start"> 
-                      <div className="w-full lg:w-full text-left"> 
-                          <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">
-                              5. The Results
-                          </h2>
-                          <div className="neulis-alt-regular font-medium text-base leading-relaxed text-[#444444] space-y-0">
-                             <p className="mb-6">
-                                 The new, cohesive brand identity and custom website completely transformed their market position.
-                             </p>
+            {/* <section className="container mx-auto px-3 mt-20 mb-16">
+                <div className="max-w-7xl mx-auto flex justify-start">
+                    <div className="w-full lg:w-full text-left">
+                        <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">
+                            5. The Results
+                        </h2>
+                        <div className="neulis-alt-regular font-medium text-base leading-relaxed text-[#444444] space-y-0">
+                            <p className="mb-6">
+                                The new, cohesive brand identity and custom website completely transformed their market position.
+                            </p>
 
-                             {/* === DANH SÁCH KẾT QUẢ CẬP NHẬT THEO HÌNH ẢNH === */}
-                             {/* ✅ SỬA LẠI: Bỏ list-disc ml-5 và dùng cấu trúc li-li */}
-                             <ul className="list-disc pl-5 space-y-0 mb-6">
+                            <ul className="list-disc pl-5 space-y-0 mb-6">
                                 <li>
                                     <strong>45% increase</strong> in qualified bids for large-scale commercial projects, a direct result of the new, clear B2B user path and professional brand image.
                                 </li>
-                                <li> 
+                                <li>
                                     <strong>60% increase</strong> in consultation requests for custom metalwork, driven by the new, inspiring portfolio design.
                                 </li>
-                                
+
                                 <li>
                                     A significant <strong>increase in user engagement</strong> (time-on-page), indicating that visitors were no longer confused and were now finding the exact information they needed.
                                 </li>
@@ -185,12 +183,11 @@ export default function SolutionsSection() {
                                 </li>
                             </ul>
                             <p>The SWS sales team now uses the new website as their primary presentation tool to close major contracts, demonstrating the site&apos;s value as a core business asset.</p>
-                          </div>
-                      </div>
-                 </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            {/* Results Parallax Image Section (giữ nguyên) */}
             <section className="container mx-auto px-6">
                 <div className="max-w-7xl mx-auto">
                     <ParallaxImage
@@ -200,7 +197,7 @@ export default function SolutionsSection() {
                         speed="-12%"
                     />
                 </div>
-            </section>
+            </section> */}
         </div>
     )
 }

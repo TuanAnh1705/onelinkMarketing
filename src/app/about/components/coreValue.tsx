@@ -78,7 +78,7 @@ export function CoreValuesSection() {
                     <div className="relative h-[350px] sm:h-[450px] lg:h-[560px] lg:col-span-1 overflow-hidden">
                         <motion.div style={{ y }} className="absolute inset-0 scale-120 will-change-transform">
                             <Image
-                                src="/assets/core.jpg"
+                                src="/assets/core.png"
                                 alt="Abstract background"
                                 fill
                                 className="object-cover"

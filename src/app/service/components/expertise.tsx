@@ -47,7 +47,7 @@ const expertiseData = [
             "Content Production",
             "Reporting & Community Engagement",
         ],
-        image: "/assets/25.png",
+        image: "/assets/25.jpg",
     },
 ]
 

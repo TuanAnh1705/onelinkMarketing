@@ -31,7 +31,7 @@ export default function FitnessShowcase() {
                         {/* Image */}
                         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/steel.jpg"
+                                src="/assets/steel.png"
                                 alt="Fitness outdoor class"
                                 fill
                                 className="object-cover"
@@ -78,7 +78,7 @@ export default function FitnessShowcase() {
                     }}
                 >
                     <Image
-                        src="/assets/steel.jpg"
+                        src="/assets/steel0.png"
                         alt="Tag Fitness - Where progress never stops"
                         fill
                         className="object-cover"

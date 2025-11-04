@@ -11,7 +11,6 @@ interface PostItem {
     src: string
     title: string
     author: string
-    year: string
     href: string // 🔹 2. Cập nhật interface, thêm 'href' cho đường dẫn
 }
 
@@ -19,22 +18,19 @@ const relatedPostsData: PostItem[] = [
     {
         src: "/assets/bl4.png", // Thay bằng đường dẫn ảnh thật của bạn
         title: "The SEO Topic Cluster Model: How to Dominate Target Keywords and Build Sustainable Brand Authority",
-        author: "Olma",
-        year: "2025",
+        author: "Tuan Nguyen",
         href: "/case-studies/expert-insights2", // 🔹 2. Cập nhật dữ liệu, thêm đường dẫn
     },
     {
         src: "/assets/bl5.png", // Thay bằng đường dẫn ảnh thật của bạn
         title: "Content Competitor Analysis: A Data-Driven Roadmap to Find Market Gaps and Dominate Your Niche",
-        author: "Olma",
-        year: "2025",
+        author: "Long Nguyen",
         href: "/case-studies/expert-insights3", // 🔹 2. Cập nhật dữ liệu, thêm đường dẫn
     },
     {
         src: "/assets/bl6.png", // Thay bằng đường dẫn ảnh thật của bạn
         title: "Building Brand Love: 7 Strategies to Turn Customers into Loyal Fans",
-        author: "Olma",
-        year: "2025",
+        author: "Quang Ho Quoc",
         href: "/case-studies/expert-insights4", // 🔹 2. Cập nhật dữ liệu, thêm đường dẫn
     },
 ]
@@ -115,7 +111,7 @@ function PostCard({ item, index, totalItems }: { item: PostItem; index: number; 
 
                 {/* Thông tin tác giả */}
                 <p className="neulis-alt-regular mt-2 text-sm font-medium text-[#666666]">
-                    By {item.author} - {item.year}
+                    By {item.author}
                 </p>
             </motion.div >
         </Link >

@@ -24,7 +24,7 @@ const BlogSection = () => {
                 <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
                     The SEO Topic Cluster Model: How to Dominate Target Keywords and Build Sustainable Brand Authority
                 </h1>
-                <p className="neulis-alt-regular font-medium text-gray-500">By Olma - 2025</p>
+                <p className="neulis-alt-regular font-medium text-gray-500">By Tuan Nguyen</p>
             </header>
 
             {/* --- Main Blog Introduction (Narrow Width) --- */}

@@ -45,7 +45,7 @@ const BlogSection = () => {
                 <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
                     How We Cut Customer Acquisition Cost (CAC) by 50% by Shifting Budget from Paid Ads to Content SEO
                 </h1>
-                <p className="neulis-alt-regular font-medium text-gray-500">By Olma - 2025</p>
+                <p className="neulis-alt-regular font-medium text-gray-500">By Long Nguyen & Tuan Nguyen</p>
             </header>
 
             {/* --- Main Blog Introduction (Narrow Width) --- */}

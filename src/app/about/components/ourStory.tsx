@@ -43,12 +43,12 @@ function useIsMobile(breakpoint = 1024) {
 // Mobile-first: class mặc định (ví dụ w-[80vw]) sẽ cho mobile
 // 'lg:' prefix (ví dụ lg:w-[30vw]) sẽ cho desktop (lớn hơn 1024px)
 const galleryImageData: GalleryImage[] = [
-    { src: "/assets/ab1.png", alt: "Image 1", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[60vh] lg:h-[30vh]" },
+    { src: "/assets/ab1.jpg", alt: "Image 1", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[60vh] lg:h-[30vh]" },
     { src: "/assets/ab2.png", alt: "Image 2", widthClass: "w-[70vw] lg:w-[22vw]", heightClass: "h-[75vh] lg:h-[55vh]" },
     { src: "/assets/ab3.jpg", alt: "Image 3", widthClass: "w-[65vw] lg:w-[16vw]", heightClass: "h-[55vh] lg:h-[35vh]" },
     { src: "/assets/ab4.jpg", alt: "Image 4", widthClass: "w-[75vw] lg:w-[24vw]", heightClass: "h-[70vh] lg:h-[60vh]" },
     { src: "/assets/ab5.png", alt: "Image 5", widthClass: "w-[85vw] lg:w-[35vw]", heightClass: "h-[65vh] lg:h-[50vh]" },
-    { src: "/assets/ab1.png", alt: "Image 6", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[50vh] lg:h-[30vh]" },
+    { src: "/assets/ab1.jpg", alt: "Image 6", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[50vh] lg:h-[30vh]" },
     { src: "/assets/ab2.png", alt: "Image 7", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[70vh] lg:h-[60vh]" },
 ]
 

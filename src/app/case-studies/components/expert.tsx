@@ -57,7 +57,6 @@ interface CaseStudyItem {
     src: string
     title: string
     author: string
-    year: string
     href: string // MỚI: Thêm trường đường dẫn
 }
 
@@ -66,22 +65,19 @@ const caseStudiesData: CaseStudyItem[][] = [
         {
             src: "/assets/bl.png",
             title: "How We Cut Customer Acquisition Cost (CAC) by 50% by Shifting Budget from Paid Ads to Content SEO",
-            author: "Olma",
-            year: "2025",
+            author: "Long Nguyen & Tuan Nguyen",
             href: "/case-studies/expert-insights", // MỚI: Thêm đường dẫn
         },
         {
             src: "/assets/bl7.png",
             title: "From 'Likes' to Revenue: A Strategic Framework to Turn Social Media into a True Growth Channel",
-            author: "Olma",
-            year: "2025",
+            author: "Quang Ho Quoc",
             href: "/case-studies/expert-insights1", // MỚI: Thêm đường dẫn
         },
         {
             src: "/assets/bl4.png",
             title: "The SEO Topic Cluster Model: How to Dominate Target Keywords and Build Sustainable Brand Authority",
-            author: "Olma",
-            year: "2025",
+            author: "Tuan Nguyen",
             href: "/case-studies/expert-insights2", // MỚI: Thêm đường dẫn
         },
     ],
@@ -89,16 +85,34 @@ const caseStudiesData: CaseStudyItem[][] = [
         {
             src: "/assets/bl5.png",
             title: "Content Competitor Analysis: A Data-Driven Roadmap to Find Market Gaps and Dominate Your Niche",
-            author: "Olma",
-            year: "2025",
+            author: "Long Nguyen",
             href: "/case-studies/expert-insights3", // MỚI: Thêm đường dẫn
         },
         {
             src: "/assets/bl6.png",
             title: "Building Brand Love: 7 Strategies to Turn Customers into Loyal Fans",
-            author: "Olma",
-            year: "2025",
+            author: "Quang Ho Quoc",
             href: "/case-studies/expert-insights4", // MỚI: Thêm đường dẫn
+        },
+        {
+            src: "/assets/bl15.png",
+            title: "Building a Conversion-Focused Digital Presence for China Sourcing Co",
+            author: "Long Nguyen & Quang Ho Quoc",
+            href: "/case-studies/expert-insights5", // MỚI: Thêm đường dẫn
+        },
+    ],
+    [
+        {
+            src: "/assets/bl22.png",
+            title: "Boosting Vietnam Sourcing Co’s Digital Presence and Lead Generation",
+            author: "Long Nguyen & Quang Ho Quoc",
+            href: "/case-studies/expert-insights6", // MỚI: Thêm đường dẫn
+        },
+        {
+            src: "/assets/bl31.png",
+            title: "Redesigning OneLink Holdings’ Landing Page to Reflect a Modern, Global Brand",
+            author: "Long Nguyen & Quang Ho Quoc",
+            href: "/case-studies/expert-insights7", // MỚI: Thêm đường dẫn
         },
     ],
 ]
@@ -161,7 +175,7 @@ export default function ExpertSection() {
                                             {item.title}
                                         </h3>
                                         <p className="mt-2 text-sm neulis-alt-extralight font-normal text-[#666666]">
-                                            By {item.author} - {item.year}
+                                            By {item.author}
                                         </p>
                                     </motion.div>
                                 </Link>

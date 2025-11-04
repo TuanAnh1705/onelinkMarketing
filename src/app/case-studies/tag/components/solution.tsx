@@ -46,7 +46,7 @@ function ParallaxImage({
 
 export default function SolutionsSection() {
     return (
-        <div className="bg-neutral-50 py-24">
+        <div className="bg-white py-24">
             {/* ==================== SOLUTIONS SECTION ==================== */}
             {/* ✅ SOLUTIONS LAYOUT: Xếp dọc, căn trái */}
             <section className="container mx-auto px-6 mb-14 -mt-72">
@@ -112,7 +112,7 @@ export default function SolutionsSection() {
 
             {/* ==================== RESULTS SECTION ==================== */}
             {/* ✅ RESULTS LAYOUT: Xếp dọc, căn trái */}
-            <section className="container mx-auto px-3 mt-20 mb-16">
+            {/* <section className="container mx-auto px-3 mt-20 mb-16">
                 <div className="max-w-7xl mx-auto flex justify-start">
                     <div className="w-full lg:w-full text-left">
                         <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">
@@ -123,7 +123,6 @@ export default function SolutionsSection() {
                                 The new platform was a success from the moment it launched. By building the site correctly from the foundation, we bypassed the typical &quot;growing pains&quot; of a new store.
                             </p>
 
-                            {/* === DANH SÁCH KẾT QUẢ CẬP NHẬT THEO HÌNH ẢNH === */}
                             <ul className="list-disc pl-5 space-y-0">
                                 <li>
                                     Achieved a Conversion Rate 110% Above Industry Benchmark
@@ -158,7 +157,6 @@ export default function SolutionsSection() {
                 </div>
             </section>
 
-            {/* Results Parallax Image Section (giữ nguyên) */}
             <section className="container mx-auto px-6">
                 <div className="max-w-7xl mx-auto">
                     <ParallaxImage
@@ -168,7 +166,7 @@ export default function SolutionsSection() {
                         speed="-12%"
                     />
                 </div>
-            </section>
+            </section> */}
         </div>
     )
 }

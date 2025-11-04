@@ -25,7 +25,7 @@ const BlogSection = () => {
                 <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
                     From &apos;Likes&apos; to Revenue: A Strategic Framework to Turn Social Media into a True Growth Channel
                 </h1>
-                <p className="neulis-alt-regular font-medium text-gray-500">By Olma - 2025</p>
+                <p className="neulis-alt-regular font-medium text-gray-500">By Quang Ho Quoc</p>
             </header>
 
             {/* --- Main Blog Introduction (Narrow Width) --- */}

@@ -48,7 +48,7 @@ export default function SectionProjects() {
         {[
           [
             { src: "/assets/tag4.jpg", title: "Tag. Fitness", href: "/case-studies/tag" },
-            { src: "/assets/steel.jpg", title: "Steel Works Seattle", href:"/case-studies/steel" },
+            { src: "/assets/steel.png", title: "Steel Works Seattle", href:"/case-studies/steel" },
           ],
         ].map((row, rowIndex) => (
           <div key={rowIndex} className="grid md:grid-cols-2 gap-16">

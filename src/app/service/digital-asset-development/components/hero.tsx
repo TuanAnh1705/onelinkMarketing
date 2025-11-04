@@ -87,7 +87,7 @@ export default function HeroSection() {
                 >
                   {/* 6. 🚀 THAY ĐỔI: Đổi 'img' thành 'Image' */}
                   <Image
-                    src="/assets/hero1.png"
+                    src="/assets/22.png"
                     alt="Never Stops - Athletes running on track"
                     fill
                     className="object-cover will-change-transform"

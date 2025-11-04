@@ -36,9 +36,9 @@ export default function ImageBottomContainer() {
     const smoothY = useSpring(moveY, { stiffness: 80, damping: 25 })
 
     // Nội dung cố định
-    const backgroundImage = "/assets/olmcont.png"
-    const topRightText = `Onelink Marketing provides a complete \ntransformation. We solve the problem \nof fragmented marketing and weak \nbrand identity,`
-    const bottomLeftText = `We understand. \nWe are the \nsolution.`
+    const backgroundImage = "/assets/olmcont.png" 
+    const topRightText = `We understand. \nWe are the solution.`
+    const bottomLeftText = `We provides a complete \ntransformation. We solve the problem \nof fragmented marketing and weak \nbrand identity,`
 
     return (
         <section
@@ -72,9 +72,9 @@ export default function ImageBottomContainer() {
             {/* 🔸 Bottom Left Text (Không thay đổi) */}
             <motion.div
                 style={{ y: smoothY }}
-                className="absolute bottom-[50%] left-[5%] md:left-[8%] text-left"
+                className="absolute bottom-[55%] left-[5%] md:left-[8%] text-left"
             >
-                <p className="archivo-expanded text-5xl md:text-7xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
+                <p className="archivo-expanded text-5xl md:text-6xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
                     {bottomLeftText}
                 </p>
             </motion.div>

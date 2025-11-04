@@ -96,7 +96,7 @@ export default function HeroSection() {
                   className="w-full h-[calc(100%_*_4/3)] relative"
                 >
                   <Image
-                    src="/assets/75.png" // Giữ ảnh của trang Paid Media
+                    src="/assets/24.png" // Giữ ảnh của trang Paid Media
                     alt="Never Stops - Athletes running on track"
                     fill={true}
                     className="object-cover" // THAY ĐỔI: Chuyển sang object-cover

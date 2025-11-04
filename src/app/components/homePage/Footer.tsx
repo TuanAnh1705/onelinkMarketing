@@ -108,7 +108,7 @@ export default function Footer() {
                                     </svg>
                                 </Link>
                                 <Link
-                                    href="https://www.linkedin.com/company/109608037/"
+                                    href="https://www.linkedin.com/company/onelink-marketing/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Linkedin"

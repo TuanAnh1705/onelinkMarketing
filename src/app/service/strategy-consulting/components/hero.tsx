@@ -95,7 +95,7 @@ export default function HeroSection() {
                   className="w-full h-[calc(100%_*_4/3)] relative"
                 >
                   <Image
-                    src="/assets/hero.png"
+                    src="/assets/21.png"
                     alt="Never Stops - Athletes running on track"
                     fill
                     className="object-cover will-change-transform"

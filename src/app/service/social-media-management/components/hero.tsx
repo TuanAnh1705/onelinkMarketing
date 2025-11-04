@@ -92,7 +92,7 @@ export default function HeroSection() {
                   className="w-full h-[calc(100%_*_4/3)] relative"
                 >
                   <Image
-                    src="/assets/50.png" // Giữ ảnh của trang Social Media
+                    src="/assets/25.jpg" // Giữ ảnh của trang Social Media
                     alt="Never Stops - Athletes running on track"
                     fill={true}
                     className="object-cover"
