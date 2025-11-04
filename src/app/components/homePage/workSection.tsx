@@ -43,7 +43,7 @@ export default function SectionWork() {
 
 
     return (
-        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-96 md:-top-32 lg:-top-40">
+        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[500px] md:-top-32 lg:-top-40">
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center ">
 
                 {/* CHỮ CHẠY NGANG */}

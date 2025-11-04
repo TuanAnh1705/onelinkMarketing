@@ -64,7 +64,7 @@ export default function ImageBottomContainer() {
                 style={{ y: smoothY }}
                 className="absolute -top-[10%] right-[5%] max-w-[80vw] md:right-[8%] md:max-w-[45vw] text-left"
             >
-                <h2 className="neulis-alt-extralight text-xs md:text-sm font-semibold text-white drop-shadow-2xl tracking-tight leading-snug whitespace-pre-line">
+                <h2 className="neulis-alt-extralight text-md md:text-sm font-semibold text-white drop-shadow-2xl tracking-tight leading-snug whitespace-pre-line">
                     {topRightText}
                 </h2>
             </motion.div>
@@ -72,7 +72,7 @@ export default function ImageBottomContainer() {
             {/* 🔸 Bottom Left Text (Không thay đổi) */}
             <motion.div
                 style={{ y: smoothY }}
-                className="absolute bottom-[55%] left-[5%] md:left-[8%] text-left"
+                className="absolute bottom-[55%] left-[5%] max-w-[80vw] md:left-[8%] text-left"
             >
                 <p className="archivo-expanded text-2xl md:text-6xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
                     {bottomLeftText}
