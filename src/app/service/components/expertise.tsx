@@ -2,6 +2,7 @@
 
 import { useRef, memo } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import Link from "next/link" // <-- 1. Import Link
 
 const expertiseData = [
     {
@@ -9,12 +10,14 @@ const expertiseData = [
         title: "Strategy \n Consulting",
         services: ["Brand Audit & Insight Analysis", "Market & Competitor Research", "Key Messaging Framework"],
         image: "/assets/sv1.png",
+        slug: "/service/strategy-consulting", // <-- 2. Thêm slug
     },
     {
         number: "02",
         title: "Digital Asset \n Development",
         services: ["Brand Identity", "Website Design", "Landing Page", "Digital Collateral"],
         image: "/assets/sv2.png",
+        slug: "/service/digital-asset-development", // <-- 2. Thêm slug
     },
     {
         number: "03",
@@ -26,6 +29,7 @@ const expertiseData = [
             "Content Strategy & Production",
         ],
         image: "/assets/sv3.png",
+        slug: "/service/seo-services", // <-- 2. Thêm slug
     },
     {
         number: "04",
@@ -37,6 +41,7 @@ const expertiseData = [
             "Performance Reporting & Daily Insights",
         ],
         image: "/assets/sv4.png",
+        slug: "/service/paid-media-&-advertising", // <-- 2. Thêm slug
     },
     {
         number: "05",
@@ -48,6 +53,7 @@ const expertiseData = [
             "Reporting & Community Engagement",
         ],
         image: "/assets/sv5.png",
+        slug: "/service/social-media-management", // <-- 2. Thêm slug
     },
 ]
 
@@ -95,49 +101,54 @@ const ExpertiseItem = memo(({ item, showLine }: { item: (typeof expertiseData)[0
                     </ul>
                 </div>
 
-                {/* Image */}
+                {/* Image --- BẮT ĐẦU THAY ĐỔI --- */}
                 <div className="lg:col-span-5">
-                    <motion.div
-                        className="relative w-full h-64 md:h-80 overflow-hidden rounded-3xl shadow-lg"
-                        style={{
-                            clipPath: useTransform(clipSpring, (v) => `inset(0 0 0 ${v}% round 24px)`),
-                            willChange: "clip-path",
-                        }}
-                    >
-                        <img
-                            src={item.image}
-                            alt=""
-                            aria-hidden="true"
-                            className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
-                        />
-                        <motion.img
-                            src={item.image}
-                            alt={item.title}
-                            className="absolute inset-0 w-full h-full object-cover"
-                            style={{
-                                x: useTransform(imageTranslateXSpring, (v) => `${v}%`),
-                                scale: useSpring(useTransform(scrollYProgress, [0, 1], [1.1, 1]), {
-                                    stiffness: 80,
-                                    damping: 20,
-                                }),
-                                opacity: sharpImageOpacitySpring,
-                                willChange: "transform, opacity",
-                            }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    {/* 3. Bọc motion.div bằng Link và truyền href từ item.slug */}
+                    <Link href={item.slug}>
                         <motion.div
-                            className="absolute inset-0 flex items-center justify-start px-6"
+                            className="relative w-full h-64 md:h-80 overflow-hidden rounded-3xl shadow-lg cursor-pointer" // <-- Thêm cursor-pointer
                             style={{
-                                x: useTransform(titleTranslateXSpring, (v) => `${v}%`),
-                                willChange: "transform",
+                                clipPath: useTransform(clipSpring, (v) => `inset(0 0 0 ${v}% round 24px)`),
+                                willChange: "clip-path",
                             }}
                         >
-                            <h3 className="archivo-expanded text-white text-xl md:text-3xl font-semibold leading-snug whitespace-pre-line text-left">
-                                {item.title}
-                            </h3>
+                            <img
+                                src={item.image}
+                                alt=""
+                                aria-hidden="true"
+                                className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
+                            />
+                            <motion.img
+                                src={item.image}
+                                alt={item.title}
+                                className="absolute inset-0 w-full h-full object-cover"
+                                style={{
+                                    x: useTransform(imageTranslateXSpring, (v) => `${v}%`),
+                                    scale: useSpring(useTransform(scrollYProgress, [0, 1], [1.1, 1]), {
+                                        stiffness: 80,
+                                        damping: 20,
+                                    }),
+                                    opacity: sharpImageOpacitySpring,
+                                    willChange: "transform, opacity",
+                                }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <motion.div
+                                className="absolute inset-0 flex items-center justify-start px-6"
+                                style={{
+                                    x: useTransform(titleTranslateXSpring, (v) => `${v}%`),
+                                    willChange: "transform",
+                                }}
+                            >
+                                <h3 className="archivo-expanded text-white text-xl md:text-3xl font-semibold leading-snug whitespace-pre-line text-left">
+                                    {item.title}
+                                </h3>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
+                    </Link>
                 </div>
+                {/* --- KẾT THÚC THAY ĐỔI --- */}
+
             </div>
 
             {/* Line dưới mỗi item, trừ item cuối */}
