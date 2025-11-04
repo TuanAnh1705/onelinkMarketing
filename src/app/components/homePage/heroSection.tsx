@@ -27,7 +27,7 @@ export default function SectionHero() {
                 </motion.div>
 
                 {/* --- CỘT PHẢI: PARAGRAPH --- */}
-                <div className="flex justify-center md:justify-end md:pt-40 md:translate-x-24">
+                <div className="flex justify-center md:justify-end md:pt-40 md:translate-x-10">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}

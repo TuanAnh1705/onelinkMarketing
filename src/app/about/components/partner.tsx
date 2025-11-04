@@ -55,7 +55,7 @@ const lineVariantsDesktop = {
 
 // Giá trị mới cho mobile
 const lineVariantsMobile = {
-    initial: { width: "250px" }, // Khớp với "CONTACT US" (text-2xl)
+    initial: { width: "200px" }, // Khớp với "CONTACT US" (text-2xl)
     hover: { width: "90px" },   // Khớp với "GO" (text-4xl)
 }
 
@@ -81,7 +81,7 @@ export default function Partner() {
                 <motion.div
                     ref={containerRef}
                     // 💡 3. Xóa "cursor-pointer" (Link đã xử lý)
-                    className="inline-flex flex-col items-center gap-4 -mt-20"
+                    className="inline-flex flex-col items-center gap-4 -translate-y-14 md:translate-y-0 md:-mt-20"
                     whileHover="hover"
                     initial="initial"
                 >
@@ -91,7 +91,7 @@ export default function Partner() {
                         className="relative overflow-hidden flex items-center justify-center h-[5rem] md:h-[7.5rem]"
                     >
                         <motion.div
-                            className="flex flex-col items-center justify-center"
+                            className="flex flex-col items-center justify-center "
                             variants={{
                                 initial: { y: "35%" },
                                 hover: { y: "-15%" },

@@ -67,7 +67,7 @@ interface CaseStudyItem {
 
 const caseStudiesData: CaseStudyItem[][] = [
     [
-        { src: "/assets/tag8.png", title: "Tag. Fitness", href: "/case-studies/tag" },
+        { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
         { src: "/assets/steel.png", title: "Steel Works Seattle", href: "/case-studies/steel" },
     ],
 ];

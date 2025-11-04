@@ -149,10 +149,10 @@ export default function TestimonialsSection() {
 
     return (
         // Thay đổi: Giảm padding mobile (py-16)
-        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-3 -top-96 z-10 flex flex-col items-center justify-center min-h-screen">
+        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-3 -top-60 md:-top-96 z-10 flex flex-col items-center justify-center min-h-screen">
             <div className="container mx-auto px-6 lg:px-8 flex flex-col items-center justify-center">
                 {/* Thay đổi: Giảm margin bottom mobile (mb-16) */}
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium archivo-expanded text-center text-white leading-tight mb-16 sm:mb-24 max-w-4xl mx-auto">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-medium archivo-expanded text-center text-white leading-tight mb-16 sm:mb-24 max-w-4xl mx-auto">
                     What our clients say <br /> about our work
                 </h2>
 
@@ -185,7 +185,7 @@ export default function TestimonialsSection() {
                                     // - Giảm padding mobile: p-6 sm:p-8 md:p-10
                                     // - Thay đổi chiều cao: h-auto min-h-[380px] (cho phép thẻ co giãn)
                                     //   sm:min-h-[350px] sm:h-[350px] (cố định lại trên desktop)
-                                    className="absolute w-[90%] max-w-[500px] h-auto min-h-[380px] sm:min-h-[350px] sm:h-[350px] p-6 sm:p-8 md:p-10 flex flex-col justify-center rounded-lg shadow-2xl cursor-grab active:cursor-grabbing"
+                                    className="absolute w-[90%] max-w-[500px] h-[380px] sm:min-h-[350px] sm:h-[350px] p-6 sm:p-8 md:p-10 flex flex-col justify-center rounded-lg shadow-2xl cursor-grab active:cursor-grabbing"
                                     style={{
                                         ...cardStyle,
                                         transformStyle: "preserve-3d",
@@ -198,7 +198,7 @@ export default function TestimonialsSection() {
                                     <FaQuoteLeft className={`absolute bottom-8 right-8 text-8xl ${cardStyle.quoteColor}`} />
                                     
                                     {/* Thay đổi: Giảm cỡ chữ mobile: text-base sm:text-lg */}
-                                    <p className={`archivo-expanded font-medium relative z-10 leading-relaxed mb-6 text-base sm:text-sm ${cardStyle.textColor}`}>
+                                    <p className={`archivo-expanded font-medium relative z-10 leading-relaxed mb-6 text-xs sm:text-sm ${cardStyle.textColor}`}>
                                         {testimonial.text}
                                     </p>
                                     <div className="relative z-10 mt-auto flex items-center gap-4">
@@ -213,7 +213,7 @@ export default function TestimonialsSection() {
                                         <div>
                                             {/* Thay đổi: Giảm cỡ chữ mobile: text-lg sm:text-xl */}
                                             <p className={`neulis-alt-extralight font-bold text-lg sm:text-xl ${cardStyle.textColor}`}>{testimonial.author}</p>
-                                            <p className={`neulis-alt-extralight font-medium text-sm ${cardStyle.textColor}`}>{testimonial.role}</p>
+                                            <p className={`neulis-alt-extralight font-medium text-xs sm:text-sm ${cardStyle.textColor}`}>{testimonial.role}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -290,7 +290,7 @@ export default function TestimonialsSection() {
                                 // Thay đổi: Thêm class responsive
                                 // w-24 (96px) trên mobile, w-32 (128px) trên desktop
                                 // mr-8 (32px) trên mobile, mr-16 (64px) trên desktop
-                                className="flex-shrink-0 flex items-center justify-center p-4 rounded-full h-16 w-24 sm:w-30 shadow-md relative mr-8 sm:mr-16"
+                                className="flex-shrink-0 flex items-center justify-center p-4 rounded-full h-14 w-24 sm:w-30 shadow-md relative mr-8 sm:mr-16"
                                 style={{
                                     background: "linear-gradient(90deg, #0074E5 0%, #00407F 100%)",
                                     padding: "1px",

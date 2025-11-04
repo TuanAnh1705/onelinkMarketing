@@ -40,7 +40,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer className="text-gray-800 pt-20 pb-10 px-4 md:px-8 relative overflow-hidden bg-white">
+        <footer className="text-gray-800 -mt-40 md:mt-0 pt-20 pb-10 px-4 md:px-8 relative overflow-hidden bg-white">
             {/* 🌈 Top Gradient Line */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#0074E5] to-[#162660]" />
 
@@ -162,7 +162,7 @@ export default function Footer() {
 
                         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 mt-14 w-full max-w-md lg:self-end">
                             {/* 👈 3. CẬP NHẬT DANH SÁCH "COMPANY" */}
-                            <div className="text-center md:text-left flex-1">
+                            <div className="text-left md:text-left flex-1">
                                 <h4 className="neulis-alt-regular text-xl mb-4 text-[#444444]">
                                     Company
                                 </h4>
@@ -170,7 +170,7 @@ export default function Footer() {
                                     {companyLinks.map((item) => (
                                         <li
                                             key={item.name}
-                                            className="flex items-start justify-center md:justify-start gap-2"
+                                            className="flex items-start justify-start md:justify-start gap-2"
                                         >
                                             <span className="text-[#444444] text-lg leading-[1.2]">
                                                 •
@@ -195,7 +195,7 @@ export default function Footer() {
                                     {servicesLinks.map((item) => (
                                         <li
                                             key={item.name}
-                                            className="flex items-start justify-center md:justify-start gap-2"
+                                            className="flex items-center justify-start md:justify-start gap-2"
                                         >
                                             <span className="text-[#444444] text-lg leading-[1.2]">
                                                 •

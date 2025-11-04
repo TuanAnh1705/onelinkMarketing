@@ -96,7 +96,7 @@ export function RoadmapSection() {
     return (
         <section className="bg-white py-20 md:py-32 px-8 -mt-28">
             <div className="max-w-7xl mx-auto">
-                <h2 className="archivo-expanded text-3xl md:text-5xl font-medium text-[#000A1D] text-center max-w-4xl mx-auto leading-tight">
+                <h2 className="archivo-expanded text-2xl md:text-5xl font-medium text-[#000A1D] text-center max-w-4xl mx-auto leading-tight">
                     Our 4-Step Roadmap to <br/> Sustainable Growth
                 </h2>
 

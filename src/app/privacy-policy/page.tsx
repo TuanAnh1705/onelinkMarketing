@@ -4,7 +4,7 @@ import React from "react"
 export default function PrivacyPolicyPage() {
   return (
     // MỚI: Thêm 'neulis-alt-extralight' làm font chữ cơ sở cho cả trang
-    <main className="bg-white py-16 sm:py-24 neulis-alt-extralight">
+    <main className="bg-white py-16 sm:py-24 neulis-alt-regular mb-40 md:mb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* === TIÊU ĐỀ TRANG === */}
@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           {/* MỚI: Thêm 'neulis-alt-extralight' cho tiêu đề phụ */}
-          <p className="mt-4 text-base font-semibold uppercase text-black tracking-wider neulis-alt-extralight">
+          <p className="mt-4 text-base font-semibold uppercase text-black tracking-wider neulis-alt-regular">
             CUSTOMER INFORMATION PRIVACY POLICY
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function PrivacyPolicyPage() {
           prose prose-lg lg:prose-xl 
           max-w-7xl 
           prose-headings:archivo-expanded
-          prose-p:neulis-alt-extralight 
-          prose-li:neulis-alt-extralight
+          prose-p:neulis-alt-regular
+          prose-li:neulis-alt-regular
           prose-h2:font-semibold 
           prose-h2:text-2xl 
           prose-h2:mb-4 

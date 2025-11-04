@@ -22,7 +22,7 @@ export default function FitnessShowcase() {
     })
 
     return (
-        <div className="min-h-screen bg-neutral-100">
+        <div className="min-h-screen bg-white">
             {/* Top Section */}
             <section className="container mx-auto px-6 py-16 lg:py-24">
                 <div className="max-w-7xl mx-auto space-y-12">
@@ -31,7 +31,7 @@ export default function FitnessShowcase() {
                         {/* Image */}
                         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/tag1.jpg"
+                                src="/assets/tag1.png"
                                 alt="Fitness outdoor class"
                                 fill
                                 className="object-cover"
@@ -78,7 +78,7 @@ export default function FitnessShowcase() {
                     }}
                 >
                     <Image
-                        src="/assets/tag1.jpg"
+                        src="/assets/tag1.png"
                         alt="Tag Fitness - Where progress never stops"
                         fill
                         className="object-cover"

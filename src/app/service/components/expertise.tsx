@@ -90,16 +90,20 @@ const ExpertiseItem = memo(({ item, showLine }: { item: (typeof expertiseData)[0
                     <p className="archivo-expanded text-xl md:text-3xl font-medium text-[#000000]">({item.number})</p>
                 </div>
 
-                {/* Services */}
-                <div className="lg:col-span-5 pl-52">
-                    <ul className="space-y-2">
+                {/* Services - Responsive fix */}
+                <div className="lg:col-span-5 pl-28 md:pl-20 -mt-14 md:mt-0 lg:pl-52 text-left">
+                    <ul className="space-y-1 md:space-y-2">
                         {item.services.map((service, idx) => (
-                            <li key={idx} className="neulis-alt-regular font-medium text-[#000000] md:text-lg">
+                            <li
+                                key={idx}
+                                className="neulis-alt-regular font-medium text-[#000000] text-sm md:text-base lg:text-lg leading-snug"
+                            >
                                 {service}
                             </li>
                         ))}
                     </ul>
                 </div>
+
 
                 {/* Image --- BẮT ĐẦU THAY ĐỔI --- */}
                 <div className="lg:col-span-5">

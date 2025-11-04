@@ -46,7 +46,7 @@ function ParallaxImage({
 
 export default function SolutionsSection() {
     return (
-        <div className="bg-white py-24">
+        <div className="bg-white py-24 mb-20">
             {/* ==================== PROBLEM SECTION (Phần 3) ==================== */}
             <section className="container mx-auto px-6 mb-14 -mt-72">
                 <div className="max-w-7xl mx-auto flex justify-start mb-14">

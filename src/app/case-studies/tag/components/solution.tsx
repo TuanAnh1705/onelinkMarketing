@@ -46,10 +46,10 @@ function ParallaxImage({
 
 export default function SolutionsSection() {
     return (
-        <div className="bg-white py-24">
+        <div className="bg-white py-24 mb-20">
             {/* ==================== SOLUTIONS SECTION ==================== */}
             {/* ✅ SOLUTIONS LAYOUT: Xếp dọc, căn trái */}
-            <section className="container mx-auto px-6 mb-14 -mt-72">
+            <section className="container mx-auto px-6 mb-14 -mt-72 md:-mt-72">
                 <div className="max-w-7xl mx-auto flex justify-start">
                     {/* Thay đổi từ lg:w-1/3 thành lg:w-full để có thêm không gian cho văn bản */}
                     <div className="w-full lg:w-full text-left">
@@ -92,19 +92,19 @@ export default function SolutionsSection() {
                     <ParallaxImage
                         src="/assets/tag5.png"
                         alt="Two people on a basketball court"
-                        className="h-[500px] lg:h-[600px]"
+                        className="h-[400px] lg:h-[600px]"
                         speed="-10%"
                     />
                     <ParallaxImage
                         src="/assets/tag6.png"
                         alt="Tag logo on a product"
-                        className="h-[500px] lg:h-[600px]"
+                        className="h-[400px] lg:h-[600px]"
                         speed="-15%"
                     />
                     <ParallaxImage
                         src="/assets/tag7.png"
                         alt="Athlete stretching on a running track"
-                        className="h-[500px] lg:h-[600px]"
+                        className="h-[400px] lg:h-[600px]"
                         speed="-8%"
                     />
                 </div>

@@ -47,7 +47,7 @@ export default function SectionProjects() {
       <div className="max-w-7xl mx-auto flex flex-col gap-20">
         {[
           [
-            { src: "/assets/tag8.png", title: "Tag. Fitness", href: "/case-studies/tag" },
+            { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
             { src: "/assets/steel.png", title: "Steel Works Seattle", href:"/case-studies/steel" },
           ],
         ].map((row, rowIndex) => (

@@ -36,7 +36,7 @@ export default function ParallaxImage() {
                         className="relative overflow-hidden bg-white/5
                                    w-full h-[350px] -translate-y-12 
                                    md:h-[500px] md:-translate-y-16
-                                   lg:ml-auto lg:w-full lg:max-w-[1200px] lg:h-[650px] lg:-translate-y-24 lg:translate-x-24"
+                                   lg:ml-auto lg:w-full lg:max-w-[1200px] lg:h-[650px] lg:-translate-y-24 lg:translate-x-10"
                     >
                         <motion.div
                             style={{ y: smoothY }}

@@ -130,7 +130,7 @@ export default function ExpertSection() {
     return (
         <motion.section
             ref={section4Ref}
-            className="relative justify-center -mt-5 z-10 bg-white pt-32 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
+            className="relative justify-center -mt-36 md:-mt-32 z-10 bg-white/0 pt-32 pb-32 px-4 sm:px-8 md:px-16 lg:px-24"
         >
             <div className="max-w-7xl mx-auto">
                 <h2 className="archivo-expanded text-4xl sm:text-5xl md:text-6xl font-medium text-center text-[#000A1D] mb-12 md:mb-16">

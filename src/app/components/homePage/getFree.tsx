@@ -73,7 +73,7 @@ export default function GetAFree() {
     const marqueeItems = Array(8).fill(marqueeText)
 
     return (
-        <section className="relative flex flex-col items-center justify-center h-screen -mt-[140vh] space-y-16 overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center h-screen -mt-[170vh] md:-mt-[140vh] space-y-16 overflow-hidden">
             
             {/* ======= Main Button ======= */}
             {/* 👇 2. BỌC TOÀN BỘ NÚT BẰNG LINK TỚI /CONTACT 👇 */}
@@ -126,7 +126,7 @@ export default function GetAFree() {
 
             {/* ======= Marquee ======= */}
             {/* (Không thay đổi) */}
-            <div className="absolute bottom-4 md:bottom-10 w-full overflow-hidden">
+            <div className="absolute bottom-56 md:bottom-10 w-full overflow-hidden">
                 <motion.div
                     className="flex whitespace-nowrap text-[8vw] font-bold uppercase tracking-tight"
                     animate={{ x: ["0%", "-50%"] }}

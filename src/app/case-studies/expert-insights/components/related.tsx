@@ -40,7 +40,7 @@ const relatedPostsData: PostItem[] = [
 // ============================================================================
 export function RelatedPosts() {
     return (
-        <section className="bg-white pt-20 pb-32 px-8 md:px-16 lg:px-24">
+        <section className="bg-white pt-20 pb-32 px-8 md:px-16 lg:px-24 mb-20 md:mb-0">
             <div className="max-w-7xl mx-auto">
                 {/* Dòng kẻ ngang - ĐÃ LÀM DÀI HƠN */}
                 <div className="w-[1250px] h-[1px] bg-gradient-to-r from-[#0074E5] to-[#162660] mx-auto mb-6"></div>

@@ -46,7 +46,7 @@ function ParallaxImage({
 
 export default function ChallengeSection() {
     return (
-        <div className="min-h-screen bg-white mt-12">
+        <div className="min-h-screen bg-white -mt-10 md:mt-8">
             {/* ✅ Top Section với đầy đủ text */}
             <section className="container mx-auto px-6 py-16 lg:py-24">
                 <div className="max-w-7xl mx-auto">
@@ -74,7 +74,7 @@ export default function ChallengeSection() {
                         {/* Left - Title */}
                         <div>
                             <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D]">
-                               2. Our Solutions
+                                2. Our Solutions
                             </h2>
                         </div>
 
@@ -90,30 +90,36 @@ export default function ChallengeSection() {
 
             {/* Parallax Grid Section */}
             <section
-                className="relative -mt-72 h-[1400px] lg:h-[1800px] w-full"
+                /* * Mặc định (mobile): -mt-24
+                 * Desktop (lg:): Ghi đè thành -mt-72
+                 */
+                className="relative -mt-72 lg:-mt-72 h-[1400px] lg:h-[1800px] w-full"
             >
                 <div className="container mx-auto px-6 h-full flex items-center">
-                    {/* ✅ FIX: Thay đổi grid-cols-2 thành grid-cols-[3fr_2fr] */}
-                    <div className="max-w-7xl mx-auto w-full grid grid-cols-[3fr_2fr] gap-4 lg:gap-6">
+                    <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 lg:gap-6">
 
+                        {/* Hai ảnh đầu tiên không cần 'col-span' vì chúng tự động lấp đầy 1 cột */}
                         <ParallaxImage
                             src="/assets/tag2.png"
                             alt="Tag fitness socks"
-                            className="h-[400px] lg:h-[600px]"
+                            className="h-[300px] lg:h-[600px]"
                             speed="-8%"
                         />
 
                         <ParallaxImage
                             src="/assets/tag3.png"
                             alt="Athlete on sports court"
-                            className="h-[400px] lg:h-[600px]"
+                            className="h-[300px] lg:h-[600px]"
                             speed="-12%"
                         />
-                        
+
                         <ParallaxImage
                             src="/assets/tag4.jpg"
                             alt="People on athletic track"
-                            className="col-span-2 h-[400px] lg:h-[600px]"
+                            /* * Mặc định (mobile): col-span-1
+                             * Desktop (lg:): Ghi đè thành lg:col-span-2
+                             */
+                            className="col-span-1 lg:col-span-2 h-[300px] lg:h-[600px]"
                             speed="-16%"
                         />
 

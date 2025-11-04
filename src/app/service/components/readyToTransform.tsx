@@ -69,10 +69,10 @@ export default function ReadyToTransform() {
     return (
         <section className="relative flex flex-col items-center justify-center h-screen -mt-[20vh] space-y-5 overflow-hidden bg-white/0">
             <div className="mb-16">
-                <h1 className="archivo-expanded text-4xl md:text-6xl font-medium text-center tracking-wider text-[#000A1D] mb-2">
+                <h1 className="archivo-expanded text-3xl md:text-6xl font-medium text-center tracking-wider text-[#000A1D] mb-2">
                     Ready to Transform Your Brand?
                 </h1>
-                <p className="neulis-alt-regular font-medium text-[#000A1D] text-center text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed py-8">
+                <p className="neulis-alt-regular font-medium text-[#000A1D] text-center text-md md:text-2xl max-w-3xl mx-auto leading-relaxed py-8">
                     Start your transformation journey with us today.
                 </p>
             </div>
@@ -82,7 +82,7 @@ export default function ReadyToTransform() {
             <Link href="/contact">
                 <motion.div
                     ref={containerRef}
-                    className="inline-flex flex-col items-center gap-4 cursor-pointer -mt-20"
+                    className="inline-flex flex-col items-center gap-4 cursor-pointer -translate-y-24 md:-translate-y-8"
                     whileHover="hover"
                     initial="initial"
                 >

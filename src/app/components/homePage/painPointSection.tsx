@@ -8,25 +8,25 @@ const timelineItems = [
     {
         title: "Fragmented Marketing",
         description:
-            "Working with multiple agencies leads to inconsistent \n messaging and a lack of control.",
+            "Working with multiple agencies leads to inconsistent messaging and a lack of control.",
         image: "/assets/pp1.png",
     },
     {
         title: "High Costs, Low ROI",
         description:
-            "You invest heavily, but campaigns lack synergy, \n resulting in an uncertain return on investment.",
+            "You invest heavily, but campaigns lack synergy, resulting in an uncertain return on investment.",
         image: "/assets/pp2.png",
     },
     {
         title: "Weak Brand Identity",
         description:
-            "Your brand's message is unclear, and your website \n fails to generate real leads or conversions.",
+            "Your brand's message is unclear, and your website fails to generate real leads or conversions.",
         image: "/assets/pp3.png",
     },
     {
         title: "Struggling to Scale Globally",
         description:
-            "Lack of a cohesive strategy makes it difficult to \n compete and expand into international markets.",
+            "Lack of a cohesive strategy makes it difficult to compete and expand into international markets.",
         image: "/assets/pp4.png",
     },
 ]
@@ -37,7 +37,7 @@ export default function Page() {
 
     return (
         // FIX: Thêm padding chung cho mobile
-        <main className="min-h-screen px-4 py-12 md:px-8 lg:px-0 lg:py-0 -mt-20">
+        <main className="min-h-screen px-4 py-12 md:px-8 lg:px-0 lg:py-0 -mt-32 md:mt-5">
             <div className="mx-auto max-w-screen-2xl">
                 {/* Title Section */}
                 <div className="mb-12 lg:mb-20">
@@ -50,35 +50,29 @@ export default function Page() {
                 {/* Content Section */}
                 {/* FIX: flex-col trên mobile, lg:flex-row trên desktop */}
                 <div className="relative w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                    
+
                     {/* Left Side - Image */}
                     {/* FIX: order-2 (hiển thị sau) trên mobile, lg:order-1 (hiện thị trước) trên desktop */}
                     {/* FIX: w-full trên mobile, lg:w-[450px] trên desktop */}
-                    <div className="relative w-full max-w-md lg:max-w-none lg:w-[450px] flex items-center justify-center shrink-0 order-2 lg:order-1">
-                        {/* FIX: h-[400px] trên mobile, lg:h-[550px] trên desktop, bỏ translate */}
-                        <div className="relative h-[400px] sm:h-[450px] lg:h-[550px] w-full lg:-translate-x-4 lg:translate-y-5">
+                    {/* Left Side - Image */}
+                    <div className="relative hidden lg:flex w-full max-w-md lg:max-w-none lg:w-[450px] items-center justify-center shrink-0 order-2 lg:order-1">
+                        <div className="relative h-[400px] sm:h-[450px] lg:h-[550px] w-full lg:-translate-x-4 lg:-translate-y-8">
                             {timelineItems.map((item, index) => (
                                 <div
                                     key={index}
                                     className={cn(
                                         "absolute inset-0 transition-all duration-[900ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] origin-bottom transform-gpu",
-                                        
-                                        // 🚀 FIX 2: Đơn giản hóa logic.
-                                        // Chỉ cần so sánh 'hoveredIndex === index'.
-                                        // Vì 'hoveredIndex' giờ là số (mặc định là 0),
-                                        // nó sẽ tự động hiển thị ảnh đầu tiên khi tải trang.
                                         hoveredIndex === index
                                             ? "opacity-100 scale-100 rotate-[18deg] translate-y-0"
                                             : "opacity-0 scale-95 rotate-0 translate-y-6 blur-[2px]"
                                     )}
                                 >
-                                    {/* Sửa: Dùng <Image> của Next.js nếu ảnh trong /public */}
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        fill // Dùng fill để lấp đầy div cha
+                                        fill
                                         className="object-contain drop-shadow-2xl"
-                                        priority={index === 0} // Ưu tiên tải ảnh đầu tiên
+                                        priority={index === 0}
                                     />
                                 </div>
                             ))}
@@ -99,9 +93,9 @@ export default function Page() {
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         // 🚀 FIX 3: Xóa 'onMouseLeave'
                                         // onMouseLeave={() => setHoveredIndex(null)} // <--- XÓA DÒNG NÀY
-                                        
+
                                         // Thêm onClick để mobile có thể "chạm" và giữ trạng thái
-                                        onClick={() => setHoveredIndex(index)} 
+                                        onClick={() => setHoveredIndex(index)}
                                         className={cn(
                                             "relative py-8 px-3 cursor-pointer group transition-all duration-300",
                                             hoveredIndex === index
@@ -128,7 +122,7 @@ export default function Page() {
                                             {/* FIX: w-full trên mobile, lg:w-[520px] trên desktop, bỏ translate-x */}
                                             <p
                                                 className={cn(
-                                                    "neulis-alt-extralight font-semibold text-base leading-relaxed transition-all duration-300 w-full lg:w-[520px] lg:translate-x-2 whitespace-pre-line text-left",
+                                                    "neulis-alt-extralight font-semibold text-base leading-relaxed transition-all duration-300 w-full lg:w-[520px] lg:-translate-x-5 whitespace-pre-line text-left",
                                                     hoveredIndex === index
                                                         ? "text-white"
                                                         : "text-[#444444]"

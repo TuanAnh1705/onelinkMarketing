@@ -53,7 +53,7 @@ export default function FaqForDigital() {
 
   return (
     <div className="relative w-full z-20 -top-20">
-      <div className="mx-auto max-w-5xl mt-60">
+      <div className="mx-auto max-w-5xl mt-14">
         {/* --- HEADER --- */}
         <div className="relative mb-12">
           <GradientLine />

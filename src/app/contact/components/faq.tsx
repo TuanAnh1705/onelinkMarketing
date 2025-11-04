@@ -52,8 +52,8 @@ export default function Faq() {
     setOpenIndex(openIndex === index ? null : index)
 
   return (
-    <div className="relative w-full z-20 mb-20">
-      <div className="mx-auto max-w-5xl mt-60">
+    <div className="relative w-full z-20 mb-40">
+      <div className="mx-auto max-w-5xl mt-40">
         {/* --- HEADER --- */}
         <div className="relative mb-12">
           <GradientLine />

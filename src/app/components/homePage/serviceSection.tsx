@@ -104,7 +104,7 @@ export default function ServiceSection() {
             {/* SECTION 1 (Giữ nguyên) */}
             <section
                 ref={containerRef}
-                className="relative flex justify-center items-center overflow-hidden h-screen bg-white -top-40 md:-top-60 lg:-top-80"
+                className="relative flex justify-center items-center overflow-hidden h-screen bg-white -top-40 md:-top-60 lg:-top-72"
             >
                 <div
                     ref={textGroupRef}

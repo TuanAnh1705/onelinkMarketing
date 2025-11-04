@@ -38,12 +38,12 @@ export default function ImageBottomContainer() {
     // Nội dung cố định
     const backgroundImage = "/assets/olmcont.png" 
     const topRightText = `We understand. \nWe are the solution.`
-    const bottomLeftText = `We provides a complete \ntransformation. We solve the problem \nof fragmented marketing and weak \nbrand identity`
+    const bottomLeftText = `We provides a complete transformation. \nWe solve the problem of fragmented \nmarketing and weak brand identity`
 
     return (
         <section
             ref={ref}
-            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-80 md:-top-[1000px]"
+            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-[1000px] md:-top-[1000px]"
         >
             {/* Example Background image */}
             <div
@@ -64,7 +64,7 @@ export default function ImageBottomContainer() {
                 style={{ y: smoothY }}
                 className="absolute -top-[10%] right-[5%] max-w-[80vw] md:right-[8%] md:max-w-[45vw] text-left"
             >
-                <h2 className="neulis-alt-extralight text-xl md:text-sm font-semibold text-white drop-shadow-2xl tracking-tight leading-snug whitespace-pre-line">
+                <h2 className="neulis-alt-extralight text-xs md:text-sm font-semibold text-white drop-shadow-2xl tracking-tight leading-snug whitespace-pre-line">
                     {topRightText}
                 </h2>
             </motion.div>
@@ -74,7 +74,7 @@ export default function ImageBottomContainer() {
                 style={{ y: smoothY }}
                 className="absolute bottom-[55%] left-[5%] md:left-[8%] text-left"
             >
-                <p className="archivo-expanded text-5xl md:text-6xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
+                <p className="archivo-expanded text-2xl md:text-6xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
                     {bottomLeftText}
                 </p>
             </motion.div>
