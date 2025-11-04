@@ -67,7 +67,7 @@ export default function Partner() {
     const isMobile = useMediaQuery("(max-width: 767px)")
 
     return (
-        <section className="relative flex flex-col items-center justify-center h-screen space-y-5 overflow-hidden bg-white/0 -mt-52">
+        <section className="relative flex flex-col items-center justify-center h-screen space-y-5 overflow-hidden bg-white/0 -mt-64">
             <div className="mb-16">
                 {/* Tiêu đề này đã responsive (text-3xl md:text-6xl) */}
                 <h1 className="archivo-expanded text-3xl md:text-6xl font-medium text-center tracking-wider text-[#000A1D] mb-2 px-4">
