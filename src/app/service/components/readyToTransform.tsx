@@ -73,7 +73,7 @@ export default function ReadyToTransform() {
                     Ready to Transform Your Brand?
                 </h1>
                 <p className="neulis-alt-regular font-medium text-[#000A1D] text-center text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed py-8">
-                    Start your transformation journey with Onelink today.
+                    Start your transformation journey with us today.
                 </p>
             </div>
 
