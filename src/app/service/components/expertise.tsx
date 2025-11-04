@@ -8,13 +8,13 @@ const expertiseData = [
         number: "01",
         title: "Strategy \n Consulting",
         services: ["Brand Audit & Insight Analysis", "Market & Competitor Research", "Key Messaging Framework"],
-        image: "/assets/21.png",
+        image: "/assets/sv1.png",
     },
     {
         number: "02",
         title: "Digital Asset \n Development",
         services: ["Brand Identity", "Website Design", "Landing Page", "Digital Collateral"],
-        image: "/assets/22.png",
+        image: "/assets/sv2.png",
     },
     {
         number: "03",
@@ -25,7 +25,7 @@ const expertiseData = [
             "Off-page Optimization",
             "Content Strategy & Production",
         ],
-        image: "/assets/23.png",
+        image: "/assets/sv3.png",
     },
     {
         number: "04",
@@ -36,7 +36,7 @@ const expertiseData = [
             "A/B Testing & Funnel Optimization",
             "Performance Reporting & Daily Insights",
         ],
-        image: "/assets/24.png",
+        image: "/assets/sv4.png",
     },
     {
         number: "05",
@@ -47,7 +47,7 @@ const expertiseData = [
             "Content Production",
             "Reporting & Community Engagement",
         ],
-        image: "/assets/25.jpg",
+        image: "/assets/sv5.png",
     },
 ]
 
