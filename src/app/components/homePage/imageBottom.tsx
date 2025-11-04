@@ -38,7 +38,7 @@ export default function ImageBottomContainer() {
     // Nội dung cố định
     const backgroundImage = "/assets/olmcont.png" 
     const topRightText = `We understand. \nWe are the solution.`
-    const bottomLeftText = `We provides a complete \ntransformation. We solve the problem \nof fragmented marketing and weak \nbrand identity,`
+    const bottomLeftText = `We provides a complete \ntransformation. We solve the problem \nof fragmented marketing and weak \nbrand identity`
 
     return (
         <section
