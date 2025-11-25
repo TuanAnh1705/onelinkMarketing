@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion"
-
+import Image from "next/image"
 // --- COMPONENT CON: UspItem ---
 const UspItem = ({
     item,
@@ -100,20 +100,25 @@ export default function UspSectionForDigital() {
             className="bg-white py-32 md:py-40 px-8 md:px-16 lg:px-24 overflow-x-hidden"
         >
             <div className="max-w-7xl mx-auto">
+                <h2 className="archivo-expanded text-2xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12">
+                    Why Your Digital Assets Will Convert
+                </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                     {/* Cột trái */}
                     <div className="lg:col-span-1">
-                        <p className="neulis-alt-regular text-lg md:text-4xl  font-medium">Our</p>
-                        <h1 className="archivo-expanded text-5xl md:text-7xl font-medium tracking-tighter leading-none ">
-                            Strengths
-                        </h1>
+                        <div className="relative w-full h-[400px] md:h-[500px] lg:h-[500px] lg:-translate-y-3 ">
+                            <Image
+                                src="/assets/sv7.png"
+                                alt="Strategic Advantage"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
                     </div>
 
                     {/* Cột phải */}
                     <div className="lg:col-span-2">
-                        <h2 className="archivo-expanded text-2xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12">
-                            Why Your Digital <br/> Assets Will Convert
-                        </h2>
 
                         <div>
                             {/* Line đầu tiên cũng gradient */}

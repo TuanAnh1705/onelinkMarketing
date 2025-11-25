@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     // 💡 Đã cập nhật các đường dẫn ảnh để phù hợp với Case Study
@@ -26,32 +42,40 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section (Narrow Width) --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                {/* 💡 THAY ĐỔI: Tiêu đề Case Study */}
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     Building a Conversion-Focused Digital Presence for China Sourcing Co
                 </h1>
-                {/* 💡 THAY ĐỔI: Tác giả */}
                 <p className="neulis-alt-regular font-medium text-gray-500">By Long Nguyen & Quang Ho Quoc</p>
             </header>
 
 
             {/* --- Main Blog Introduction (Narrow Width) --- */}
-            {/* 💡 THAY ĐỔI: Nội dung "1. About the Project" */}
-            <p className="neulis-alt-regular font-medium text-lg text-[#000A1D] leading-relaxed max-w-7xl mx-auto px-6 mt-8 mb-16 md:mb-24">
-                <strong className="font-semibold">China Sourcing Co</strong> is a sourcing service company that connects global businesses with reliable manufacturers across China. Despite having an extensive supplier network and a strong operational foundation, the company’s online presence did not fully reflect its expertise and credibility.
-                <br /><br />
-                The old website was outdated, hard to navigate, and lacked a clear brand narrative. Marketing activities were fragmented across channels, with no unified tracking or data integration.
-                <br /><br />
-                That’s when <strong className="font-semibold">China Sourcing Co partnered with OneLink Marketing</strong> with three main goals: 
+            {/* ✅ FIX: Đã thay đổi thẻ <p> cha thành <div>.
+                Lỗi hydration xảy ra vì <ul> không thể là con của <p>.
+                Các khối văn bản giờ được bọc trong thẻ <p> riêng của chúng.
+                Thêm 'space-y-6' để tạo khoảng cách giữa các phần tử con (p, ul).
+            */}
+            <div className="neulis-alt-regular font-medium text-lg text-[#000A1D] leading-relaxed max-w-7xl mx-auto px-6 mt-8 mb-16 md:mb-24 space-y-6">
+                <p>
+                    <strong className="font-semibold">China Sourcing Co</strong> is a sourcing service company that connects global businesses with reliable manufacturers across China. Despite having an extensive supplier network and a strong operational foundation, the company’s online presence did not fully reflect its expertise and credibility.
+                </p>
+                <p>
+                    The old website was outdated, hard to navigate, and lacked a clear brand narrative. Marketing activities were fragmented across channels, with no unified tracking or data integration.
+                </p>
+                <p>
+                    That’s when <strong className="font-semibold">China Sourcing Co partnered with OneLink Marketing</strong> with three main goals: 
+                </p>
                 <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] list-disc pl-5 space-y-2">
                     <li><strong className="font-semibold">Redesign the website</strong> with a modern, conversion-optimized layout.</li>
                     <li><strong className="font-semibold">Build a unified multi-channel marketing strategy</strong> to strengthen brand positioning.</li>
                     <li><strong className="font-semibold">Increase qualified leads</strong> while improving cost efficiency and user experience.</li>
                 </ul>
-            </p>
+            </div>
 
             {/* --- Parallax Image Section (Full-width) --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -67,7 +91,8 @@ const BlogSection = () => {
 
                 {/* --- 1. The Challenges --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         2. The Challenges
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -88,7 +113,8 @@ const BlogSection = () => {
 
                 {/* --- Heading for Solutions --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         3. Our Solutions
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -98,7 +124,8 @@ const BlogSection = () => {
 
                 {/* --- 3.1 Website Redesign & CRO --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl (từ 3xl) */}
+                    <h2 className="archivo-expanded text-2xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         1 Website Redesign & Conversion Rate Optimization (CRO)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -113,7 +140,8 @@ const BlogSection = () => {
                         />
                     </div>
 
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Our approach included:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -124,7 +152,8 @@ const BlogSection = () => {
                         <li><strong className="font-semibold">A/B testing</strong> on landing pages to find the best-performing layouts.</li>
                         <li>Integrated <strong className="font-semibold">analytics stack</strong> (GM4, Tag Manager, GSC) for real-time behavioral tracking.</li>
                     </ul>
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                     {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Result:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -132,6 +161,7 @@ const BlogSection = () => {
                         <li>&quot;Get a Quote&quot; submissions rose by <strong className="font-semibold">192%</strong> within the first 90 days.</li>
                     </ul>
 
+                    {/* ✅ FIX: Thêm flex-col trên mobile, md:flex-row trên desktop */}
                     <div className="flex flex-col md:flex-row gap-8 justify-center w-full my-8">
                         <img
                             src={trafficReportImageUrl}
@@ -148,7 +178,8 @@ const BlogSection = () => {
 
                 {/* --- 3.2 SEO & Content Strategy --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl (từ 3xl) */}
+                    <h2 className="archivo-expanded text-2xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         2 SEO & Content Strategy
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -158,10 +189,19 @@ const BlogSection = () => {
                         <li>In-depth keyword research targeting sourcing, manufacturing, quality control, and logistics.</li>
                         <li>Full <strong className="font-semibold">on-page optimization</strong> (meta, internal linking, schema markup, and page performance).</li>
                         <li>Creation of <strong className="font-semibold">content pillars</strong> like:</li>
-                        <li> &quot;Vietnam vs China Sourcing,&quot; &quot;How to Find Reliable Suppliers,&quot; &quot;Canton Fair Insights,&quot; and &quot;Product Quality Control in Asia.&quot;</li>
+                        {/* ✅ FIX: Đây là cách làm list lồng nhau (nested list) đúng ngữ nghĩa */}
+                        <li>
+                            <ul className="list-[circle] pl-5 space-y-2">
+                                <li>&quot;Vietnam vs China Sourcing,&quot;</li>
+                                <li>&quot;How to Find Reliable Suppliers,&quot;</li>
+                                <li>&quot;Canton Fair Insights,&quot;</li>
+                                <li>&quot;Product Quality Control in Asia.&quot;</li>
+                            </ul>
+                        </li>
                         <li><strong className="font-semibold">Off-page link building</strong> through digital PR and guest posts.</li>
                     </ul>
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Result:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -172,13 +212,15 @@ const BlogSection = () => {
 
                 {/* --- 3.3 Social Media Marketing --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                     {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl (từ 3xl) */}
+                    <h2 className="archivo-expanded text-2xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         3 Social Media Marketing
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         We redefined <strong className="font-semibold">brand voice, creative direction, and visual identity</strong> for LinkedIn, Facebook, Instagram, and X (Twitter), the two key B2B channels for sourcing professionals.
                     </p>
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Execution:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -186,7 +228,8 @@ const BlogSection = () => {
                         <li>Designed cohesive post templates and storytelling visuals.</li>
                         <li>Tested multiple post formats to optimize engagement.</li>
                     </ul>
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Result:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -205,13 +248,15 @@ const BlogSection = () => {
 
                 {/* --- 3.4 Email Marketing & Lead Nurturing --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl (từ 3xl) */}
+                    <h2 className="archivo-expanded text-2xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         4 Email Marketing & Lead Nurturing
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         To maximize conversion potential, we developed a <strong className="font-semibold">targeted email nurture flow</strong> that guided leads through every stage of decision-making.
                     </p>
-                    <h3 className="archivo-expanded text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Actions taken:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -231,13 +276,15 @@ const BlogSection = () => {
 
                 {/* --- 3.5 Reporting & Performance Insights --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                     {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         5 Reporting & Performance Insights
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Transparency and agility were key to this partnership. We created a live dashboard consolidating data from all channels to monitor daily performance.
                     </p>
-                    <h3 className="archivo-expanded text-2xl font-semibold text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl (từ 2xl) */}
+                    <h3 className="archivo-expanded text-xl md:text-2xl font-semibold text-[#000A1D] max-w-7xl mx-auto pt-4">
                         What we delivered:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -256,7 +303,8 @@ const BlogSection = () => {
 
                 {/* --- 4. Key Results --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         4. Key Results
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -266,7 +314,7 @@ const BlogSection = () => {
                         <br /><br />
                         On social media, engagement on LinkedIn grew by <strong className="font-semibold">145%</strong>, fueled by consistent storytelling and improved brand visuals. User behavior metrics showed significant improvement too — the average session duration increased from 38 seconds to 1 minute and 4 seconds, a <strong className="font-semibold">68% boost</strong> in time spent on site.
                         <br /><br />
-                        Meanwhile, the new <strong className="font-semibold">email marketing flow</strong>  helped re-engage cold leads, achieving a <strong className="font-semibold">30% reactivation rate</strong> and a much higher click-through rate compared to previous campaigns.
+                        Meanwhile, the new <strong className="font-semibold">email marketing flow</strong>  helped re-engage cold leads, achieving a <strong className="font-semibold">30% reactivation rate</strong> and a much higher click-through rate compared to previous campaigns.
                         <br /><br />
                         Overall, within just three months, China Sourcing Co successfully transformed its digital presence into a scalable, high-performing growth engine — turning traffic into trust, and visitors into qualified leads.
                     </p>
@@ -274,7 +322,8 @@ const BlogSection = () => {
 
                 {/* --- 5. Conclusion --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         5. Conclusion
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">

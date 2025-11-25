@@ -1,113 +1,166 @@
-"use client"
+// components/TeamSection.tsx hoặc app/components/TeamSection.tsx (Client FE)
+"use client";
 
-import Image from "next/image"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import api from "@/lib/api";
 
-// ==================== DỮ LIỆU TEAM ====================
-const teamMembers = [
-    {
-        name: "Tom Daniels",
-        role: "Director",
-        imageUrl: "/assets/mem2.webp",
-    },
-    {
-        name: "Sam Sheehan",
-        role: "Director",
-        imageUrl: "/assets/mem3.webp",
-    },
-    {
-        name: "Bheki Mhlanga",
-        role: "General Manager",
-        imageUrl: "/assets/mem4.webp",
-    },
-    {
-        name: "Quang Ho Quoc",
-        role: "Head of Marketing",
-        imageUrl: "/assets/mem1.webp",
-    },
-    // Thêm thành viên (ví dụ lặp lại)
-    {
-        name: "Tuan Nguyen",
-        role: "SEO Executive",
-        imageUrl: "/assets/mem5.jpg",
-    },
-    {
-        name: "Long Nguyen",
-        role: "Content & Growth Executive",
-        imageUrl: "/assets/mem6.jpg",
-    },
-    {
-        name: "Trang Hoang",
-        role: "Creative Executive",
-        imageUrl: "/assets/mem7.jpg",
-    },
-    {
-        name: "Anh Tran Tuan",
-        role: "Website Developer",
-        imageUrl: "/assets/mem8.png",
-    },
-    {
-        name: "Nguyen Tan",
-        role: "Social Media Executive",
-        imageUrl: "/assets/mem9.png",
-    },
-]
+// ==================== INTERFACE ====================
+interface TeamMember {
+  id: number;
+  name: string;
+  position: string;
+  imageUrl: string;
+}
 
 // ==================== COMPONENT ====================
 export function TeamSection() {
-    const [emblaRef] = useEmblaCarousel(
-        {
-            loop: false,
-            align: "start",
-            dragFree: true,
-        },
-        [
-            Autoplay({
-                delay: 2000,
-                stopOnInteraction: false,
-                stopOnLastSnap: false,
-            }),
-        ]
-    )
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: false,
+      align: "start",
+      dragFree: true,
+    },
+    [
+      Autoplay({
+        delay: 2000,
+        stopOnInteraction: false,
+        stopOnLastSnap: false,
+      }),
+    ]
+  );
+
+  // ✅ Fetch data từ Dashboard API
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await api.get("/api/representatives");
+        
+        // ✅ SẮP XẾP THEO ID TĂNG DẦN (nhỏ nhất bên trái)
+        const sortedMembers = (response.data || []).sort(
+          (a: TeamMember, b: TeamMember) => a.id - b.id
+        );
+        
+        setTeamMembers(sortedMembers);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (err: any) {
+        console.error("Error fetching team members:", err);
+        setError("Failed to load team members");
+        setTeamMembers([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
+
+  // ==================== LOADING STATE ====================
+  if (loading) {
     return (
-        <section className="bg-white py-20 md:py-32"> {/* Loại bỏ 'px-8' khỏi section */}
-            <div className="max-w-7xl mx-auto px-8"> {/* Giữ 'px-8' cho div này để tiêu đề vẫn căn giữa */}
-                {/* --- Tiêu đề --- */}
-                <div className="text-center mb-16">
-                    <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">Meet Our Team</h2>
-                </div>
-            </div>
+      <section className="bg-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">
+              Meet Our Team
+            </h2>
+          </div>
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#000A1D]"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-            {/* --- Carousel Container --- */}
-            {/* Di chuyển carousel ra khỏi div có max-w-7xl mx-auto và px-8 */}
-            <div className="embla w-full overflow-hidden" ref={emblaRef}>
-                <div className="embla__container flex -ml-8">
-                    {teamMembers.map((member, index) => (
-                        <div
-                            className="embla__slide relative min-w-0 flex-shrink-0 flex-grow-0
-                                       basis-full pl-8 sm:basis-1/2 lg:basis-1/4"
-                            key={index}
-                        >
-                            <div className="group text-left">
-                                {/* Container chứa ảnh */}
-                                <div className="relative w-full aspect-[3/4] bg-gray-300 overflow-hidden mb-4 shadow-md">
-                                    <Image
-                                        src={member.imageUrl}
-                                        alt={`Photo of ${member.name}`}
-                                        fill
-                                        className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
-                                    />
-                                </div>
-                                {/* Tên và Chức vụ */}
-                                <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">{member.name}</h3>
-                                <p className="neulis-alt-regular font-medium text-[#444444]">{member.role}</p>
-                            </div>
-                        </div>
-                    ))}
+  // ==================== ERROR STATE ====================
+  if (error) {
+    return (
+      <section className="bg-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">
+              Meet Our Team
+            </h2>
+          </div>
+          <div className="text-center py-20">
+            <p className="text-red-500">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ==================== EMPTY STATE ====================
+  if (teamMembers.length === 0) {
+    return (
+      <section className="bg-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">
+              Meet Our Team
+            </h2>
+          </div>
+          <div className="text-center py-20">
+            <p className="text-gray-500">No team members available</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ==================== MAIN RENDER ====================
+  return (
+    <section className="bg-white py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-8">
+        {/* --- Tiêu đề --- */}
+        <div className="text-center mb-16">
+          <h2 className="archivo-expanded text-5xl md:text-6xl font-medium text-[#000A1D]">
+            Meet Our Team
+          </h2>
+        </div>
+      </div>
+
+      {/* --- Carousel Container --- */}
+      <div className="embla w-full overflow-hidden" ref={emblaRef}>
+        <div className="embla__container flex -ml-8">
+          {teamMembers.map((member) => (
+            <div
+              className="embla__slide relative min-w-0 shrink-0 grow-0
+                         basis-full pl-8 sm:basis-1/2 lg:basis-1/4"
+              key={member.id}
+            >
+              <div className="group text-left">
+                {/* Container chứa ảnh */}
+                <div className="relative w-full aspect-3/4 bg-gray-300 overflow-hidden mb-4 shadow-md">
+                  <Image
+                    src={member.imageUrl}
+                    alt={`Photo of ${member.name}`}
+                    fill
+                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+                  />
                 </div>
+                {/* Tên và Chức vụ */}
+                <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">
+                  {member.name}
+                </h3>
+                <p className="neulis-alt-regular font-medium text-[#444444]">
+                  {member.position}
+                </p>
+              </div>
             </div>
-        </section>
-    )
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

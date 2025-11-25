@@ -1,22 +1,178 @@
 "use client"
 
-// 1. Import thêm useSpring
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { ArrowUpRight } from "lucide-react"
+
+// Wrap Next/Image for Framer Motion
+const MotionImage = motion(Image)
+
+//-----------------------------------------------------
+// VARIANTS FOR SERVICE CARDS
+//-----------------------------------------------------
+
+const overlayVariants: Variants = {
+  rest: {
+    y: "calc(100% - 7rem)",
+  },
+  hover: {
+    y: 0,
+    transition: { duration: 0.4, ease: "easeInOut" },
+  },
+}
+
+const contentVariants: Variants = {
+  rest: { opacity: 0, y: 10 },
+  hover: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.2, duration: 0.3 },
+  },
+}
+
+const mobileCardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+    },
+  }),
+}
+
+//-----------------------------------------------------
+// DATA
+//-----------------------------------------------------
+
+interface ServiceCardProps {
+  title: React.ReactNode
+  description: string
+  imageUrl: string
+  link: string
+}
+
+const services: ServiceCardProps[] = [
+  {
+    title: (
+      <>
+        Social Media Strategy
+        <br />
+        & Planning
+      </>
+    ),
+    description:
+      "Defining your audience, content pillars, and platform-specific goals to build a cohesive brand voice.",
+    imageUrl: "/assets/25.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Content Creation &
+        <br />
+        Scheduling
+      </>
+    ),
+    description:
+      "Producing and scheduling engaging visuals, videos, and copy in a consistent content calendar.",
+    imageUrl: "/assets/25.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Community Management
+        <br />
+        & Engagement
+      </>
+    ),
+    description:
+      "Actively engaging with your audience, responding to feedback, and fostering a loyal brand community.",
+    imageUrl: "/assets/25.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Performance Analytics
+        <br />
+        & Reporting
+      </>
+    ),
+    description:
+      "Tracking key metrics, analyzing performance, and providing actionable reports to demonstrate ROI.",
+    imageUrl: "/assets/25.png",
+    link: "/case-studies",
+  },
+]
+
+const DEFAULT_SERVICE_IMAGE = "/assets/25.png"
+
+//-----------------------------------------------------
+// MOBILE SERVICE CARD
+//-----------------------------------------------------
+
+const MobileServiceCard = ({ service, index }: { service: ServiceCardProps; index: number }) => {
+  return (
+    <motion.div
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={mobileCardVariants}
+      className="relative h-[450px] overflow-hidden shadow-lg"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <MotionImage
+          src={service.imageUrl}
+          alt={typeof service.title === 'string' ? service.title : 'Service'}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 to-black/60" />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="absolute inset-x-0 bottom-0 p-6 bg-[#0074E5] backdrop-blur-sm text-white">
+        <h3 className="archivo-expanded text-lg font-bold mb-3 leading-tight text-white">
+          {service.title}
+        </h3>
+        <p className="neulis-alt-regular text-sm leading-relaxed text-white mb-4">
+          {service.description}
+        </p>
+        <Link
+          href={service.link}
+          className="group inline-flex items-center gap-2 px-4 py-3
+          rounded-full bg-white text-[#444444] text-sm font-medium
+          hover:bg-[#162660] hover:text-white transition-colors"
+        >
+          Explore Now
+          <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
+//-----------------------------------------------------
+// MAIN COMPONENT
+//-----------------------------------------------------
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  // 1. 🔽 THAY ĐỔI: Cập nhật logic transform để khớp với trang SEO/Paid Media
   const imageY = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
-
-  // 2. Dùng useSpring để làm mượt giá trị từ useTransform
   const smoothImageY = useSpring(imageY, {
     stiffness: 100,
     damping: 30,
@@ -25,23 +181,24 @@ export default function HeroSection() {
 
   return (
     <div className="relative overflow-hidden" ref={containerRef}>
-      {/* --- Curtain Animation --- */}
+      {/* Curtain Animation */}
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
         transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-        className="fixed top-0 left-0 w-1/2 h-full bg-white z-[9999]"
+        className="fixed top-0 left-0 w-1/2 h-full bg-white z-9999"
       />
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "100%" }}
         transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-        className="fixed top-0 right-0 w-1/2 h-full bg-white z-[9999]"
+        className="fixed top-0 right-0 w-1/2 h-full bg-white z-9999"
       />
 
-      {/* --- Page Content --- */}
-      {/* THAY ĐỔI: Giảm padding mobile */}
+      {/* Page Content */}
       <div className="min-h-screen bg-white p-6 md:p-16 relative z-10">
+
+        {/* SVG Definition for Gradient */}
         <svg width="0" height="0" style={{ position: "absolute" }}>
           <defs>
             <linearGradient id="chevronGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -52,137 +209,143 @@ export default function HeroSection() {
         </svg>
 
         <div className="mx-auto max-w-7xl">
-          {/* Header with gradient text (Nội dung Social Media) */}
-          {/* THAY ĐỔI: Giảm margin mobile */}
+          {/* Header with gradient text */}
           <div className="mb-12 md:mb-16">
-            {/* THAY ĐỔI: Cỡ chữ mobile */}
             <h1 className="text-center text-3xl md:text-8xl font-bold tracking-wider mb-8">
-              <span className="archivo-expanded bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+              <span className="archivo-expanded bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
                 SOCIAL MEDIA
               </span>
               <br />
-              <span className="archivo-expanded bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+              <span className="archivo-expanded bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
                 MANAGEMENT
               </span>
             </h1>
-            <div className="h-[1px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+            <div className="h-px w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
           </div>
 
-          {/* 🔽 THAY ĐỔI: Chuyển sang bố cục DỌC giống trang SEO */}
-          {/* THAY ĐỔI: Giảm margin/spacing mobile */}
+          {/* Main content section */}
           <div className="mb-16 md:mb-24 space-y-10 md:space-y-20">
-            {/* Căn giữa khối text */}
+            {/* Centered text */}
             <div className="flex items-start justify-center">
               <div className="max-w-3xl text-center">
-                {/* THAY ĐỔI: Cỡ chữ mobile */}
                 <p className="neulis-alt-regular text-sm md:text-xl text-[#444444] leading-relaxed">
                   Transform your social channels into powerful community-building and lead-nurturing platforms through strategic content and authentic engagement.
                 </p>
               </div>
             </div>
 
-            {/* Cập nhật khối container ảnh và motion.div */}
-            <div className="flex items-center">
-              {/* Container cha bọc ngoài (giữ tỷ lệ và overflow) */}
-              {/* THAY ĐỔI: Bỏ min-h, đổi aspect-ratio mobile, prefix max-w */}
+            {/* Image container */}
+            {/* <div className="flex items-center">
               <div className="relative w-full aspect-video md:aspect-[16/7] overflow-hidden md:max-w-[1600px] mx-auto">
-                {/* Tăng chiều cao lên 133.33% (tức 4/3) để bù vào phần di chuyển */}
                 <motion.div
                   style={{ y: smoothImageY }}
                   className="w-full h-[calc(100%_*_4/3)] relative"
                 >
                   <Image
-                    src="/assets/25.jpg" // Giữ ảnh của trang Social Media
-                    alt="Never Stops - Athletes running on track"
-                    fill={true}
-                    className="object-cover"
-                    priority={true}
+                    src="/assets/25.png"
+                    alt="Social Media Management"
+                    fill
+                    className="object-cover will-change-transform"
+                    priority
                   />
                 </motion.div>
               </div>
+            </div> */}
+          </div>
+
+          {/* Services section - NEW DESIGN */}
+          <div className="mb-12 md:-mb-16">
+            {/* Mobile: Stacked cards */}
+            <div className="lg:hidden space-y-6">
+              {services.map((service, index) => (
+                <MobileServiceCard
+                  key={index}
+                  service={service}
+                  index={index}
+                />
+              ))}
             </div>
-          </div>
-          {/* --- KẾT THÚC THAY ĐỔI --- */}
 
-
-          {/* Services section (Nội dung Social Media) */}
-          {/* THAY ĐỔI: Giảm gap mobile */}
-          <div className="grid md:grid-cols-4 gap-8 md:gap-14">
-            {[
-              {
-                title: (
-                  <>
-                    Social Media Strategy <br /> & Planning
-                  </>
-                ),
-                desc: "Defining your audience, content pillars, and platform-specific goals to build a cohesive brand voice.",
-              },
-              {
-                title: (
-                  <>
-                    Content Creation & <br /> Scheduling
-                  </>
-                ),
-                desc: "Producing and scheduling engaging visuals, videos, and copy in a consistent content calendar.",
-              },
-              {
-                title: (
-                  <>
-                    Community Management & Engagement
-                  </>
-                ),
-                desc: "Actively engaging with your audience, responding to feedback, and fostering a loyal brand community.",
-              },
-              {
-                title: (
-                  <>
-                    Performance Analytics <br /> & Reporting
-                  </>
-                ),
-                desc: "Tracking key metrics, analyzing performance, and providing actionable reports to demonstrate ROI.",
-              },
-            ].map((s, i) => (
-              <div key={i} className="space-y-4 flex flex-col">
-                <div className="border-b border-[#0074E5] pb-3">
-                  {/* THAY ĐỔI: Cỡ chữ h3 responsive */}
-                  <h3 className="archivo-expanded text-lg md:text-lg font-bold text-[#000A1D]">
-                    {s.title}
-                  </h3>
-                </div>
-                <p className="neulis-alt-regular text-[#444444] leading-relaxed text-sm">
-                  {s.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Nút "EXPLORE MORE" CHUNG */}
-          {/* THAY ĐỔI: Giảm margin top mobile */}
-          <div className="flex justify-center mt-12 md:mt-16">
-            <Link
-              href="/insights"
-              className="flex items-center gap-2 text-[#444444] hover:text-[#0074E5] transition-colors text-sm group"
+            {/* Desktop: Interactive grid */}
+            <div
+              className="hidden lg:block relative h-[650px] xl:h-[700px] overflow-hidden shadow-lg w-full"
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="url(#chevronGradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Default Background */}
+              <MotionImage
+                src={DEFAULT_SERVICE_IMAGE}
+                alt="Social Media Services"
+                fill
+                className="object-cover"
+                animate={{ opacity: 1 }}
+              />
+
+              {/* Hover images */}
+              {services.map((service, index) => (
+                <MotionImage
+                  key={index}
+                  src={service.imageUrl}
+                  alt={typeof service.title === 'string' ? service.title : 'Service'}
+                  fill
+                  className="object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                 />
-              </svg>
-              <span className="neulis-alt-regular">Explore more</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="url(#chevronGradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
+              ))}
+
+              <div className="absolute inset-0 grid grid-cols-4 z-10">
+                {services.map((service, index) => {
+                  const animateState = hoveredIndex === index ? "hover" : "rest"
+
+                  return (
+                    <div
+                      key={index}
+                      className="relative h-full"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                    >
+                      {/* Overlay */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 p-6 
+                        bg-[#0074E5]/40
+                        text-white flex flex-col justify-start"
+                        variants={overlayVariants}
+                        animate={animateState}
+                      >
+                        <h3 className="archivo-expanded text-lg xl:text-xl font-bold leading-tight text-white">
+                          {service.title}
+                        </h3>
+
+                        <motion.div
+                          className="mt-4 space-y-4"
+                          variants={contentVariants}
+                          animate={animateState}
+                        >
+                          <p className="neulis-alt-regular text-md leading-relaxed text-white">
+                            {service.description}
+                          </p>
+
+                          <Link
+                            href={service.link}
+                            className="group flex items-center gap-2 px-4 py-4 w-fit
+                            rounded-full bg-white text-[#444444] text-sm font-medium
+                            hover:bg-[#162660] hover:text-white transition-colors"
+                          >
+                            Explore Now
+                            <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
+                          </Link>
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Vertical dividers */}
+              <div className="absolute top-0 bottom-0 left-1/4 w-px bg-white/20 z-20" />
+              <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white/20 z-20" />
+              <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white/20 z-20" />
+            </div>
           </div>
         </div>
       </div>

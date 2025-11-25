@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     // 💡 Đã cập nhật các đường dẫn ảnh để phù hợp với nội dung Blog 4
@@ -22,7 +38,8 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section (Narrow Width) --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     Content Competitor Analysis: A Data-Driven Roadmap to Find Market Gaps and Dominate Your Niche
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">By Long Nguyen</p>
@@ -40,7 +57,8 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section (Full-width) --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -56,13 +74,15 @@ const BlogSection = () => {
                 
                 {/* --- Step 1: Identify Your True Content Competitors --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Step 1: Identify Your True Content Competitors
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         The first mistake many businesses make is looking only at their direct business competitors. In the world of content, however, your competitor is <strong className="font-semibold">anyone who is capturing the attention of your target audience</strong>. This can include industry publications, specialized blogs, or even influential experts.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         The Analytical Mindset:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -72,28 +92,32 @@ const BlogSection = () => {
 
                 {/* --- Step 2: Decode Your Competitors’ Strategy with Data --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Step 2: Decode Your Competitors’ Strategy with Data
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Once you have your list of competitors, it’s time to use the power of analytics tools to deeply understand their strategy.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Uncover Their Content “Goldmine”:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         <strong className="font-semibold">The Mindset:</strong> “What are our competitors’ most successful pieces of content?” Analytics tools can show you exactly which pages on a competitor’s website are driving the most organic traffic. These are their proven winners—their “pillar” content and the topics they are excelling at. Analyze the themes and formats of these pages to understand what resonates with the audience.
                     </p>
                     
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Analyze Their Keyword DNA:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         <strong className="font-semibold">The Mindset:</strong> “Which keywords are our competitors targeting and winning?” SEO tools allow you to see the entire list of keywords a website is ranking for. This helps you understand if they are focusing on informational keywords (to build awareness) or commercial keywords (to drive sales).
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Reverse-Engineer Their “Authority”:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -112,21 +136,24 @@ const BlogSection = () => {
 
                 {/* --- Step 3: Find the Golden Opportunities (The Gaps) --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Step 3: Find the Golden Opportunities (The Gaps)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         This is the most critical step: turning data into actionable opportunities.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Keyword Gaps — The Low-Hanging Fruit:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         “What are our competitors talking about that we are completely missing?” Most professional SEO platforms have a “Keyword Gap Analysis” feature. You can compare your domain against your competitors to generate a list of keywords they are ranking for, <strong className="font-semibold">but you are not</strong>. These are golden opportunities—the clearest gaps in your content strategy that you can begin to target immediately.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Depth and Format Gaps — The Strategic Advantage:
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -144,7 +171,8 @@ const BlogSection = () => {
 
                 {/* --- Step 4: Build Your Domination Plan --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Step 4: Build Your Domination Plan
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -177,7 +205,8 @@ const BlogSection = () => {
 
                 {/* --- Conclusion --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Conclusion: Stop Guessing, Start Analyzing
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">

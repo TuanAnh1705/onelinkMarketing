@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     const mainParallaxImageUrl = "/assets/bl22.png"
@@ -27,7 +43,8 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     Boosting Vietnam Sourcing Co&apos;s Digital Presence and Lead Generation
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">
@@ -37,7 +54,8 @@ const BlogSection = () => {
 
             {/* --- Services List --- */}
             <div className="max-w-7xl mx-auto px-6 mt-8">
-                <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                     About the Project
                 </h2>
             </div>
@@ -65,7 +83,8 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -80,7 +99,8 @@ const BlogSection = () => {
             <article className="max-w-7xl mx-auto px-6 pb-16">
                 {/* --- The Challenges --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">The Challenges</h2>
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">The Challenges</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         Before partnering with the agency, Vietnam Sourcing Co faced three major challenges:
                     </p>
@@ -105,14 +125,16 @@ const BlogSection = () => {
 
                 {/* --- Approach --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Our Approach: How We Solved It
                     </h2>
                 </section>
 
                 {/* --- 1. Brand Positioning --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         1. Brand Positioning & Messaging Framework
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -138,7 +160,8 @@ const BlogSection = () => {
 
                 {/* --- 2. SEO & Website Overhaul --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         2. SEO & Website Overhaul
                     </h2>
 
@@ -179,7 +202,8 @@ const BlogSection = () => {
 
                 {/* --- 3. Social Media --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         3. Social Media Marketing: Human-Centered Storytelling
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -208,7 +232,8 @@ const BlogSection = () => {
 
                 {/* --- 4. Conversion Optimization --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         4. Conversion Optimization & Email Automation
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -240,7 +265,8 @@ const BlogSection = () => {
 
                 {/* --- Results --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-3xl font-medium text-[#000A1D]">Our Results</h2>
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl (từ 3xl) */}
+                    <h2 className="archivo-expanded text-2xl md:text-3xl font-medium text-[#000A1D]">Our Results</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         After 4 months of implementation, Vietnam Sourcing Co achieved measurable growth:
                     </p>
@@ -256,7 +282,7 @@ const BlogSection = () => {
                         </li>
                         <li>
                             <strong className="font-semibold">+45% session duration</strong> and{" "}
-                            <strong className="font-semibold">-30% bounce rate</strong> showing stronger engagement {" "}
+                            <strong className="font-semibold">-30% bounce rate</strong> showing stronger engagement{" "}
                             <strong className="font-semibold">Boosted brand authority</strong> positioning Vietnam Sourcing Co as a credible global sourcing partner
                         </li>
                     </ul>
@@ -289,8 +315,9 @@ const BlogSection = () => {
 
                 {/* --- Quote --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">Quote</h2>
-                    <blockquote className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed pl-6 italic">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">Quote</h2>
+                    <blockquote className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed pl-6 italic border-l-4 border-gray-300"> {/* ✅ FIX: Thêm border-l */}
                         &quot;Before working with the agency, we were doing great work but nobody knew about it
                         online. Now, our content and SEO strategy consistently bring in the right leads and help
                         us tell the Vietnam sourcing story the way it deserves to be told.&quot;
@@ -302,7 +329,8 @@ const BlogSection = () => {
 
                 {/* --- Key Takeaway --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">Key Takeaway</h2>
+                     {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">Key Takeaway</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         The partnership between <strong className="font-semibold">OneLink Marketing</strong> and{" "}
                         <strong className="font-semibold">Vietnam Sourcing Co</strong> demonstrates how a

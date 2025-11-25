@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion"
-
+import Image from "next/image"
 // --- COMPONENT CON: UspItem ---
 const UspItem = ({
     item,
@@ -46,7 +46,7 @@ const UspItem = ({
             {/* Chỉ hiển thị line nếu KHÔNG phải item cuối */}
             {index < total - 1 && (
                 <motion.div
-                    className="h-[1px] w-full rounded-full"
+                    className="h-px w-full rounded-full"
                     style={{
                         background: "linear-gradient(90deg, #0074E5, #162660)",
                         x: lineTranslateX,
@@ -100,25 +100,29 @@ export default function UspSectionForSeo() {
             className="bg-white py-32 md:py-40 px-8 md:px-16 lg:px-24 overflow-x-hidden"
         >
             <div className="max-w-7xl mx-auto">
+                <h2 className="archivo-expanded text-3xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12">
+                    Gain Your SEO Advantage
+                </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                     {/* Cột trái */}
                     <div className="lg:col-span-1">
-                        <p className="neulis-alt-regular text-lg md:text-4xl  font-medium">Our</p>
-                        <h1 className="archivo-expanded text-5xl md:text-7xl font-medium tracking-tighter leading-none ">
-                            Strengths
-                        </h1>
+                        <div className="relative w-full h-[400px] md:h-[500px] lg:h-[500px] lg:-translate-y-3">
+                            <Image
+                                src="/assets/sv8.png"
+                                alt="Strategic Advantage"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
                     </div>
 
                     {/* Cột phải */}
                     <div className="lg:col-span-2">
-                        <h2 className="archivo-expanded text-3xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12">
-                            Gain Your SEO <br/> Advantage
-                        </h2>
-
                         <div>
                             {/* Line đầu tiên cũng gradient */}
                             <div
-                                className="h-[1px] w-full rounded-full"
+                                className="h-px w-full rounded-full"
                                 style={{ background: "linear-gradient(90deg, #0074E5, #162660)" }}
                             />
                             {uspItems.map((item, index) => (
@@ -136,7 +140,7 @@ export default function UspSectionForSeo() {
 
                 {/* Nút CTA */}
                 <div className="flex justify-center mt-20">
-                    <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                    <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
 
                         {/* Lớp chữ trên cùng */}
                         <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">

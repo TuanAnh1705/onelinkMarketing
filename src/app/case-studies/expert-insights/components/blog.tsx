@@ -5,44 +5,58 @@ import { useState, useEffect, useRef } from "react"
 
 const BlogSection = () => {
     const [offsetY, setOffsetY] = useState(0)
-    const image1Ref = useRef<HTMLImageElement>(null)
-    const image2Ref = useRef<HTMLImageElement>(null)
-    const image3Ref = useRef<HTMLImageElement>(null)
+    // const image1Ref = useRef<HTMLImageElement>(null)
+    // const image2Ref = useRef<HTMLImageElement>(null)
+    // const image3Ref = useRef<HTMLImageElement>(null)
 
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
-    const getParallaxOffset = (
-        ref: React.RefObject<HTMLImageElement | null>,
-        speed: number,
-    ) => {
-        if (!ref.current) return 0
-        const rect = ref.current.getBoundingClientRect()
-        const elementTopInViewport = rect.top
-        const windowHeight = window.innerHeight
+    // const getParallaxOffset = (
+    //     ref: React.RefObject<HTMLImageElement | null>,
+    //     speed: number,
+    // ) => {
+    //     if (!ref.current) return 0
+    //     const rect = ref.current.getBoundingClientRect()
+    //     const elementTopInViewport = rect.top
+    //     const windowHeight = window.innerHeight
+    //     const progress = windowHeight - elementTopInViewport
+    //     if (progress > 0) {
+    //         return progress * speed - 100
+    //     }
+    //     return -100
+    // }
 
-        const progress = windowHeight - elementTopInViewport
-
-        if (progress > 0) {
-            return progress * speed - 100
-        }
-        return -100
-    }
-
-    const mainParallaxImageUrl = "/assets/bl.png" // 👈 Thay đổi đường dẫn ảnh chính (nếu cần)
-    const phase1DiagramUrl = "/assets/bl1.png" // 👈 Đường dẫn ảnh cho Phase 1
-    const phase3TableUrl = "/assets/bl2.png" // 👈 Đường dẫn ảnh cho Phase 3
-    const resultsChartUrl = "/assets/bl3.png" // 👈 Đường dẫn ảnh cho Results
+    const mainParallaxImageUrl = "/assets/bl.png"
+    const phase1DiagramUrl = "/assets/bl1.png"
+    const phase3TableUrl = "/assets/bl2.png"
+    const resultsChartUrl = "/assets/bl3.png"
 
     return (
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section (Narrow Width) --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     How We Cut Customer Acquisition Cost (CAC) by 50% by Shifting Budget from Paid Ads to Content SEO
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">By Long Nguyen & Tuan Nguyen</p>
@@ -58,16 +72,15 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section (Full-width) --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
-                        backgroundImage: `url(${mainParallaxImageUrl})`, // Sử dụng ảnh chính của bạn
+                        backgroundImage: `url(${mainParallaxImageUrl})`,
                         transform: `translateY(${-400 + offsetY * 0.4}px)`,
                         willChange: "transform",
                     }}
                 ></div>
-                {/* 💡 Có vẻ như ảnh chính của bạn có text sẵn, nên không cần overlay nữa */}
             </div>
 
             {/* --- Main Content Article --- */}
@@ -75,7 +88,8 @@ const BlogSection = () => {
                 
                 {/* --- The Background: The Pitfalls of Paid Ad Dependency --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         The Background: The Pitfalls of Paid Ad Dependency
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -99,7 +113,8 @@ const BlogSection = () => {
 
                 {/* --- The Solution: A Strategic Shift from "Renting" to "Owning" Your Audience --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         The Solution: A Strategic Shift from &quot;Renting&quot; to &quot;Owning&quot; Your Audience
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -111,7 +126,8 @@ const BlogSection = () => {
 
                 {/* --- Phase 1: Strategic Analysis and Planning (Months 1-2) --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Phase 1: Strategic Analysis and Planning (Months 1-2)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -134,14 +150,14 @@ const BlogSection = () => {
                             src={phase1DiagramUrl}
                             alt="Diagram of Topic Cluster Architectures for Vietnam Sourcing"
                             className="max-w-full h-auto rounded-lg shadow-md"
-                            // 💡 Thêm ref nếu muốn hiệu ứng parallax riêng cho ảnh này
                         />
                     </div>
                 </section>
 
                 {/* --- Phase 2: Intelligent Budget Reallocation (Months 3-6) --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Phase 2: Intelligent Budget Reallocation (Months 3-6)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -159,7 +175,8 @@ const BlogSection = () => {
 
                 {/* --- Phase 3: Content SEO Execution and Optimization (Months 7-12) --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Phase 3: Content SEO Execution and Optimization (Months 7-12)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -182,14 +199,14 @@ const BlogSection = () => {
                             src={phase3TableUrl}
                             alt="Table showing content performance and keyword rankings in Phase 3"
                             className="max-w-full h-auto rounded-lg shadow-md"
-                            // 💡 Thêm ref nếu muốn hiệu ứng parallax riêng cho ảnh này
                         />
                     </div>
                 </section>
 
                 {/* --- The Results: The Numbers Speak for Themselves --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         The Results: The Numbers Speak for Themselves
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -215,14 +232,14 @@ const BlogSection = () => {
                             src={resultsChartUrl}
                             alt="Chart showing increase in organic traffic and leads"
                             className="max-w-full h-auto rounded-lg shadow-md"
-                            // 💡 Thêm ref nếu muốn hiệu ứng parallax riêng cho ảnh này
                         />
                     </div>
                 </section>
 
                 {/* --- Analysis: Why This Strategy Worked --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Analysis: Why This Strategy Worked
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -243,7 +260,8 @@ const BlogSection = () => {
 
                 {/* --- Key Takeaways for Your Business --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Key Takeaways for Your Business
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -280,4 +298,3 @@ const BlogSection = () => {
 }
 
 export default BlogSection
-

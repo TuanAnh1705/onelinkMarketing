@@ -22,7 +22,7 @@ export default function FitnessShowcase() {
     })
 
     return (
-        <div className="min-h-screen bg-neutral-100">
+        <div className="min-h-screen bg-white">
             {/* Top Section */}
             <section className="container mx-auto px-6 py-16 lg:py-24">
                 <div className="max-w-7xl mx-auto space-y-12">
@@ -78,7 +78,7 @@ export default function FitnessShowcase() {
                     }}
                 >
                     <Image
-                        src="/assets/steel0.png"
+                        src="/assets/steel.png"
                         alt="Tag Fitness - Where progress never stops"
                         fill
                         className="object-cover"

@@ -48,7 +48,7 @@ export default function SolutionsSection() {
     return (
         <div className="bg-white py-24 mb-20">
             {/* ==================== PROBLEM SECTION (Phần 3) ==================== */}
-            <section className="container mx-auto px-6 mb-14 -mt-72">
+            <section className="container mx-auto px-6 mb-14 -mt-40 md:-mt-72">
                 <div className="max-w-7xl mx-auto flex justify-start mb-14">
                     <div className="w-full lg:w-full text-left">
                         <h2 className="archivo-expanded text-4xl lg:text-5xl font-medium tracking-tight text-[#000A1D] mb-10">

@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     // 💡 Đã cập nhật các đường dẫn ảnh để phù hợp với nội dung Blog 3
@@ -21,7 +37,8 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section (Narrow Width) --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     The SEO Topic Cluster Model: How to Dominate Target Keywords and Build Sustainable Brand Authority
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">By Tuan Nguyen</p>
@@ -37,7 +54,8 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section (Full-width) --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -53,7 +71,8 @@ const BlogSection = () => {
                 
                 {/* --- What is a Topic Cluster? --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         What is a Topic Cluster? Decoding the Power Structure
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -77,14 +96,16 @@ const BlogSection = () => {
 
                 {/* --- Why is the Topic Cluster Model So Effective? --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Why is the Topic Cluster Model So Effective?
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         This approach offers a dual benefit: it’s optimized for Google’s algorithms while simultaneously enhancing the user experience.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         For Search Engines (Google):
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -108,7 +129,8 @@ const BlogSection = () => {
                         />
                     </div>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         For Users (Your Customers):
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -123,14 +145,16 @@ const BlogSection = () => {
 
                 {/* --- 5-Step Guide --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         A 5-Step Guide to Implementing the Topic Cluster Model
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Adopting this model requires a strategic plan. Here is a 5-step roadmap to get you started:
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Step 1: Identify Your Core Topics (Pillar Topics)
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -139,7 +163,8 @@ const BlogSection = () => {
                         <strong className="font-normal">Example:</strong> A marketing agency might choose pillar topics like: “Content Marketing,” “SEO,” “Social Media Marketing,” and “Email Marketing.”
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Step 2: Conduct Keyword Research for Your Clusters (Cluster Keywords)
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -148,21 +173,24 @@ const BlogSection = () => {
                         <strong className="font-normal">Example:</strong> For the “Content Marketing” pillar, cluster keywords could be: “how to create a content plan,” “how to write an SEO-friendly blog post,” “types of content marketing,” “how to measure content effectiveness.”
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Step 3: Create Your Pillar Page
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         This is the most critical part. Create a comprehensive, high-quality overview (often called “10x content”) for your core topic. This page should cover all the main sub-topics you identified in Step 2 and link out to the cluster articles where readers can learn more.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Step 4: Write Your Cluster Content
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Now, create individual blog posts for each of the cluster keywords you researched. Each article should focus on solving one specific problem in a detailed and in-depth manner.
                     </p>
 
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         Step 5: Link It All Together
                     </h3>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
@@ -181,7 +209,8 @@ const BlogSection = () => {
 
                 {/* --- Conclusion --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Conclusion: Stop Producing Content, Start Building Authority
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">

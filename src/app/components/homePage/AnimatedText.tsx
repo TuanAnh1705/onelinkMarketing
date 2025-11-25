@@ -34,7 +34,7 @@ export default function AnimatedText() {
                         <br />
                         <span className="text-gray-400">and</span> perform
                         <span className="text-gray-400">, for</span> growing <br />
-                        <span className="text-gray-400">markets since</span>
+                        <span className="text-gray-400">markets</span>
                     </motion.h2>
                 </motion.div>
             </div>

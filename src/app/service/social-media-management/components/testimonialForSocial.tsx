@@ -85,10 +85,10 @@ export default function TestimonialsForSocial() {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-white text-[#000A1D] w-full overflow-hidden py-24 sm:py-32 -translate-y-24 z-10"
+            className="relative bg-white text-[#000A1D] w-full overflow-hidden py-24 sm:py-32 -translate-y-24 z-10 md:mb-0 mb-20"
         >
 
-            <div className="mt-20">
+            <div className="mt-0">
                 {/* THAY ĐỔI: Cỡ chữ responsive */}
                 <p className="text-center text-[#000A1D] mb-12 text-2xl md:text-5xl archivo-expanded font-medium">Manage My Social Media</p>
                 <div className="relative w-full overflow-hidden">

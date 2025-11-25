@@ -21,7 +21,7 @@ export default function SectionProjects() {
   return (
     <motion.section
       ref={section4Ref}
-      className="relative justify-center -mt-96 z-10 bg-white pt-0 pb-32 px-8 md:px-16 lg:px-24"
+      className="relative justify-center -mt-[1700px] md:-mt-96 z-10 bg-white pt-0 pb-32 px-8 md:px-16 lg:px-24"
       onMouseMove={(e) => {
         mouseX.set(e.clientX)
         mouseY.set(e.clientY)

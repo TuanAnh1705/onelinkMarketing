@@ -181,7 +181,7 @@ export default function ServiceSection() {
             </section>
 
             {/* SECTION 2 (ĐÃ CẬP NHẬT VỚI <Link>) */}
-            <section className="relative -translate-y-[5vh] text-white bg-[#000A1D] z-40 -top-40 md:-top-60 lg:-top-80">
+            <section className="relative -translate-y-[5vh] text-white bg-[#000A1D] z-40 -top-[900px] md:-top-60 lg:-top-80">
                 <div className="flex flex-col w-full relative overflow-visible md:-top-96">
                     {/* LINE ĐẦU */}
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />

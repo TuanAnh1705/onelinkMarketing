@@ -94,7 +94,7 @@ export default function ChallengeSection() {
 
             {/* Parallax Grid Section */}
             <section
-                className="relative -mt-72 h-[1400px] lg:h-[1800px] w-full"
+                className="relative -mt-36 md:-mt-72 h-[1400px] lg:h-[1800px] w-full"
             >
                 <div className="container mx-auto px-6 h-full flex items-center">
                     

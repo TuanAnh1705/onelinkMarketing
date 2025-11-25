@@ -68,15 +68,15 @@ const useMediaQuery = (query: string) => {
 export default function Showcase() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [lastDirection, setLastDirection] = useState<"up" | "down">("down")
-  const [curtainRevealed, setCurtainRevealed] = useState(false)
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [curtainRevealed, setCurtainRevealed] = useState(isDesktop);
+
 
   const sectionRef = useRef<HTMLDivElement>(null)
   const isScrolling = useRef(false)
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null)
   const touchStartY = useRef<number | null>(null)
 
-  // Sử dụng hook (Giữ nguyên)
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // ... (slideVariants, changeSlide, changeSlideRef giữ nguyên) ...
   const slideVariants = {
@@ -124,12 +124,31 @@ export default function Showcase() {
     changeSlideRef.current = changeSlide
   }, [changeSlide])
 
+  useEffect(() => {
+    if (!isDesktop) setCurtainRevealed(true)
+  }, [isDesktop])
 
   useEffect(() => {
     const section = sectionRef.current
     if (!section) return
 
-    // ... (handleWheel, handleTouchStart, handleTouchMove, handleTouchEnd giữ nguyên) ...
+    // 🚀 MOBILE: Auto slide
+    if (!isDesktop) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
+      }, 4000) // đổi slide mỗi 4 giây
+
+      // Xóa ScrollTrigger nếu có tồn tại từ desktop
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill()
+        scrollTriggerRef.current = null
+        document.body.classList.remove("in-showcase")
+      }
+
+      return () => clearInterval(interval)
+    }
+
+    // 🚀 DESKTOP: ScrollTrigger logic
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault()
       event.stopPropagation()
@@ -144,9 +163,7 @@ export default function Showcase() {
 
     const handleTouchMove = (event: TouchEvent) => {
       event.preventDefault()
-      if (touchStartY.current === null || isScrolling.current) {
-        return
-      }
+      if (touchStartY.current === null || isScrolling.current) return
       const currentY = event.touches[0].clientY
       const deltaY = touchStartY.current - currentY
 
@@ -161,14 +178,11 @@ export default function Showcase() {
       touchStartY.current = null
     }
 
-    // 'addListeners' (Đã được sửa để chỉ chạy trên desktop)
     const addListeners = () => {
-      if (isDesktop) {
-        section.addEventListener("wheel", handleWheel, { passive: false })
-        section.addEventListener("touchstart", handleTouchStart, { passive: false })
-        section.addEventListener("touchmove", handleTouchMove, { passive: false })
-        section.addEventListener("touchend", handleTouchEnd, { passive: false })
-      }
+      section.addEventListener("wheel", handleWheel, { passive: false })
+      section.addEventListener("touchstart", handleTouchStart, { passive: false })
+      section.addEventListener("touchmove", handleTouchMove, { passive: false })
+      section.addEventListener("touchend", handleTouchEnd, { passive: false })
     }
 
     const removeListeners = () => {
@@ -178,28 +192,17 @@ export default function Showcase() {
       section.removeEventListener("touchend", handleTouchEnd)
     }
 
-    // 🚀 BƯỚC 1: Sửa logic 'ScrollTrigger'
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-
-      // pin: Chỉ true khi là desktop
-      pin: isDesktop,
-      // pinSpacing: Chỉ true khi là desktop
-      pinSpacing: isDesktop,
-
-      // end: Desktop = pin dài, Mobile = pin 0 (chỉ là 1 section)
-      end: () => isDesktop
-        ? `+=${window.innerHeight * slides.length}`
-        : "bottom top",
-
+      pin: true,
+      pinSpacing: true,
+      end: `+=${window.innerHeight * slides.length}`,
       anticipatePin: 1,
       scrub: false,
       onEnter: () => {
         document.body.classList.add("in-showcase")
-        if (!curtainRevealed) {
-          setCurtainRevealed(true)
-        }
+        if (!curtainRevealed) setCurtainRevealed(true)
         addListeners()
       },
       onLeave: () => {
@@ -223,10 +226,15 @@ export default function Showcase() {
       document.body.classList.remove("in-showcase")
       removeListeners()
     }
-  }, [curtainRevealed, isDesktop]) // Thêm 'isDesktop' vào dependencies
+  }, [curtainRevealed, isDesktop])
+
 
   return (
-    <section id="showcase" ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-neutral-900">
+    <section
+      id="showcase"
+      ref={sectionRef}
+      className={`relative h-screen w-full overflow-hidden ${isDesktop ? "bg-neutral-900" : "bg-black/90"}`}
+    >
       {/* Phần JSX bên dưới không đổi. 
         Nó sẽ tự động hiển thị slide 0 (vì 'currentSlide' không đổi)
       */}
@@ -237,10 +245,11 @@ export default function Showcase() {
             className="absolute inset-0"
             variants={slideVariants}
             custom={lastDirection}
-            initial={lastDirection === "down" ? "fromBelow" : "fromAbove"}
-            animate="animate"
-            exit="exit"
+            initial={isDesktop ? (lastDirection === "down" ? "fromBelow" : "fromAbove") : { opacity: 0 }}
+            animate={isDesktop ? "animate" : { opacity: 1, transition: { duration: 1 } }}
+            exit={isDesktop ? "exit" : { opacity: 0, transition: { duration: 0.6 } }}
           >
+
             <Image
               src={slides[currentSlide].image || "/placeholder.svg"}
               alt={slides[currentSlide].title}

@@ -1,18 +1,177 @@
 "use client"
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { ArrowUpRight } from "lucide-react"
+
+// Wrap Next/Image for Framer Motion
+const MotionImage = motion(Image)
+
+//-----------------------------------------------------
+// VARIANTS FOR SERVICE CARDS
+//-----------------------------------------------------
+
+const overlayVariants: Variants = {
+  rest: {
+    y: "calc(100% - 7rem)",
+  },
+  hover: {
+    y: 0,
+    transition: { duration: 0.4, ease: "easeInOut" },
+  },
+}
+
+const contentVariants: Variants = {
+  rest: { opacity: 0, y: 10 },
+  hover: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.2, duration: 0.3 },
+  },
+}
+
+const mobileCardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+    },
+  }),
+}
+
+//-----------------------------------------------------
+// DATA
+//-----------------------------------------------------
+
+interface ServiceCardProps {
+  title: React.ReactNode
+  description: string
+  imageUrl: string
+  link: string
+}
+
+// UPDATED: All items use image 21 and link to /case-studies
+const services: ServiceCardProps[] = [
+  {
+    title: (
+      <>
+        Brand Audit
+        <br />& Insight Analysis
+      </>
+    ),
+    description:
+      "We analyze your brand's current positioning and effectiveness to uncover key opportunities.",
+    imageUrl: "/assets/21.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Market & Competitor
+        <br />
+        Research
+      </>
+    ),
+    description:
+      "A deep dive into your market landscape and competitors to identify your unique space.",
+    imageUrl: "/assets/21.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Key Messaging
+        <br />
+        Framework
+      </>
+    ),
+    description:
+      "Crafting a clear, concise, and persuasive message that resonates with your target audience.",
+    imageUrl: "/assets/21.png",
+    link: "/case-studies",
+  },
+  {
+    title: (
+      <>
+        Go-to-Market
+        <br />
+        Roadmap
+      </>
+    ),
+    description:
+      "Developing a step-by-step, integrated marketing plan to launch your brand and drive sustainable growth.",
+    imageUrl: "/assets/21.png",
+    link: "/case-studies",
+  },
+]
+
+const DEFAULT_SERVICE_IMAGE = "/assets/21.png"
+
+//-----------------------------------------------------
+// MOBILE SERVICE CARD
+//-----------------------------------------------------
+
+const MobileServiceCard = ({ service, index }: { service: ServiceCardProps; index: number }) => {
+  return (
+    <motion.div
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={mobileCardVariants}
+      className="relative h-[450px] overflow-hidden shadow-lg"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <MotionImage
+          src={service.imageUrl}
+          alt={typeof service.title === 'string' ? service.title : 'Service'}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 to-black/60" />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="absolute inset-x-0 bottom-0 p-6 bg-[#0074E5] backdrop-blur-sm text-white">
+        <h3 className="archivo-expanded text-lg font-bold mb-3 leading-tight text-white">
+          {service.title}
+        </h3>
+        <p className="neulis-alt-regular text-sm leading-relaxed text-white mb-4">
+          {service.description}
+        </p>
+        <Link
+          href={service.link}
+          className="group inline-flex items-center gap-2 px-4 py-3
+          rounded-full bg-white text-[#444444] text-sm font-medium
+          hover:bg-[#162660] hover:text-white transition-colors"
+        >
+          Explore Now
+          <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
+//-----------------------------------------------------
+// MAIN COMPONENT
+//-----------------------------------------------------
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  // (Logic parallax của bạn giữ nguyên)
   const imageY = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
   const smoothImageY = useSpring(imageY, {
     stiffness: 100,
@@ -22,23 +181,24 @@ export default function HeroSection() {
 
   return (
     <div className="relative overflow-hidden" ref={containerRef}>
-      {/* --- Curtain Animation (Giữ nguyên) --- */}
+      {/* Curtain Animation */}
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
         transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-        className="fixed top-0 left-0 w-1/2 h-full bg-white z-[9999]"
+        className="fixed top-0 left-0 w-1/2 h-full bg-white z-9999"
       />
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "100%" }}
         transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-        className="fixed top-0 right-0 w-1/2 h-full bg-white z-[9999]"
+        className="fixed top-0 right-0 w-1/2 h-full bg-white z-9999"
       />
 
-      {/* --- Page Content --- */}
-      {/* THAY ĐỔI: Giảm padding trên mobile từ p-8 xuống p-6 */}
+      {/* Page Content */}
       <div className="min-h-screen bg-white p-6 md:p-16 relative z-10">
+        
+        {/* SVG Definition for Gradient */}
         <svg width="0" height="0" style={{ position: "absolute" }}>
           <defs>
             <linearGradient id="chevronGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -50,27 +210,24 @@ export default function HeroSection() {
 
         <div className="mx-auto max-w-7xl">
           {/* Header with gradient text */}
-          {/* THAY ĐỔI: Giảm margin bottom trên mobile từ mb-16 xuống mb-12 */}
           <div className="mb-12 md:mb-16">
             <h1 className="text-center text-4xl md:text-8xl font-bold tracking-wider mb-8">
-              <span className="archivo-expanded bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+              <span className="archivo-expanded bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
                 STRATEGY
               </span>
               <br />
-              <span className="archivo-expanded bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+              <span className="archivo-expanded bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
                 CONSULTING
               </span>
             </h1>
-            <div className="h-[1px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+            <div className="h-px w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
           </div>
 
-          {/* --- BỐ CỤC ĐÃ THAY ĐỔI TẠI ĐÂY --- */}
-          {/* THAY ĐỔI: Giảm khoảng cách trên mobile */}
+          {/* Main content section */}
           <div className="mb-16 md:mb-24 space-y-10 md:space-y-20">
-            {/* Căn giữa khối text */}
+            {/* Centered text */}
             <div className="flex items-start justify-center">
               <div className="max-w-3xl text-center">
-                {/* THAY ĐỔI: Giảm cỡ chữ p trên mobile từ text-xl xuống text-lg */}
                 <p className="neulis-alt-regular text-lg md:text-xl text-[#444444] leading-relaxed">
                   Craft data-driven, actionable roadmaps that navigate market
                   complexities and position your brand for sustainable,
@@ -79,17 +236,9 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Container ảnh */}
-            <div className="flex items-center">
-              {/* Container cha bọc ngoài (giữ tỷ lệ và overflow) */}
-              {/* THAY ĐỔI LỚN NHẤT:
-                - Bỏ `min-h-[500px]` (gây xung đột trên mobile).
-                - Đổi `aspect-[16/7]` (rất rộng) thành `aspect-video` (16/9) trên mobile.
-                - Giữ `aspect-[16/7]` cho desktop (`md:`).
-                - Chuyển `max-w-[1600px]` thành `md:max-w-[1600px]` để mobile `w-full`.
-              */}
+            {/* Image container */}
+            {/* <div className="flex items-center">
               <div className="relative w-full aspect-video md:aspect-[16/7] overflow-hidden md:max-w-[1600px] mx-auto">
-                {/* (Logic parallax của bạn giữ nguyên) */}
                 <motion.div
                   style={{ y: smoothImageY }}
                   className="w-full h-[calc(100%_*_4/3)] relative"
@@ -102,95 +251,102 @@ export default function HeroSection() {
                   />
                 </motion.div>
               </div>
+            </div> */}
+          </div>
+
+          {/* Services section - NEW DESIGN */}
+          <div className="mb-12 md:-mb-16">
+            {/* Mobile: Stacked cards */}
+            <div className="lg:hidden space-y-6">
+              {services.map((service, index) => (
+                <MobileServiceCard
+                  key={index}
+                  service={service}
+                  index={index}
+                />
+              ))}
             </div>
-          </div>
-          {/* --- KẾT THÚC THAY ĐỔI --- */}
 
-          {/* Services section */}
-          {/* THAY ĐỔI: Giảm gap trên mobile từ gap-12 xuống gap-8 */}
-          <div className="grid md:grid-cols-4 gap-8 md:gap-16">
-            {[
-              {
-                title: (
-                  <>
-                    Brand Audit
-                    <br />& Insight Analysis
-                  </>
-                ),
-                desc: "We analyze your brand's current positioning and effectiveness to uncover key opportunities.",
-              },
-              {
-                title: (
-                  <>
-                    Market & Competitor
-                    <br />
-                    Research
-                  </>
-                ),
-                desc: "A deep dive into your market landscape and competitors to identify your unique space.",
-              },
-              {
-                title: (
-                  <>
-                    Key Messaging
-                    <br />
-                    Framework
-                  </>
-                ),
-                desc: "Crafting a clear, concise, and persuasive message that resonates with your target audience.",
-              },
-              {
-                title: (
-                  <>
-                    Go-to-Market
-                    <br />
-                    Roadmap
-                  </>
-                ),
-                desc: "Developing a step-by-step, integrated marketing plan to launch your brand and drive sustainable growth.",
-              },
-            ].map((s, i) => (
-              <div key={i} className="space-y-4">
-                <div className="border-b border-[#0074E5] pb-3">
-                  {/* THAY ĐỔI: Giảm cỡ chữ h3 trên mobile từ text-xl xuống text-lg */}
-                  <h3 className="archivo-expanded text-lg md:text-xl font-bold text-[#000A1D]">
-                    {s.title}
-                  </h3>
-                </div>
-                <p className="neulis-alt-regular text-[#444444] leading-relaxed text-sm">
-                  {s.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* --- NÚT MỚI ĐƯỢC THÊM VÀO Ở ĐÂY --- */}
-          {/* THAY ĐỔI: Giảm margin top trên mobile từ mt-16 xuống mt-12 */}
-          <div className="flex justify-center mt-12 md:mt-16">
-            <Link
-              href="/insights"
-              className="flex items-center gap-2 text-[#444444] hover:text-[#0074E5] transition-colors text-sm group"
+            {/* Desktop: Interactive grid */}
+            <div
+              className="hidden lg:block relative h-[650px] xl:h-[700px] overflow-hidden shadow-lg w-full"
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="url(#chevronGradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Default Background */}
+              <MotionImage
+                src={DEFAULT_SERVICE_IMAGE}
+                alt="Strategy Consulting Services"
+                fill
+                className="object-cover"
+                animate={{ opacity: 1 }}
+              />
+
+              {/* Hover images */}
+              {services.map((service, index) => (
+                <MotionImage
+                  key={index} // Changed to index because imageUrl is not unique anymore
+                  src={service.imageUrl}
+                  alt={typeof service.title === 'string' ? service.title : 'Service'}
+                  fill
+                  className="object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                 />
-              </svg>
-              <span className="neulis-alt-regular">Explore more</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="url(#chevronGradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
+              ))}
+
+              <div className="absolute inset-0 grid grid-cols-4 z-10">
+                {services.map((service, index) => {
+                  const animateState = hoveredIndex === index ? "hover" : "rest"
+
+                  return (
+                    <div
+                      key={index}
+                      className="relative h-full"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                    >
+                      {/* Overlay */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 p-6 
+                        bg-[#0074E5]/40
+                        text-white flex flex-col justify-start"
+                        variants={overlayVariants}
+                        animate={animateState}
+                      >
+                        <h3 className="archivo-expanded text-lg xl:text-xl font-bold leading-tight text-white">
+                          {service.title}
+                        </h3>
+
+                        <motion.div
+                          className="mt-4 space-y-4"
+                          variants={contentVariants}
+                          animate={animateState}
+                        >
+                          <p className="neulis-alt-regular text-md text-white ">
+                            {service.description}
+                          </p>
+
+                          <Link
+                            href={service.link}
+                            className="group flex items-center gap-2 px-4 py-4 w-fit
+                            rounded-full bg-white text-[#444444] text-sm font-medium
+                            hover:bg-[#162660] hover:text-white transition-colors"
+                          >
+                            Explore Now
+                            <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
+                          </Link>
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Vertical dividers */}
+              <div className="absolute top-0 bottom-0 left-1/4 w-px bg-white/20 z-20" />
+              <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white/20 z-20" />
+              <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white/20 z-20" />
+            </div>
           </div>
         </div>
       </div>

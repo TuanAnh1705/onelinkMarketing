@@ -1,90 +1,121 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react" // 👈 Thêm useState, useEffect
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, useMotionValue, useAnimationFrame, useVelocity, useSpring } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
-//  interfacing
 interface GalleryImage {
     src: string
     alt: string
-    widthClass: string
-    heightClass: string
 }
 
-// ----------------------------------------------------------------
-// 🔹 BƯỚC 1: Thêm hook để kiểm tra kích thước màn hình
-// ----------------------------------------------------------------
-// Hook này sẽ trả về 'true' nếu chiều rộng màn hình nhỏ hơn 1024px (breakpoint 'lg' của Tailwind)
-// Chúng ta cần hook này vì 'useTransform' là JS và không thể đọc media query của CSS
-function useIsMobile(breakpoint = 1024) {
-    const [isMobile, setIsMobile] = useState(false)
-
-    useEffect(() => {
-        // Chỉ chạy ở client-side
-        const checkSize = () => {
-            setIsMobile(window.innerWidth < breakpoint)
-        }
-
-        checkSize() // Kiểm tra ngay khi component mount
-        window.addEventListener("resize", checkSize)
-
-        // Cleanup listener khi component unmount
-        return () => window.removeEventListener("resize", checkSize)
-    }, [breakpoint])
-
-    return isMobile
-}
-
-// ----------------------------------------------------------------
-// 🔹 BƯỚC 2: Cập nhật dữ liệu ảnh với class responsive
-// ----------------------------------------------------------------
-// Mobile-first: class mặc định (ví dụ w-[80vw]) sẽ cho mobile
-// 'lg:' prefix (ví dụ lg:w-[30vw]) sẽ cho desktop (lớn hơn 1024px)
 const galleryImageData: GalleryImage[] = [
-    { src: "/assets/ab1.jpg", alt: "Image 1", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[60vh] lg:h-[30vh]" },
-    { src: "/assets/ab2.png", alt: "Image 2", widthClass: "w-[70vw] lg:w-[22vw]", heightClass: "h-[75vh] lg:h-[55vh]" },
-    { src: "/assets/ab3.jpg", alt: "Image 3", widthClass: "w-[65vw] lg:w-[16vw]", heightClass: "h-[55vh] lg:h-[35vh]" },
-    { src: "/assets/ab4.jpg", alt: "Image 4", widthClass: "w-[75vw] lg:w-[24vw]", heightClass: "h-[70vh] lg:h-[60vh]" },
-    { src: "/assets/ab5.png", alt: "Image 5", widthClass: "w-[85vw] lg:w-[35vw]", heightClass: "h-[65vh] lg:h-[50vh]" },
-    { src: "/assets/ab1.jpg", alt: "Image 6", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[50vh] lg:h-[30vh]" },
-    { src: "/assets/ab2.png", alt: "Image 7", widthClass: "w-[80vw] lg:w-[30vw]", heightClass: "h-[70vh] lg:h-[60vh]" },
+    { src: "/assets/ab1.jpg", alt: "Image 1" },
+    { src: "/assets/ab2.png", alt: "Image 2" },
+    { src: "/assets/ab3.jpg", alt: "Image 3" },
+    { src: "/assets/ab4.jpg", alt: "Image 4" },
+    { src: "/assets/ab5.png", alt: "Image 5" },
+    { src: "/assets/ab6.png", alt: "Image 6" },
+    { src: "/assets/ab7.png", alt: "Image 7" },
 ]
 
-// Tổng chiều rộng mới (ước lượng)
-// Mobile: 80+70+65+75+85+80+80 = 535vw -> Làm tròn 550vw (tính cả gap)
-// Desktop: 30+22+16+24+35+30+30 = 187vw -> Làm tròn 200vw (tính cả gap)
-
-
 export function StorySection() {
-    const targetRef = useRef<HTMLDivElement>(null)
-    const isMobile = useIsMobile(1024) // 👈 Sử dụng hook
+    const [isDragging, setIsDragging] = useState(false)
+    const baseVelocity = -0.5 // Tốc độ tự động chạy (âm = sang trái)
+    const x = useMotionValue(0)
+    const dragVelocityRef = useRef(0)
+    
+    // Kích thước và tính toán
+    const imageWidth = 500
+    const gap = 20
+    const itemWidth = imageWidth + gap
+    const originalArrayLength = galleryImageData.length
+    const totalWidth = originalArrayLength * itemWidth
 
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-        offset: ["start 90%", "end start"],
+    // Duplicate images nhiều lần
+    const duplicatedImages = [
+        ...galleryImageData,
+        ...galleryImageData,
+        ...galleryImageData,
+        ...galleryImageData,
+        ...galleryImageData,
+        ...galleryImageData,
+    ]
+
+    // Theo dõi velocity khi drag để tạo momentum
+    const velocity = useVelocity(x)
+
+    // Auto-scroll animation với infinite loop
+    useAnimationFrame((t, delta) => {
+        if (!isDragging) {
+            const moveBy = baseVelocity * (delta / 16)
+            let currentX = x.get()
+            
+            // Thêm momentum từ drag vừa kết thúc
+            if (Math.abs(dragVelocityRef.current) > 0.1) {
+                dragVelocityRef.current *= 0.95 // Giảm dần momentum
+                currentX += dragVelocityRef.current * (delta / 16)
+            }
+            
+            let newX = currentX + moveBy
+
+            // Wrap position seamlessly
+            if (newX <= -totalWidth * 2) {
+                newX += totalWidth
+            } else if (newX >= -totalWidth) {
+                newX -= totalWidth
+            }
+
+            x.set(newX)
+        }
     })
 
-    // ----------------------------------------------------------------
-    // 🔹 BƯỚC 3: Cung cấp các giá trị động cho useTransform
-    // ----------------------------------------------------------------
+    // Set vị trí ban đầu
+    useEffect(() => {
+        x.set(-totalWidth * 1.5)
+    }, [x, totalWidth])
 
-    // Giá trị X (dịch chuyển ngang) tuỳ theo màn hình
-    const xRange = isMobile
-        ? ["10vw", "-460vw"] // Mobile: bắt đầu từ 10vw, kết thúc ở -460vw
-        : ["30vw", "-130vw"] // Desktop: giữ nguyên giá trị cũ
+    // Xử lý khi bắt đầu kéo
+    const handleDragStart = () => {
+        setIsDragging(true)
+        dragVelocityRef.current = 0
+    }
 
-    const rawX = useTransform(scrollYProgress, [0, 1], xRange)
+    // Xử lý trong khi đang kéo
+    const handleDrag = () => {
+        const currentX = x.get()
+        
+        // Wrap position ngay khi đang kéo để tránh giật
+        if (currentX <= -totalWidth * 2.5) {
+            x.set(currentX + totalWidth)
+        } else if (currentX >= -totalWidth * 0.5) {
+            x.set(currentX - totalWidth)
+        }
+    }
 
-    const x = useSpring(rawX, {
-        stiffness: 60,
-        damping: 20,
-        mass: 0.8,
-    })
+    // Xử lý khi kết thúc kéo
+    const handleDragEnd = () => {
+        setIsDragging(false)
+        
+        // Lưu velocity để tạo momentum
+        const currentVelocity = velocity.get()
+        dragVelocityRef.current = currentVelocity * 0.01 // Scale down để không quá nhanh
+        
+        // Wrap position về khoảng an toàn
+        let currentX = x.get()
+        
+        if (currentX <= -totalWidth * 2) {
+            currentX += totalWidth
+        } else if (currentX >= -totalWidth) {
+            currentX -= totalWidth
+        }
+        
+        x.set(currentX)
+    }
 
     return (
-        <section ref={targetRef} className="bg-white py-20 md:py-32 overflow-hidden -mt-36">
+        <section className="bg-white py-20 md:py-32 overflow-hidden -mt-36">
             <div className="max-w-7xl mx-auto px-8 mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                     <div className="flex items-start">
@@ -114,35 +145,53 @@ export function StorySection() {
                                         aria-hidden="true"
                                     ></span>
                                     <span
-                                        className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] rounded-full z-10"
+                                        className="absolute inset-0 bg-linear-to-r from-[#0074E5] to-[#162660] rounded-full z-10"
                                         aria-hidden="true"
                                     ></span>
                                 </button>
                             </Link>
-
                         </motion.div>
                     </div>
                 </div>
             </div>
 
-            {/* 🔹 Dải ảnh trượt ngang mượt mà */}
-            <motion.div
-                style={{ x }}
-                // ----------------------------------------------------------------
-                // 🔹 BƯỚC 4: Cập nhật tổng chiều rộng gallery
-                // ----------------------------------------------------------------
-                className="flex items-start gap-4 lg:gap-8 w-[550vw] lg:w-[200vw] will-change-transform"
-            >
-                {galleryImageData.map((image, index) => (
-                    <div
-                        key={index}
-                        // Các class 'widthClass' và 'heightClass' giờ đã có responsive
-                        className={`relative shrink-0 rounded-lg overflow-hidden ${image.widthClass} ${image.heightClass}`}
-                    >
-                        <Image src={image.src} alt={image.alt} fill className="object-cover" />
-                    </div>
-                ))}
-            </motion.div>
+            {/* Carousel với drag mượt mà và momentum */}
+            <div className="relative cursor-grab active:cursor-grabbing">
+                <motion.div
+                    style={{ x }}
+                    drag="x"
+                    dragElastic={0.05}
+                    dragMomentum={true}
+                    dragTransition={{ 
+                        power: 0.2,
+                        timeConstant: 200,
+                        modifyTarget: (target) => {
+                            // Không snap, để tự nhiên
+                            return target
+                        }
+                    }}
+                    onDragStart={handleDragStart}
+                    onDrag={handleDrag}
+                    onDragEnd={handleDragEnd}
+                    className="flex items-center gap-5 will-change-transform"
+                >
+                    {duplicatedImages.map((image, index) => (
+                        <div
+                            key={index}
+                            className="relative shrink-0 rounded-lg overflow-hidden w-[500px] h-[500px] select-none"
+                        >
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-cover pointer-events-none"
+                                draggable={false}
+                                priority={index < 8}
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
         </section>
     )
 }

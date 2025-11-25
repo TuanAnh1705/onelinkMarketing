@@ -38,7 +38,7 @@ export default function ImageBottomContainer() {
     // Nội dung cố định
     const backgroundImage = "/assets/olmcont.png" 
     const topRightText = `We understand. \nWe are the solution.`
-    const bottomLeftText = `We provides a complete transformation. \nWe solve the problem of fragmented \nmarketing and weak brand identity`
+    const bottomLeftText = `We provides a complete transformation. We solve the problem of fragmented marketing and weak brand identity`
 
     return (
         <section
@@ -60,19 +60,19 @@ export default function ImageBottomContainer() {
             </div>
 
             {/* 🔹 Top Right Text (Không thay đổi) */}
-            <motion.div
+            {/* <motion.div
                 style={{ y: smoothY }}
                 className="absolute -top-[10%] right-[5%] max-w-[80vw] md:right-[8%] md:max-w-[45vw] text-left"
             >
                 <h2 className="neulis-alt-extralight text-md md:text-sm font-semibold text-white drop-shadow-2xl tracking-tight leading-snug whitespace-pre-line">
                     {topRightText}
                 </h2>
-            </motion.div>
+            </motion.div> */}
 
             {/* 🔸 Bottom Left Text (Không thay đổi) */}
             <motion.div
                 style={{ y: smoothY }}
-                className="absolute bottom-[55%] left-[5%] max-w-[80vw] md:left-[8%] text-left"
+                className="absolute bottom-[55%] left-[5%] max-w-[78vw] md:left-[8%] text-left"
             >
                 <p className="archivo-expanded text-2xl md:text-6xl font-semibold text-white drop-shadow-2xl tracking-tight leading-tight whitespace-pre-line">
                     {bottomLeftText}

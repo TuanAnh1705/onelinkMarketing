@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     // --- CẬP NHẬT ĐƯỜNG DẪN ẢNH CỦA BẠN TẠI ĐÂY ---
@@ -31,7 +47,8 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     Redesigning OneLink Holdings&apos; Landing Page to Reflect a Modern, Global Brand
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">
@@ -41,7 +58,8 @@ const BlogSection = () => {
 
             {/* --- About the Project --- */}
             <div className="max-w-7xl mx-auto px-6 mt-8">
-                <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                     About the Project
                 </h2>
             </div>
@@ -66,7 +84,8 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -81,7 +100,8 @@ const BlogSection = () => {
             <article className="max-w-7xl mx-auto px-6 pb-16">
                 {/* --- The Challenge --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">The Challenge</h2>
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">The Challenge</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         The original OneLink Holdings website had strong content but lacked a unified brand identity.
                         Key challenges included:
@@ -120,7 +140,8 @@ const BlogSection = () => {
 
                 {/* --- Our Approach --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">Our Approach</h2>
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">Our Approach</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         At OneLink Marketing, we believe strong web design starts with strategy. Before sketching a
                         single wireframe, we spent time understanding OneLink Holdings&apos; brand story, values, and
@@ -133,7 +154,8 @@ const BlogSection = () => {
 
                 {/* --- Step 1. Brand Discovery & Design Direction --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Step 1: Brand Discovery & Design Direction
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -174,7 +196,8 @@ const BlogSection = () => {
 
                 {/* --- Step 2. Information Architecture (IA) --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Step 2: Information Architecture (IA)
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -208,7 +231,8 @@ const BlogSection = () => {
 
                 {/* --- Step 3. UX/UI Design Execution --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Step 3: UX/UI Design Execution
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -263,7 +287,8 @@ const BlogSection = () => {
 
                 {/* --- Step 4. Design System & Handoff --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Step 4: Design System & Handoff
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -291,7 +316,8 @@ const BlogSection = () => {
 
                 {/* --- 3. The Final Outcome --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         3. The Final Outcome
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
@@ -331,7 +357,8 @@ const BlogSection = () => {
 
                 {/* --- Key Design Highlights --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">
                         Key Design Highlights
                     </h2>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] list-disc pl-5 space-y-3 leading-relaxed">
@@ -356,7 +383,8 @@ const BlogSection = () => {
 
                 {/* --- Conclusion --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D]">Conclusion</h2>
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D]">Conclusion</h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] leading-relaxed">
                         For growing enterprises like OneLink Holdings, a website is no longer just a digital brochure
                         — it&apos;s a <strong className="font-semibold">brand stage</strong>. The redesign by

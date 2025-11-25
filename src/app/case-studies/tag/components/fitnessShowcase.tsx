@@ -29,7 +29,7 @@ export default function FitnessShowcase() {
                     {/* Top Row */}
                     <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
                         {/* Image */}
-                        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
+                        <div className="relative aspect-video overflow-hidden rounded-2xl">
                             <Image
                                 src="/assets/tag1.png"
                                 alt="Fitness outdoor class"
@@ -56,7 +56,7 @@ export default function FitnessShowcase() {
                             ["Technology", "Figma, Adobe Creative Suite, Shopify"],
                         ].map(([label, value], i) => (
                             <div key={i} className="space-y-3">
-                                <div className="h-[0.5px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+                                <div className="h-[0.5px] w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
                                 <p className="neulis-alt-regular text-sm text-[#444444]">{label}</p>
                                 <p className="neulis-alt-regular text-base font-medium text-[#000A1D]">{value}</p>
                             </div>

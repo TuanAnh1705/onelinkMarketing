@@ -53,7 +53,7 @@ export default function Faq() {
 
   return (
     <div className="relative w-full z-20 mb-40">
-      <div className="mx-auto max-w-5xl mt-40">
+      <div className="mx-auto max-w-5xl mt-40 mb-60 md:mb-0">
         {/* --- HEADER --- */}
         <div className="relative mb-12">
           <GradientLine />
@@ -73,7 +73,7 @@ export default function Faq() {
                 className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-300 hover:bg-gray-50/50"
               >
                 <div className="flex items-center gap-6 pl-6">
-                  <span className="archivo-expanded text-lg font-medium text-[#000000] w-12">
+                  <span className="archivo-expanded text-lg font-medium text-[#000000] min-w-[48px] text-left">
                     {item.id}
                   </span>
                   <h3 className="neulis-alt-regular text-xl font-medium text-[#000A1D] md:text-2xl">

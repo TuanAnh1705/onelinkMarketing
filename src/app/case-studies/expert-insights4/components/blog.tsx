@@ -9,8 +9,24 @@ const BlogSection = () => {
     const handleScroll = () => setOffsetY(window.pageYOffset)
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        // ✅ FIX: Tối ưu: Chỉ chạy parallax trên desktop (>= 768px)
+        const checkWidthAndAddListener = () => {
+            const isDesktop = window.innerWidth >= 768 // Tailwind's 'md' breakpoint
+
+            if (isDesktop) {
+                window.addEventListener("scroll", handleScroll)
+            } else {
+                window.removeEventListener("scroll", handleScroll)
+            }
+        }
+
+        checkWidthAndAddListener()
+        window.addEventListener("resize", checkWidthAndAddListener)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", checkWidthAndAddListener)
+        }
     }, [])
 
     // 💡 Đã cập nhật các đường dẫn ảnh để phù hợp với nội dung Blog 5
@@ -22,7 +38,8 @@ const BlogSection = () => {
         <div className="bg-white font-sans text-gray-800">
             {/* --- Header Section (Narrow Width) --- */}
             <header className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 text-left">
-                <h1 className="archivo-expanded text-4xl md:text-5xl font-medium leading-tight mb-2">
+                {/* ✅ FIX: Giảm cỡ chữ h1 trên mobile xuống 2xl */}
+                <h1 className="archivo-expanded text-2xl md:text-5xl font-medium leading-tight mb-2">
                     Building Brand Love: 7 Strategies to Turn Customers into Loyal Fans
                 </h1>
                 <p className="neulis-alt-regular font-medium text-gray-500">By Quang Ho Quoc</p>
@@ -47,7 +64,8 @@ const BlogSection = () => {
             </p>
 
             {/* --- Parallax Image Section (Full-width) --- */}
-            <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
+            {/* ✅ FIX: Thêm 'hidden' và 'md:block' để ẩn trên mobile */}
+            <div className="hidden md:block relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-xl my-12 md:my-20">
                 <div
                     className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
                     style={{
@@ -63,13 +81,15 @@ const BlogSection = () => {
                 
                 {/* --- 1. Define and Live Your Core Values --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         1. Define and Live Your Core Values
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Love begins with authenticity. The most beloved brands have a clear set of values, and they live by them every single day. They don’t just sell a product; they stand for something bigger. Patagonia doesn’t just sell outdoor gear; they stand for environmental protection. Doves don’t just sell soap; they stand for real beauty.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -84,13 +104,15 @@ const BlogSection = () => {
 
                 {/* --- 2. Create Exceptional and Consistent Customer Experiences --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         2. Create Exceptional and Consistent Customer Experiences
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Love is built through repeated positive interactions. Every touchpoint—from your website, social media, and emails to your support staff—must be seamless, helpful, and enjoyable. Consistency in experience builds trust—the foundation of any strong relationship.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -114,13 +136,15 @@ const BlogSection = () => {
 
                 {/* --- 3. Build a Community, Not Just an Audience --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         3. Build a Community, Not Just an Audience
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Humans have a fundamental need to belong. Smart brands don’t just sell to customers; they connect customers to one another. When a brand becomes the center of a community, it’s no longer just a business entity—it’s part of its members’ identity. Harley-Davidson doesn’t just sell motorcycles; they cultivate a community of freedom-lovers.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -135,13 +159,15 @@ const BlogSection = () => {
 
                 {/* --- 4. Tell Compelling Stories --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         4. Tell Compelling Stories
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         People connect through stories, not spec sheets. Share the story of your brand’s origin, the stories of your passionate employees, and most importantly, the success stories of your customers. Stories evoke emotion and create a much deeper connection than simply talking about product features.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -156,13 +182,15 @@ const BlogSection = () => {
 
                 {/* --- 5. Personalize at Scale --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         5. Personalize at Scale
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Love always feels personal. Using data to understand your customers’ needs and preferences, then tailoring your messaging and offers accordingly, shows that you truly care about them as individuals, not just as numbers in a report.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -186,13 +214,15 @@ const BlogSection = () => {
 
                 {/* --- 6. Surprise and Delight --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         6. Surprise and Delight
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">
                         Unexpected acts of kindness create powerful emotional memories. Small, thoughtful gestures can have an outsized impact on how a customer feels about your brand.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -207,13 +237,15 @@ const BlogSection = () => {
 
                 {/* --- 7. Be Human and Transparent --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         7. Be Human and Transparent
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#0E1525] max-w-7xl mx-auto leading-relaxed">
                         People love brands that are authentic and honest. Admit your mistakes, be transparent about your processes, and communicate with a human voice, not a corporate one. Transparency builds trust, and authenticity creates affection.
                     </p>
-                    <h3 className="archivo-expanded text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
+                    {/* ✅ FIX: Giảm cỡ chữ h3 trên mobile xuống xl */}
+                    <h3 className="archivo-expanded text-xl md:text-3xl font-medium text-[#000A1D] max-w-7xl mx-auto pt-4">
                         How to implement:
                     </h3>
                     <ul className="neulis-alt-regular font-medium text-lg text-[#000A1D] max-w-7xl mx-auto list-disc pl-5 space-y-3 leading-relaxed">
@@ -228,7 +260,8 @@ const BlogSection = () => {
 
                 {/* --- Conclusion --- */}
                 <section className="space-y-6 md:space-y-8 mb-16 md:mb-24">
-                    <h2 className="archivo-expanded text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
+                    {/* ✅ FIX: Giảm cỡ chữ h2 trên mobile xuống 2xl */}
+                    <h2 className="archivo-expanded text-2xl md:text-4xl font-medium text-[#000A1D] max-w-7xl mx-auto">
                         Conclusion: Love is the Best Business Strategy
                     </h2>
                     <p className="neulis-alt-regular text-lg font-medium text-[#000A1D] max-w-7xl mx-auto leading-relaxed">

@@ -149,7 +149,7 @@ export default function TestimonialsSection() {
 
     return (
         // Thay đổi: Giảm padding mobile (py-16)
-        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-3 -top-60 md:-top-96 z-10 flex flex-col items-center justify-center min-h-screen">
+        <section className="relative bg-[#000A1D] text-white w-full overflow-hidden py-16 sm:py-3 -top-[950px] md:-top-96 z-10 flex flex-col items-center justify-center min-h-screen">
             <div className="container mx-auto px-6 lg:px-8 flex flex-col items-center justify-center">
                 {/* Thay đổi: Giảm margin bottom mobile (mb-16) */}
                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-medium archivo-expanded text-center text-white leading-tight mb-16 sm:mb-24 max-w-4xl mx-auto">
