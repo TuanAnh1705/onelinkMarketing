@@ -1,25 +1,48 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useSpring, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 
-export default function FitnessShowcase() {
-    const parallaxRef = useRef<HTMLDivElement>(null)
-
-    // Theo dõi tiến trình cuộn
+function ParallaxStrong({
+    src,
+    alt,
+    className,
+}: {
+    src: string
+    alt: string
+    className?: string
+}) {
+    const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
-        target: parallaxRef,
+        target: ref,
         offset: ["start end", "end start"],
     })
 
-    // Mượt hơn: scale nhỏ + scroll nhỏ + spring smoothing
-    const rawY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"])
-    const y = useSpring(rawY, {
-        stiffness: 15,  // lực đàn hồi thấp => chuyển động mượt
-        damping: 15,    // lực cản mềm => trôi nhẹ, không giật
-        mass: 0.8,      // thêm chút độ nặng => cinematic
-    })
+    // Tăng biên độ từ 10% lên 25% để thấy rõ chuyển động
+    const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
+
+    return (
+        // bg-transparent để không lộ khung trắng/xám
+        <div ref={ref} className={`relative overflow-hidden bg-transparent ${className}`}>
+            {/* Tăng chiều cao ảnh lên 150% và top -25% để bù trừ cho quãng đường di chuyển dài hơn */}
+            <motion.div 
+                style={{ y }} 
+                className="relative w-full h-[150%] -top-[25%] will-change-transform"
+            >
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </motion.div>
+        </div>
+    )
+}
+
+export default function FitnessShowcase() {
 
     return (
         <div className="min-h-screen bg-white">
@@ -29,7 +52,7 @@ export default function FitnessShowcase() {
                     {/* Top Row */}
                     <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
                         {/* Image */}
-                        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
+                        <div className="relative aspect-video overflow-hidden rounded-2xl">
                             <Image
                                 src="/assets/steel.png"
                                 alt="Fitness outdoor class"
@@ -56,7 +79,7 @@ export default function FitnessShowcase() {
                             ["Technology", "Figma \n Adobe Creative Suite \n WordPress"],
                         ].map(([label, value], i) => (
                             <div key={i} className="space-y-3">
-                                <div className="h-[0.5px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+                                <div className="h-[0.5px] w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
                                 <p className="neulis-alt-regular text-sm text-[#444444]">{label}</p>
                                 <p className="neulis-alt-regular text-base font-medium text-[#000A1D] whitespace-pre-line">{value}</p>
                             </div>
@@ -66,25 +89,12 @@ export default function FitnessShowcase() {
             </section>
 
             {/* Bottom Parallax Section */}
-            <section
-                ref={parallaxRef}
-                className="relative min-h-screen w-full overflow-hidden"
-            >
-                <motion.div
-                    className="absolute inset-0 w-full h-full will-change-transform"
-                    style={{
-                        y,
-                        scale: 1.5, // phóng to hơn một chút cho chiều sâu mạnh hơn
-                    }}
-                >
-                    <Image
-                        src="/assets/steel.png"
-                        alt="Tag Fitness - Where progress never stops"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </motion.div>
+            <section className="w-full h-[60vh] md:h-[85vh] mb-20">
+                <ParallaxStrong
+                    src="/assets/steel.png"
+                    alt="China Sourcing Large Banner"
+                    className="w-full h-full"
+                />
             </section>
         </div>
     )

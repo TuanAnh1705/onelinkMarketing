@@ -1,31 +1,53 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useSpring, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 
-export default function FitnessShowcase() {
-    const parallaxRef = useRef<HTMLDivElement>(null)
-
-    // Theo dõi tiến trình cuộn
+// --- ParallaxStrong (GIỮ NGUYÊN LOGIC TỪ CODE TRÊN) ---
+function ParallaxStrong({
+    src,
+    alt,
+    className,
+}: {
+    src: string
+    alt: string
+    className?: string
+}) {
+    const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
-        target: parallaxRef,
+        target: ref,
         offset: ["start end", "end start"],
     })
 
-    // Mượt hơn: scale nhỏ + scroll nhỏ + spring smoothing
-    const rawY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"])
-    const y = useSpring(rawY, {
-        stiffness: 15,  // lực đàn hồi thấp => chuyển động mượt
-        damping: 15,    // lực cản mềm => trôi nhẹ, không giật
-        mass: 0.8,      // thêm chút độ nặng => cinematic
-    })
+    // Biên độ mạnh: -25% → 25%
+    const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
 
+    return (
+        <div ref={ref} className={`relative overflow-hidden bg-transparent ${className}`}>
+            <motion.div
+                style={{ y }}
+                className="relative w-full h-[150%] -top-[25%] will-change-transform"
+            >
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </motion.div>
+        </div>
+    )
+}
+
+export default function FitnessShowcase() {
     return (
         <div className="min-h-screen bg-white">
             {/* Top Section */}
             <section className="container mx-auto px-6 py-16 lg:py-24">
                 <div className="max-w-7xl mx-auto space-y-12">
+
                     {/* Top Row */}
                     <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
                         {/* Image */}
@@ -65,27 +87,15 @@ export default function FitnessShowcase() {
                 </div>
             </section>
 
-            {/* Bottom Parallax Section */}
-            <section
-                ref={parallaxRef}
-                className="relative min-h-screen w-full overflow-hidden"
-            >
-                <motion.div
-                    className="absolute inset-0 w-full h-full will-change-transform"
-                    style={{
-                        y,
-                        scale: 1.5, // phóng to hơn một chút cho chiều sâu mạnh hơn
-                    }}
-                >
-                    <Image
-                        src="/assets/tag1.png"
-                        alt="Tag Fitness - Where progress never stops"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </motion.div>
+            {/* --- PARALLAX STRONG SECTION --- */}
+            <section className="w-full h-[60vh] md:h-[85vh]">
+                <ParallaxStrong
+                    src="/assets/tag1.png"
+                    alt="Tag Fitness - Where progress never stops"
+                    className="w-full h-full"
+                />
             </section>
+
         </div>
     )
 }

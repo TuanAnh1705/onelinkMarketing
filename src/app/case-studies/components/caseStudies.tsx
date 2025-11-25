@@ -70,6 +70,7 @@ const caseStudiesData: CaseStudyItem[][] = [
         { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
         { src: "/assets/steel.png", title: "Steel Works Seattle", href: "/case-studies/steel" },
         { src: "/assets/cns1.png", title: "China Sourcing Co", href: "/case-studies/cns" },
+        { src: "/assets/vns1.png", title: "Vietnam Sourcing Co", href: "/case-studies/vns" },
     ],
 ];
 

@@ -5,16 +5,14 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Image from "next/image"
 
 // Component ParallaxImage độc lập (giữ nguyên)
-function ParallaxImage({
+function ParallaxStrong({
     src,
     alt,
     className,
-    speed = "-15%",
 }: {
     src: string
     alt: string
     className?: string
-    speed?: string | number
 }) {
     const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
@@ -22,22 +20,22 @@ function ParallaxImage({
         offset: ["start end", "end start"],
     })
 
-    const numericSpeed = typeof speed === 'string' ? parseFloat(speed) : speed;
-    const positiveSpeed = Math.abs(numericSpeed);
-
-    const y = useSpring(useTransform(scrollYProgress, [0, 1], [`-${positiveSpeed}%`, `${positiveSpeed}%`]), {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001,
-    })
+    // biên độ mạnh
+    const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
 
     return (
-        <div ref={ref} className={`overflow-hidden rounded-3xl ${className}`}>
+        <div ref={ref} className={`relative overflow-hidden bg-transparent rounded-3xl ${className}`}>
             <motion.div
                 style={{ y }}
-                className="relative h-[140%] w-full top-[-20%] will-change-transform"
+                className="relative w-full h-[150%] -top-[25%] will-change-transform"
             >
-                <Image src={src} alt={alt} fill className="object-cover" />
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    priority
+                />
             </motion.div>
         </div>
     )
@@ -89,38 +87,26 @@ export default function ChallengeSection() {
             </section>
 
             {/* Parallax Grid Section */}
-            <section
-                /* * Mặc định (mobile): -mt-24
-                 * Desktop (lg:): Ghi đè thành -mt-72
-                 */
-                className="relative -mt-72 lg:-mt-72 h-[1400px] lg:h-[1800px] w-full"
-            >
+            <section className="relative -mt-72 lg:-mt-72 h-[1400px] lg:h-[1800px] w-full">
                 <div className="container mx-auto px-6 h-full flex items-center">
                     <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 lg:gap-6">
 
-                        {/* Hai ảnh đầu tiên không cần 'col-span' vì chúng tự động lấp đầy 1 cột */}
-                        <ParallaxImage
+                        <ParallaxStrong
                             src="/assets/tag2.png"
                             alt="Tag fitness socks"
                             className="h-[300px] lg:h-[600px]"
-                            speed="-8%"
                         />
 
-                        <ParallaxImage
+                        <ParallaxStrong
                             src="/assets/tag3.png"
                             alt="Athlete on sports court"
                             className="h-[300px] lg:h-[600px]"
-                            speed="-12%"
                         />
 
-                        <ParallaxImage
+                        <ParallaxStrong
                             src="/assets/tag4.jpg"
                             alt="People on athletic track"
-                            /* * Mặc định (mobile): col-span-1
-                             * Desktop (lg:): Ghi đè thành lg:col-span-2
-                             */
                             className="col-span-1 lg:col-span-2 h-[300px] lg:h-[600px]"
-                            speed="-16%"
                         />
 
                     </div>

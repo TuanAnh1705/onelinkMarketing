@@ -76,7 +76,7 @@ export default function CNSShowcase() {
                                         ["Service", "Website Design, SEO, Social Media Marketing"],
                                         ["Client", "China Sourcing Co"],
                                         ["Date", "July 2025"],
-                                        ["Adobe Creative Suite, WordPress, Hubspot"],
+                                        ["Technology","Adobe Creative Suite, WordPress, Hubspot"],
                                     ].map(([label, value], i) => (
                                         <div key={i} className="space-y-3">
                                             <div className="h-[0.5px] w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />

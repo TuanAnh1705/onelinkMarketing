@@ -5,16 +5,14 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Image from "next/image"
 
 // Component ParallaxImage độc lập (giữ nguyên)
-function ParallaxImage({
+function ParallaxStrong({
     src,
     alt,
     className,
-    speed = "-15%",
 }: {
     src: string
     alt: string
     className?: string
-    speed?: string | number
 }) {
     const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
@@ -22,22 +20,22 @@ function ParallaxImage({
         offset: ["start end", "end start"],
     })
 
-    const numericSpeed = typeof speed === 'string' ? parseFloat(speed) : speed;
-    const positiveSpeed = Math.abs(numericSpeed);
-
-    const y = useSpring(useTransform(scrollYProgress, [0, 1], [`-${positiveSpeed}%`, `${positiveSpeed}%`]), {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001,
-    })
+    // biên độ mạnh
+    const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
 
     return (
-        <div ref={ref} className={`overflow-hidden rounded-3xl ${className}`}>
+        <div ref={ref} className={`relative overflow-hidden bg-transparent rounded-3xl ${className}`}>
             <motion.div
                 style={{ y }}
-                className="relative h-[140%] w-full top-[-20%] will-change-transform"
+                className="relative w-full h-[150%] -top-[25%] will-change-transform"
             >
-                <Image src={src} alt={alt} fill className="object-cover" />
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    priority
+                />
             </motion.div>
         </div>
     )
@@ -133,23 +131,20 @@ export default function SolutionsSection() {
             {/* Solutions Parallax Grid Section (giữ nguyên) */}
             <section className="container mx-auto px-6">
                 <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <ParallaxImage
-                        src="/assets/steel4.jpg"
-                        alt="Two people on a basketball court"
-                        className="h-[500px] lg:h-[600px]"
-                        speed="-10%"
+                    <ParallaxStrong
+                        src="/assets/steel4.png"
+                        alt="Tag fitness socks"
+                        className="h-[300px] lg:h-[600px]"
                     />
-                    <ParallaxImage
-                        src="/assets/steel5.jpg"
-                        alt="Tag logo on a product"
-                        className="h-[500px] lg:h-[600px]"
-                        speed="-15%"
+                    <ParallaxStrong
+                        src="/assets/steel5.png"
+                        alt="Tag fitness socks"
+                        className="h-[300px] lg:h-[600px]"
                     />
-                    <ParallaxImage
+                    <ParallaxStrong
                         src="/assets/steel6.png"
-                        alt="Athlete stretching on a running track"
-                        className="h-[500px] lg:h-[600px]"
-                        speed="-8%"
+                        alt="Tag fitness socks"
+                        className="h-[300px] lg:h-[600px]"
                     />
                 </div>
             </section>

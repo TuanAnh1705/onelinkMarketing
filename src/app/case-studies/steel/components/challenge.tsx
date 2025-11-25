@@ -1,20 +1,18 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform} from "framer-motion"
 import Image from "next/image"
 
 // Component ParallaxImage độc lập (giữ nguyên)
-function ParallaxImage({
+function ParallaxStrong({
     src,
     alt,
     className,
-    speed = "-15%",
 }: {
     src: string
     alt: string
     className?: string
-    speed?: string | number
 }) {
     const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
@@ -22,22 +20,24 @@ function ParallaxImage({
         offset: ["start end", "end start"],
     })
 
-    const numericSpeed = typeof speed === 'string' ? parseFloat(speed) : speed;
-    const positiveSpeed = Math.abs(numericSpeed);
-
-    const y = useSpring(useTransform(scrollYProgress, [0, 1], [`-${positiveSpeed}%`, `${positiveSpeed}%`]), {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001,
-    })
+    // Tăng biên độ từ 10% lên 25% để thấy rõ chuyển động
+    const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
 
     return (
-        <div ref={ref} className={`overflow-hidden rounded-3xl ${className}`}>
-            <motion.div
-                style={{ y }}
-                className="relative h-[140%] w-full top-[-20%] will-change-transform"
+        // bg-transparent để không lộ khung trắng/xám
+        <div ref={ref} className={`relative overflow-hidden bg-transparent rounded-3xl ${className}`}>
+            {/* Tăng chiều cao ảnh lên 150% và top -25% để bù trừ cho quãng đường di chuyển dài hơn */}
+            <motion.div 
+                style={{ y }} 
+                className="relative w-full h-[150%] -top-[25%] will-change-transform"
             >
-                <Image src={src} alt={alt} fill className="object-cover" />
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    priority
+                />
             </motion.div>
         </div>
     )
@@ -101,41 +101,23 @@ export default function ChallengeSection() {
                     {/* ✅ SỬA ĐỔI: Quay lại grid 2 cột [3fr_2fr] trên desktop */}
                     <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 lg:gap-6">
 
-                        <ParallaxImage
+                        <ParallaxStrong
                             src="/assets/steel1.png"
                             alt="Tag fitness socks"
-                            className="h-[400px] lg:h-[600px]"
-                            speed="-8%"
+                            className="h-[300px] lg:h-[600px]"
                         />
                         
                         {/* ✅ SỬA ĐỔI: Wrapper cho ảnh nền và logo */}
-                        <div className="relative h-[400px] lg:h-[600px]">
-                            {/* Ảnh nền (Parallax) */}
-                            <ParallaxImage
-                                src="/assets/steel2.png"
-                                alt="Athlete on sports court"
-                                className="w-full h-full" // Cho nó lấp đầy wrapper
-                                speed="-12%"
-                            />
-                            
-                            {/* Logo (Ảnh thường, không Parallax) */}
-                            <div className="absolute inset-0 z-10 flex items-center justify-center p-8">
-                                <Image
-                                    src="/assets/avatar-1.png"
-                                    alt="Steel Works Seattle Logo"
-                                    width={200}
-                                    height={200}
-                                    className="object-contain" // Dùng object-contain để logo không bị méo
-                                />
-                            </div>
-                        </div>
+                        <ParallaxStrong
+                            src="/assets/steel2.png"
+                            alt="Tag fitness socks"
+                            className="h-[300px] lg:h-[600px]"
+                        />
                         
-                        <ParallaxImage
+                        <ParallaxStrong
                             src="/assets/steel3.png"
-                            alt="People on athletic track"
-                            // ✅ SỬA ĐỔI: Quay lại col-span-2
-                            className="lg:col-span-2 h-[400px] lg:h-[600px]"
-                            speed="-16%"
+                            alt="Tag fitness socks"
+                            className="lg:col-span-2 h-[300px] lg:h-[600px]"
                         />
 
                     </div>

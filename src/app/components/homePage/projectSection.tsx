@@ -50,6 +50,7 @@ export default function SectionProjects() {
             { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
             { src: "/assets/steel.png", title: "Steel Works Seattle", href:"/case-studies/steel" },
             { src: "/assets/cns1.png", title: "China Sourcing Co", href: "/case-studies/cns" },
+            { src: "/assets/vns1.png", title: "Vietnam Sourcing Co", href: "/case-studies/vns" },
           ],
         ].map((row, rowIndex) => (
           <div key={rowIndex} className="grid md:grid-cols-2 gap-16">
@@ -70,7 +71,7 @@ export default function SectionProjects() {
                   }}
                   viewport={{ once: false, amount: 0.4 }}
                 >
-                  <div className="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                  <div className="relative w-full aspect-4/3 rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
                     <Image src={item.src} alt={item.title} fill className="object-cover object-center" />
                   </div>
                   <h3 className="mt-7 archivo-expanded font-medium text-xl text-[#000A1D]">{item.title}</h3>
@@ -85,12 +86,12 @@ export default function SectionProjects() {
       {/* nút cuối */}
       <div className="flex justify-center mt-20 relative">
         <motion.div whileHover={{ scale: 1.05 }} style={{ opacity: buttonOpacity, y: buttonY }}>
-          <Link href="/insights">
+          <Link href="/case-studies">
             <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-medium text-sm text-[#444444] border-[0.5px] border-[#444444] hover:border-transparent bg-white transition-colors duration-300 group">
               <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-white">
                 View All Work
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+              <span className="absolute inset-0 bg-linear-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
             </button>
           </Link>
         </motion.div>

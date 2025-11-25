@@ -233,30 +233,11 @@ export default function HeroSection() {
                 </p>
               </div>
             </div>
-
-            {/* Image container */}
-            {/* <div className="flex items-center">
-              <div className="relative w-full aspect-video md:aspect-[16/7] overflow-hidden md:max-w-[1600px] mx-auto">
-                <motion.div
-                  style={{ y: smoothImageY }}
-                  className="w-full h-[calc(100%_*_4/3)] relative"
-                >
-                  <Image
-                    src="/assets/24.png"
-                    alt="Paid Media & Advertising"
-                    fill
-                    className="object-cover will-change-transform"
-                    priority
-                  />
-                </motion.div>
-              </div>
-            </div> */}
           </div>
 
-          {/* Services section - NEW DESIGN */}
-          <div className="mb-12 md:-mb-16">
-            {/* Mobile: Stacked cards */}
-            <div className="lg:hidden space-y-6">
+          {/* Services section - Mobile only inside container */}
+          <div className="mb-12 md:mb-16 lg:hidden">
+            <div className="space-y-6">
               {services.map((service, index) => (
                 <MobileServiceCard
                   key={index}
@@ -265,87 +246,89 @@ export default function HeroSection() {
                 />
               ))}
             </div>
+          </div>
+        </div>
 
-            {/* Desktop: Interactive grid */}
-            <div
-              className="hidden lg:block relative h-[650px] xl:h-[700px] overflow-hidden shadow-lg w-full"
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Default Background */}
+        {/* Desktop Services - Full Width, outside container */}
+        <div className="hidden lg:block mb-12 md:-mb-18">
+          <div
+            className="relative h-[750px] xl:h-[850px] overflow-hidden shadow-lg w-full"
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            {/* Default Background */}
+            <MotionImage
+              src={DEFAULT_SERVICE_IMAGE}
+              alt="Paid Media Services"
+              fill
+              className="object-cover"
+              animate={{ opacity: 1 }}
+            />
+
+            {/* Hover images */}
+            {services.map((service, index) => (
               <MotionImage
-                src={DEFAULT_SERVICE_IMAGE}
-                alt="Paid Media Services"
+                key={index}
+                src={service.imageUrl}
+                alt={typeof service.title === 'string' ? service.title : 'Service'}
                 fill
                 className="object-cover"
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               />
+            ))}
 
-              {/* Hover images */}
-              {services.map((service, index) => (
-                <MotionImage
-                  key={index}
-                  src={service.imageUrl}
-                  alt={typeof service.title === 'string' ? service.title : 'Service'}
-                  fill
-                  className="object-cover"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                />
-              ))}
+            <div className="absolute inset-0 grid grid-cols-4 z-10">
+              {services.map((service, index) => {
+                const animateState = hoveredIndex === index ? "hover" : "rest"
 
-              <div className="absolute inset-0 grid grid-cols-4 z-10">
-                {services.map((service, index) => {
-                  const animateState = hoveredIndex === index ? "hover" : "rest"
-
-                  return (
-                    <div
-                      key={index}
-                      className="relative h-full"
-                      onMouseEnter={() => setHoveredIndex(index)}
+                return (
+                  <div
+                    key={index}
+                    className="relative h-full"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                  >
+                    {/* Overlay */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 p-6 
+                      bg-[#0074E5]/40
+                      text-white flex flex-col justify-start"
+                      variants={overlayVariants}
+                      animate={animateState}
                     >
-                      {/* Overlay */}
+                      <h3 className="archivo-expanded text-lg xl:text-xl font-bold leading-tight text-white">
+                        {service.title}
+                      </h3>
+
                       <motion.div
-                        className="absolute bottom-0 left-0 right-0 p-6 
-                        bg-[#0074E5]/40
-                        text-white flex flex-col justify-start"
-                        variants={overlayVariants}
+                        className="mt-4 space-y-4"
+                        variants={contentVariants}
                         animate={animateState}
                       >
-                        <h3 className="archivo-expanded text-lg xl:text-xl font-bold leading-tight text-white">
-                          {service.title}
-                        </h3>
+                        <p className="neulis-alt-regular text-md leading-relaxed text-white">
+                          {service.description}
+                        </p>
 
-                        <motion.div
-                          className="mt-4 space-y-4"
-                          variants={contentVariants}
-                          animate={animateState}
+                        <Link
+                          href={service.link}
+                          className="group flex items-center gap-2 px-4 py-4 w-fit
+                          rounded-full bg-white text-[#444444] text-sm font-medium
+                          hover:bg-[#162660] hover:text-white transition-colors"
                         >
-                          <p className="neulis-alt-regular text-md leading-relaxed text-white">
-                            {service.description}
-                          </p>
-
-                          <Link
-                            href={service.link}
-                            className="group flex items-center gap-2 px-4 py-4 w-fit
-                            rounded-full bg-white text-[#444444] text-sm font-medium
-                            hover:bg-[#162660] hover:text-white transition-colors"
-                          >
-                            Explore Now
-                            <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
-                          </Link>
-                        </motion.div>
+                          Explore Now
+                          <ArrowUpRight className="w-4 h-4 stroke-[url(#chevronGradient)] group-hover:stroke-white transition-colors duration-300" />
+                        </Link>
                       </motion.div>
-                    </div>
-                  )
-                })}
-              </div>
-
-              {/* Vertical dividers */}
-              <div className="absolute top-0 bottom-0 left-1/4 w-px bg-white/20 z-20" />
-              <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white/20 z-20" />
-              <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white/20 z-20" />
+                    </motion.div>
+                  </div>
+                )
+              })}
             </div>
+
+            {/* Vertical dividers */}
+            <div className="absolute top-0 bottom-0 left-1/4 w-px bg-white/20 z-20" />
+            <div className="absolute top-0 bottom-0 left-2/4 w-px bg-white/20 z-20" />
+            <div className="absolute top-0 bottom-0 left-3/4 w-px bg-white/20 z-20" />
           </div>
         </div>
       </div>

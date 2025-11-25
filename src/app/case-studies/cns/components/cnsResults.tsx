@@ -26,8 +26,8 @@ function ParallaxStrong({
 
     return (
         <div ref={ref} className={`relative overflow-hidden bg-transparent ${className}`}>
-            <motion.div 
-                style={{ y }} 
+            <motion.div
+                style={{ y }}
                 className="relative w-full h-[130%] -top-[15%] will-change-transform"
             >
                 <Image
@@ -87,11 +87,12 @@ export default function CNSResults() {
                     </ul>
 
                     {/* Chart Image Wide */}
-                    <div className="w-full h-[300px] md:h-[400px]">
-                        <ParallaxStrong
+                    <div className="relative h-[650px] w-full rounded-xl overflow-hidden">
+                        <Image
                             src="/assets/cns11.png"
-                            alt="Email Marketing Stats"
-                            className="w-full h-full rounded-xl"
+                            alt="Conversion Chart"
+                            fill
+                            className="object-contain"
                         />
                     </div>
                 </div>
@@ -117,11 +118,12 @@ export default function CNSResults() {
                     </ul>
 
                     {/* Analytics Dashboard Image */}
-                    <div className="w-full h-[300px] md:h-[400px]">
-                        <ParallaxStrong
+                    <div className="relative h-[650px] w-full rounded-xl overflow-hidden">
+                        <Image
                             src="/assets/cns12.png"
-                            alt="Google Analytics Reporting"
-                            className="w-full h-full rounded-xl"
+                            alt="Conversion Chart"
+                            fill
+                            className="object-contain"
                         />
                     </div>
                 </div>

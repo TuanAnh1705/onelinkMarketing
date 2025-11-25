@@ -27,8 +27,8 @@ function ParallaxStrong({
 
     return (
         <div ref={ref} className={`relative overflow-hidden bg-transparent ${className}`}>
-            <motion.div 
-                style={{ y }} 
+            <motion.div
+                style={{ y }}
                 className="relative w-full h-[140%] -top-[20%] will-change-transform"
             >
                 <Image
@@ -100,20 +100,27 @@ export default function CNSSolution() {
                     </div>
 
                     {/* Charts Grid - Parallax Mạnh */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                        <ParallaxStrong
-                            src="/assets/cns3.png"
-                            alt="Traffic Chart"
-                            className="h-[250px] w-full rounded-xl"
-                            objectFit="contain"
-                        />
-                        <ParallaxStrong
-                            src="/assets/cns4.png"
-                            alt="Conversion Chart"
-                            className="h-[250px] w-full rounded-xl"
-                            objectFit="contain"
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-16 pl-0">
+                        <div className="relative h-[350px] w-full rounded-xl overflow-hidden">
+                            <Image
+                                src="/assets/cns3.png"
+                                alt="Traffic Chart"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+
+                        <div className="relative h-[350px] w-full rounded-xl overflow-hidden">
+                            <Image
+                                src="/assets/cns4.png"
+                                alt="Conversion Chart"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
                     </div>
+
+
                 </div>
             </section>
 
