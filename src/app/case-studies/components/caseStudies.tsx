@@ -6,59 +6,55 @@ import Image from "next/image"
 // 🚀 FIX: Import Link để sử dụng
 import Link from "next/link"
 
-// ============================================================================
-// 🔹 Component FilterTabs - ĐÃ FIX RESPONSIVE VÀ LOGIC ANIMATION
-// ============================================================================
-const categories = ["All", "Websites", "SEO", "Paid Media", "Social Media"]
+// // ============================================================================
+// // 🔹 Component FilterTabs - ĐÃ FIX RESPONSIVE VÀ LOGIC ANIMATION
+// // ============================================================================
+// const categories = ["All", "Websites", "SEO", "Paid Media", "Social Media"]
 
-function FilterTabs() {
-    const [activeTab, setActiveTab] = useState(categories[0])
-    const [hoveredTab, setHoveredTab] = useState<string | null>(null)
+// function FilterTabs() {
+//     const [activeTab, setActiveTab] = useState(categories[0])
+//     const [hoveredTab, setHoveredTab] = useState<string | null>(null)
 
-    return (
-        // ✅ FIX 1: Chuyển sang flex + scroll ngang trên mobile, giữ grid trên desktop
-        <div className="flex flex-row overflow-x-auto md:grid md:grid-cols-5 w-full max-w-7xl mx-auto mb-12 md:mb-20 px-4 sm:px-8 md:px-0">
-            {categories.map((category) => {
-                const isActive = activeTab === category
-                const isHovered = hoveredTab === category
+//     return (
+//         // ✅ FIX 1: Chuyển sang flex + scroll ngang trên mobile, giữ grid trên desktop
+//         <div className="flex flex-row overflow-x-auto md:grid md:grid-cols-5 w-full max-w-7xl mx-auto mb-12 md:mb-20 px-4 sm:px-8 md:px-0">
+//             {categories.map((category) => {
+//                 const isActive = activeTab === category
+//                 const isHovered = hoveredTab === category
 
-                return (
-                    <div
-                        key={category}
-                        onClick={() => setActiveTab(category)}
-                        onMouseEnter={() => setHoveredTab(category)}
-                        onMouseLeave={() => setHoveredTab(null)}
-                        // ✅ FIX 2: Thêm flex-shrink-0 và padding để scroll
-                        className="relative flex flex-col items-start cursor-pointer group shrink-0 pr-8 md:pr-0"
-                    >
-                        {/* ✅ FIX 3: Giảm cỡ chữ trên mobile */}
-                        <span className="text-base md:text-lg text-[#444444] group-hover:text-[#000A1D] transition-colors duration-300 relative z-10 pb-3 whitespace-nowrap">
-                            {category}
-                        </span>
+//                 return (
+//                     <div
+//                         key={category}
+//                         onClick={() => setActiveTab(category)}
+//                         onMouseEnter={() => setHoveredTab(category)}
+//                         onMouseLeave={() => setHoveredTab(null)}
+//                         // ✅ FIX 2: Thêm flex-shrink-0 và padding để scroll
+//                         className="relative flex flex-col items-start cursor-pointer group shrink-0 pr-8 md:pr-0"
+//                     >
+//                         {/* ✅ FIX 3: Giảm cỡ chữ trên mobile */}
+//                         <span className="text-base md:text-lg text-[#444444] group-hover:text-[#000A1D] transition-colors duration-300 relative z-10 pb-3 whitespace-nowrap">
+//                             {category}
+//                         </span>
 
-                        {/* Gạch chân với animation */}
-                        <motion.div
-                            className="absolute bottom-0 left-0 w-full bg-[#D1D1D1]"
-                            initial={{ scaleX: 0 }}
-                            animate={{
-                                // ✅ SỬA LỖI LOGIC: Thay 0.9 thứ hai thành 0
-                                scaleX: isActive || isHovered ? 0.9 : 0,
-                                height: isActive || isHovered ? 2 : 1,
-                                backgroundColor: isActive || isHovered ? "#000A1D" : "#D1D1D1",
-                            }}
-                            transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                            style={{ transformOrigin: "left" }}
-                        />
-                    </div>
-                )
-            })}
-        </div>
-    )
-}
-
-// ============================================================================
-// 🔹 Định nghĩa Type và Dữ liệu (Giữ nguyên)
-// ============================================================================
+//                         {/* Gạch chân với animation */}
+//                         <motion.div
+//                             className="absolute bottom-0 left-0 w-full bg-[#D1D1D1]"
+//                             initial={{ scaleX: 0 }}
+//                             animate={{
+//                                 // ✅ SỬA LỖI LOGIC: Thay 0.9 thứ hai thành 0
+//                                 scaleX: isActive || isHovered ? 0.9 : 0,
+//                                 height: isActive || isHovered ? 2 : 1,
+//                                 backgroundColor: isActive || isHovered ? "#000A1D" : "#D1D1D1",
+//                             }}
+//                             transition={{ type: "spring", stiffness: 350, damping: 30 }}
+//                             style={{ transformOrigin: "left" }}
+//                         />
+//                     </div>
+//                 )
+//             })}
+//         </div>
+//     )
+// }
 interface CaseStudyItem {
     src: string;
     title: string;
@@ -113,7 +109,6 @@ export default function CaseStudies() {
                 <h2 className="archivo-expanded text-4xl sm:text-5xl md:text-6xl font-medium text-center text-[#000A1D] mb-12 md:mb-16">
                     Case Studies
                 </h2>
-                <FilterTabs />
                 <div className="flex flex-col gap-12 md:gap-20">
                     {caseStudiesData.map((row, rowIndex) => (
                         <div key={rowIndex} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">

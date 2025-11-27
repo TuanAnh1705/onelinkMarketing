@@ -18,6 +18,22 @@ const nextConfig = {
         hostname: "utfs.io",
         pathname: "/f/**",
       },
+      {
+        protocol: 'https',
+        hostname: 'hsgcjcoeaqgq.sg.larksuite.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.larksuite.com', // Allow all larksuite subdomains
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: '**', // Allow all HTTPS domains (less secure but convenient)
+      },
     ],
   },
   
