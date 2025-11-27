@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
+import { motion, useSpring, useMotionValue } from "framer-motion"
 import { useRef, useState } from "react"
 import Image from "next/image"
 // 🚀 FIX: Import Link để sử dụng
@@ -29,7 +29,7 @@ function FilterTabs() {
                         onMouseEnter={() => setHoveredTab(category)}
                         onMouseLeave={() => setHoveredTab(null)}
                         // ✅ FIX 2: Thêm flex-shrink-0 và padding để scroll
-                        className="relative flex flex-col items-start cursor-pointer group flex-shrink-0 pr-8 md:pr-0"
+                        className="relative flex flex-col items-start cursor-pointer group shrink-0 pr-8 md:pr-0"
                     >
                         {/* ✅ FIX 3: Giảm cỡ chữ trên mobile */}
                         <span className="text-base md:text-lg text-[#444444] group-hover:text-[#000A1D] transition-colors duration-300 relative z-10 pb-3 whitespace-nowrap">
@@ -63,14 +63,15 @@ interface CaseStudyItem {
     src: string;
     title: string;
     href: string;
+    year: string
 }
 
 const caseStudiesData: CaseStudyItem[][] = [
     [
-        { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
-        { src: "/assets/steel.png", title: "Steel Works Seattle", href: "/case-studies/steel" },
-        { src: "/assets/cns1.png", title: "China Sourcing Co", href: "/case-studies/china-sourcing-co" },
-        { src: "/assets/vns1.png", title: "Vietnam Sourcing Co", href: "/case-studies/vietnam-sourcing-co" },
+        { src: "/assets/tag1.png", title: "Tag. Fitness",year:"2025", href: "/case-studies/tag" },
+        { src: "/assets/steel.png", title: "Steel Works Seattle",year:"2025", href: "/case-studies/steel" },
+        { src: "/assets/cns1.png", title: "China Sourcing Co",year:"2025", href: "/case-studies/china-sourcing-co" },
+        { src: "/assets/vns1.png", title: "Vietnam Sourcing Co",year:"2023", href: "/case-studies/vietnam-sourcing-co" },
     ],
 ];
 
@@ -84,10 +85,6 @@ export default function CaseStudies() {
     const mouseY = useMotionValue(0)
     const smoothX = useSpring(mouseX, { stiffness: 350, damping: 20 })
     const smoothY = useSpring(mouseY, { stiffness: 350, damping: 20 })
-
-    const { scrollYProgress } = useScroll({ target: section4Ref, offset: ["start end", "center start"] })
-    const buttonOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1])
-    const buttonY = useTransform(scrollYProgress, [0, 0.4], [100, 0])
 
     return (
         <motion.section
@@ -135,11 +132,11 @@ export default function CaseStudies() {
                                         }}
                                         viewport={{ once: false, amount: 0.4 }}
                                     >
-                                        <div className="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                                        <div className="relative w-full aspect-4/3 rounded-[2.5rem] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
                                             <Image src={item.src} alt={item.title} fill className="object-cover object-center" />
                                         </div>
                                         <h3 className="mt-7 archivo-expanded font-medium text-xl text-[#000A1D]">{item.title}</h3>
-                                        <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">Digital Asset Development · 2025</p>
+                                        <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">{item.year}</p>
                                     </motion.div>
                                 </Link>
                             ))}

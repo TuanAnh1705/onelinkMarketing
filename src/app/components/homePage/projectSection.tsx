@@ -47,10 +47,10 @@ export default function SectionProjects() {
       <div className="max-w-7xl mx-auto flex flex-col gap-20">
         {[
           [
-            { src: "/assets/tag1.png", title: "Tag. Fitness", href: "/case-studies/tag" },
-            { src: "/assets/steel.png", title: "Steel Works Seattle", href: "/case-studies/steel" },
-            { src: "/assets/cns1.png", title: "China Sourcing Co", href: "/case-studies/china-sourcing-co" },
-            { src: "/assets/vns1.png", title: "Vietnam Sourcing Co", href: "/case-studies/vietnam-sourcing-co" },
+            { src: "/assets/tag1.png", title: "Tag. Fitness",year:"2025", href: "/case-studies/tag" },
+            { src: "/assets/steel.png", title: "Steel Works Seattle",year:"2025", href: "/case-studies/steel" },
+            { src: "/assets/cns1.png", title: "China Sourcing Co",year:"2025", href: "/case-studies/china-sourcing-co" },
+            { src: "/assets/vns1.png", title: "Vietnam Sourcing Co",year:"2023", href: "/case-studies/vietnam-sourcing-co" },
           ],
         ].map((row, rowIndex) => (
           <div key={rowIndex} className="grid md:grid-cols-2 gap-16">
@@ -75,7 +75,7 @@ export default function SectionProjects() {
                     <Image src={item.src} alt={item.title} fill className="object-cover object-center" />
                   </div>
                   <h3 className="mt-7 archivo-expanded font-medium text-xl text-[#000A1D]">{item.title}</h3>
-                  <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">Digital Asset Development · 2025</p>
+                  <p className="text-sm neulis-alt-extralight font-semibold text-[#444444]">{item.year}</p>
                 </motion.div>
               </Link>
             ))}
