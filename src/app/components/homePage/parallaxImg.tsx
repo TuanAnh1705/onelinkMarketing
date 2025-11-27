@@ -28,7 +28,7 @@ export default function ParallaxImage() {
     }, [])
 
     return (
-        <div className="relative h-screen z-0 isolate -mt-96 md:-mt-[33vh]">
+        <div className="relative h-screen z-0 isolate -mt-[500px] md:-mt-[33vh]">
             <section className="relative h-[120vh] flex items-center justify-center overflow-hidden">
                 <div className="flex justify-center lg:justify-end w-full max-w-7xl mx-auto px-4 lg:px-0">
                     <div

@@ -43,7 +43,7 @@ export default function ImageBottomContainer() {
     return (
         <section
             ref={ref}
-            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-[1000px] md:-top-[1000px]"
+            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-[40px] md:-top-[1000px]"
         >
             {/* Example Background image */}
             <div

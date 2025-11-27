@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -13,19 +13,13 @@ export function PartnerSection() {
     offset: ["start end", "end start"],
   })
 
-  const smoothYProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 40,
-    mass: 0.5,
-  })
-
-  const y = useTransform(smoothYProgress, [0, 1], ["-25%", "25%"])
+  const y = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"])
 
   return (
     <section className="bg-[#0a0e1a] text-white py-16 md:py-20">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <h2 className="archivo-expanded text-4xl md:text-6xl text-white font-medium text-center mb-16 md:mb-20">
+        <h2 className="archivo-expanded text-4xl md:text-6xl text-white font-medium text-left md:text-center mb-16 md:mb-20">
           Why We Are Your Ideal Partner?
         </h2>
 
@@ -36,8 +30,9 @@ export function PartnerSection() {
             <div
               key={index}
               // Căn giữa card + divider trên mobile, và áp dụng translate-x trên desktop
-              className={`flex flex-col lg:flex-row lg:items-stretch w-full items-center ${index >= 1 ? "lg:-translate-x-2" : ""
-                }`}
+              className={`flex flex-col lg:flex-row lg:items-stretch w-full items-start ${
+                index >= 1 ? "lg:-translate-x-2" : ""
+              }`}
             >
               <FeatureCard
                 iconSrc={feature.iconSrc}
@@ -56,25 +51,22 @@ export function PartnerSection() {
           {/* Two-column container for image and text */}
           {/* Chuyển sang flex-col trên mobile, lg:flex-row trên desktop */}
           <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-12 lg:gap-20">
-            {/* Hình bên trái */}
+            {/* Hình bên trái với parallax effect */}
             <div
               ref={containerRef}
-              // Thay đổi w và h cố định thành w-full và h-[500px] trên mobile
-              className="relative w-full max-w-md lg:w-[720px] h-[500px] lg:h-[800px] overflow-hidden  flex-shrink-0"
+              className="relative w-full max-w-md lg:w-[720px] h-[500px] lg:h-[800px] overflow-hidden shrink-0"
             >
               <motion.div
                 style={{ y }}
-                className="absolute inset-0 flex justify-center items-center"
+                className="relative w-full h-[140%] -top-[20%] will-change-transform"
               >
-                <div className="relative w-[100%] h-[150%]">
-                  <Image
-                    src="/assets/5.jpg"
-                    alt="Abstract gradient"
-                    fill
-                    className="object-cover "
-                    priority
-                  />
-                </div>
+                <Image
+                  src="/assets/5.jpg"
+                  alt="Abstract gradient"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </motion.div>
             </div>
 
@@ -83,13 +75,13 @@ export function PartnerSection() {
             <div className="h-auto lg:h-[800px] flex-1 flex flex-col w-full max-w-md lg:max-w-none lg:w-auto mt-12 lg:mt-0">
               <div>
                 {/* Giảm font-size và căn giữa trên mobile */}
-                <h3 className="archivo-expanded text-4xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12 leading-tight text-white text-center lg:text-left">
+                <h3 className="archivo-expanded text-3xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12 leading-tight text-white md:text-left lg:text-left">
                   Metrics That Matter
                 </h3>
               </div>
 
               {/* Bỏ justify-between, dùng gap-10 trên mobile */}
-              <div className="archivo-expanded flex-grow flex flex-col justify-start lg:justify-between pt-0 lg:pt-8 gap-10 lg:gap-0">
+              <div className="archivo-expanded grow flex flex-col justify-start lg:justify-between pt-0 lg:pt-8 gap-10 lg:gap-0">
                 <MetricItem value="300%+" label="Improvement in website traffic" />
                 <MetricItem value="50%+" label="Increase in lead conversion rates" />
                 <MetricItem value="20%+" label="Reduction in bounce rate" />
@@ -106,7 +98,7 @@ export function PartnerSection() {
                   <span className="relative z-20 flex items-center justify-center w-full h-full">
                     Contact Us
                   </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+                  <span className="absolute inset-0 bg-linear-to-r from-[#0074E5] to-[#162660] translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
                 </button>
               </Link>
             </motion.div>
@@ -194,9 +186,7 @@ function FeatureCard({
   // Logic cho 'alignTop' (Desktop: Text trên, Icon dưới)
   if (alignTop) {
     return (
-      <div
-        className={`${baseClasses} justify-start lg:justify-between`}
-      >
+      <div className={`${baseClasses} justify-start lg:justify-between`}>
         {/* Mobile: Luôn là Icon trên (lg:hidden) */}
         <Icon marginClass="mb-3 lg:hidden" />
         {/* Desktop: Text trên (hidden lg:block) */}
@@ -209,9 +199,7 @@ function FeatureCard({
   // Logic cho 'reversed' (Desktop: Text trên, Icon dưới)
   if (reversed) {
     return (
-      <div
-        className={`${baseClasses} justify-start lg:justify-end`}
-      >
+      <div className={`${baseClasses} justify-start lg:justify-end`}>
         {/* Mobile: Luôn là Icon trên (lg:hidden) */}
         <Icon marginClass="mb-3 lg:hidden" />
         {/* Desktop: Text trên (hidden lg:block) */}
@@ -223,9 +211,7 @@ function FeatureCard({
 
   // Logic mặc định (Mobile: Icon trên. Desktop: Icon trên)
   return (
-    <div
-      className={`${baseClasses} justify-start lg:justify-between`}
-    >
+    <div className={`${baseClasses} justify-start lg:justify-between`}>
       <Icon marginClass="mb-3" /> {/* Hiển thị cho cả hai */}
       <TextBlock />
     </div>
@@ -235,7 +221,7 @@ function FeatureCard({
 function GradientDivider() {
   return (
     // Chuyển thành vạch ngang (w-full, h-px) trên mobile, và vạch dọc (w-px, h-[340px]) trên desktop
-    <div className="flex-shrink-0 w-full max-w-xs h-px lg:w-px lg:h-[340px] bg-gradient-to-r from-[#0074E5] to-[#162660] lg:bg-gradient-to-b opacity-70 lg:mx-[30px]" />
+    <div className="shrink-0 lg:mt-0 mt-5 w-full max-w-xs h-px lg:w-px lg:h-[340px] bg-linear-to-r from-[#0074E5] to-[#162660] lg:bg-linear-to-b opacity-70 lg:mx-30" />
   )
 }
 
@@ -252,7 +238,7 @@ function MetricItem({
     <div>
       {showLine && (
         // Thêm w-full và max-w để giới hạn chiều rộng trên mobile
-        <div className="w-full max-w-[370px] h-[1px] bg-gradient-to-r from-[#0094FF] to-[#162660] mb-6" />
+        <div className="w-full max-w-[370px] h-px bg-linear-to-r from-[#0094FF] to-[#162660] mb-6" />
       )}
       {/* Chuyển sang flex-col trên mobile, và flex-row trên desktop */}
       <div className="flex flex-col lg:flex-row items-start lg:items-start gap-4 lg:gap-28">

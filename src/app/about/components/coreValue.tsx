@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 
 const coreValuesData = [
@@ -30,8 +30,7 @@ export function CoreValuesSection() {
         offset: ["start end", "end start"],
     })
 
-    const smooth = useSpring(scrollYProgress, { stiffness: 50, damping: 20 })
-    const y = useTransform(smooth, [0, 1], ["-15%", "15%"])
+    const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"])
 
     return (
         // THAY ĐỔI: Giảm padding 'px-8' xuống 'px-6' cho mobile
@@ -49,14 +48,14 @@ export function CoreValuesSection() {
                         <div
                             key={value.title}
                             // THAY ĐỔI: Giảm padding 'p-8' xuống 'p-6' cho mobile
-                            className="relative rounded-2xl overflow-hidden p-6 md:p-8 h-64 bg-gradient-to-br from-[#0A4BE1] to-[#04205E]"
+                            className="relative rounded-2xl overflow-hidden p-6 md:p-8 h-64 bg-linear-to-br from-[#0A4BE1] to-[#04205E]"
                         >
                             <div className="absolute inset-0">
                                 <Image
                                     src={value.imageUrl}
                                     alt={value.title}
                                     fill
-                                    className="object-contain translate-x-[10%] -translate-y-[30%] scale-110 opacity-80"
+                                    className="object-contain translate-x-[20%] -translate-y-[30%] scale-110 opacity-80"
                                 />
                             </div>
                             <div className="absolute inset-0 bg-[#0074E5]/70"></div>
@@ -76,7 +75,10 @@ export function CoreValuesSection() {
                     {/* --- ẢNH PARALLAX --- */}
                     {/* THAY ĐỔI: Chiều cao ảnh responsive */}
                     <div className="relative h-[350px] sm:h-[450px] lg:h-[560px] lg:col-span-1 overflow-hidden">
-                        <motion.div style={{ y }} className="absolute inset-0 scale-120 will-change-transform">
+                        <motion.div
+                            style={{ y }}
+                            className="relative w-full h-[140%] -top-[20%] will-change-transform"
+                        >
                             <Image
                                 src="/assets/core.png"
                                 alt="Abstract background"
@@ -89,7 +91,7 @@ export function CoreValuesSection() {
 
                     {/* --- CARD TEXT BÊN PHẢI --- */}
                     {/* THAY ĐỔI: Padding responsive */}
-                    <div className="bg-gradient-to-br lg:col-span-2 from-[#0074E5] to-[#162660] p-6 sm:p-10 md:p-14 flex flex-col justify-start">
+                    <div className="bg-linear-to-br lg:col-span-2 from-[#0074E5] to-[#162660] p-6 sm:p-10 md:p-14 flex flex-col justify-start">
                         <div className="max-w-3xl">
                             <h2 className="archivo-expanded text-white text-3xl md:text-5xl font-medium leading-tight mb-8">
                                 From a Lifeless Website to a Lead Engine
@@ -100,12 +102,12 @@ export function CoreValuesSection() {
                                 </ListItem>
                                 <ListItem>A <span className="font-bold">clear and professional brand identity.</span></ListItem>
                                 <ListItem>
-                                    Digital assets integrated into a single, effective <span className="font-bold">lead engine.</span> 
+                                    Digital assets integrated into a single, effective <span className="font-bold">lead engine.</span>
                                 </ListItem>
                                 <ListItem><span className="font-bold">Optimized costs</span> with high-performance results.</ListItem>
                             </ul>
-                            <a
-                                href="/case-studies"
+
+                            <a href="/case-studies"
                                 // THAY ĐỔI: Thêm 'mt-8' cho mobile
                                 className="group relative inline-block mt-8 md:mt-10 text-white border border-white rounded-full px-6 py-2 text-sm transition-colors duration-300 ease-in-out overflow-hidden hover:text-black"
                             >
@@ -116,7 +118,7 @@ export function CoreValuesSection() {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }
 

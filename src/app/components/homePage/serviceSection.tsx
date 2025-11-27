@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import Link from "next/link" // <-- THÊM IMPORT NÀY
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,8 +12,24 @@ export default function ServiceSection() {
     const textGroupRef = useRef<HTMLDivElement>(null)
     const blackLinesRef = useRef<HTMLDivElement[]>([])
     const gradientLinesRef = useRef<HTMLDivElement[]>([])
+    const [isMobile, setIsMobile] = useState(false)
 
+    // Kiểm tra screen size
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768) // md breakpoint
+        }
+        
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    // GSAP animation chỉ chạy trên desktop
+    useEffect(() => {
+        if (isMobile) return // Bỏ qua animation nếu là mobile
+
         const ctx = gsap.context(() => {
             let scrollVelocity = 0
             let lastScrollY = 0
@@ -74,7 +90,7 @@ export default function ServiceSection() {
         }, containerRef)
 
         return () => ctx.revert()
-    }, [])
+    }, [isMobile])
 
     const services = [
         {
@@ -101,114 +117,130 @@ export default function ServiceSection() {
 
     return (
         <>
-            {/* SECTION 1 (Giữ nguyên) */}
+            {/* SECTION 1 - Desktop: Animation, Mobile: Static Gradient */}
             <section
                 ref={containerRef}
-                className="relative flex justify-center items-center overflow-hidden h-screen bg-white -top-40 md:-top-60 lg:-top-72"
+                className={`relative flex justify-center items-center overflow-hidden bg-white -top-40 md:-top-60 lg:-top-72 ${
+                    isMobile ? 'h-auto py-20' : 'h-screen'
+                }`}
             >
-                <div
-                    ref={textGroupRef}
-                    className="fixed top-[45%] md:top-[40%] lg:top-[38%] z-10 flex flex-col justify-center items-center text-center leading-tight pointer-events-none archivo-expanded font-medium text-[clamp(36px,7vw,90px)]"
-                >
-                    {/* LAYER 1: Xám nền */}
-                    <div className="text-gray-300">
+                {isMobile ? (
+                    // MOBILE VERSION - Chỉ hiển thị text gradient tĩnh
+                    <div className="text-center leading-tight archivo-expanded font-medium text-4xl px-6 mt-20 -mb-16">
                         <div>
-                            From <span>Strategy</span> to
+                            <span className="bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+                                From Strategy
+                            </span>{" "}
+                            to
                         </div>
                         <div>
-                            <span>Performance Growth</span>
+                            <span className="bg-linear-to-r from-[#162660] to-[#0074E5] bg-clip-text text-transparent">
+                                Performance Growth
+                            </span>
                         </div>
                     </div>
-
-                    {/* LAYER 2: Chữ đen */}
-                    <div className="absolute text-black">
-                        {["From Strategy to", "Performance Growth"].map((text, i) => (
-                            <div
-                                key={i}
-                                ref={(el) => {
-                                    if (el) blackLinesRef.current[i] = el
-                                }}
-                                style={{ clipPath: "inset(0% 100% 0% 0%)" }}
-                            >
-                                {text}
+                ) : (
+                    // DESKTOP VERSION - Giữ nguyên animation
+                    <div
+                        ref={textGroupRef}
+                        className="fixed top-[45%] md:top-[40%] lg:top-[38%] z-10 flex flex-col justify-center items-center text-center leading-tight pointer-events-none archivo-expanded font-medium text-[clamp(36px,7vw,90px)]"
+                    >
+                        {/* LAYER 1: Xám nền */}
+                        <div className="text-gray-300">
+                            <div>
+                                From <span>Strategy</span> to
                             </div>
-                        ))}
-                    </div>
-
-                    {/* LAYER 3: Gradient không viền đen */}
-                    <div className="absolute text-transparent">
-                        {[
-                            {
-                                text: (
-                                    <>
-                                        <span className="bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
-                                            From Strategy
-                                        </span>{" "}
-                                        to
-                                    </>
-                                ),
-                                key: "layer2",
-                            },
-                            {
-                                text: (
-                                    <span className="bg-gradient-to-r from-[#162660] to-[#0074E5] bg-clip-text text-transparent">
-                                        Performance Growth
-                                    </span>
-                                ),
-                                key: "layer3",
-                            },
-                        ].map((item, i) => (
-                            <div
-                                key={item.key}
-                                ref={(el) => {
-                                    if (el) gradientLinesRef.current[i] = el
-                                }}
-                                style={{
-                                    clipPath: "inset(0% 100% 0% 0%)",
-                                    WebkitFontSmoothing: "antialiased",
-                                    MozOsxFontSmoothing: "grayscale",
-                                    textShadow: "none",
-                                    filter: "none",
-                                    mixBlendMode: "normal",
-                                    WebkitTextStroke: "0px transparent",
-                                }}
-                            >
-                                {item.text}
+                            <div>
+                                <span>Performance Growth</span>
                             </div>
-                        ))}
+                        </div>
+
+                        {/* LAYER 2: Chữ đen */}
+                        <div className="absolute text-black">
+                            {["From Strategy to", "Performance Growth"].map((text, i) => (
+                                <div
+                                    key={i}
+                                    ref={(el) => {
+                                        if (el) blackLinesRef.current[i] = el
+                                    }}
+                                    style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+                                >
+                                    {text}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* LAYER 3: Gradient */}
+                        <div className="absolute text-transparent">
+                            {[
+                                {
+                                    text: (
+                                        <>
+                                            <span className="bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent">
+                                                From Strategy
+                                            </span>{" "}
+                                            to
+                                        </>
+                                    ),
+                                    key: "layer2",
+                                },
+                                {
+                                    text: (
+                                        <span className="bg-linear-to-r from-[#162660] to-[#0074E5] bg-clip-text text-transparent">
+                                            Performance Growth
+                                        </span>
+                                    ),
+                                    key: "layer3",
+                                },
+                            ].map((item, i) => (
+                                <div
+                                    key={item.key}
+                                    ref={(el) => {
+                                        if (el) gradientLinesRef.current[i] = el
+                                    }}
+                                    style={{
+                                        clipPath: "inset(0% 100% 0% 0%)",
+                                        WebkitFontSmoothing: "antialiased",
+                                        MozOsxFontSmoothing: "grayscale",
+                                        textShadow: "none",
+                                        filter: "none",
+                                        mixBlendMode: "normal",
+                                        WebkitTextStroke: "0px transparent",
+                                    }}
+                                >
+                                    {item.text}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </section>
 
-            {/* SECTION 2 (ĐÃ CẬP NHẬT VỚI <Link>) */}
-            <section className="relative -translate-y-[5vh] text-white bg-[#000A1D] z-40 -top-[900px] md:-top-60 lg:-top-80">
+            {/* SECTION 2 - Service List */}
+            <section className={`relative text-white bg-[#000A1D] z-40 ${
+                isMobile ? 'top-0' : '-translate-y-[5vh] -top-[900px] md:-top-60 lg:-top-80'
+            }`}>
                 <div className="flex flex-col w-full relative overflow-visible md:-top-96">
                     {/* LINE ĐẦU */}
-                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
                     
-                    {/* ✅ FIX: THAY ĐỔI TỪ services.map((...) => (...)) THÀNH services.map((...) => { ... return ... }) */}
                     {services.map((item, index) => {
-                        
-                        // ✅ FIX: Tạo href bằng logic giống hệt Navbar
-                        // Regex \s+ sẽ xử lý cả dấu cách và dấu \n (xuống dòng)
                         const href = `/service/${item.title
                             .toLowerCase()
                             .replace(/\s+/g, "-")}`
 
                         return (
-                            // ✅ FIX: Bọc toàn bộ div bằng <Link> và gán href
-                            // Di chuyển key={item.title} và các className ra <Link>
                             <Link
                                 key={item.title}
                                 href={href}
                                 className="relative w-full flex justify-center items-center overflow-visible group"
                             >
                                 {/* NỀN DƯỚI */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#002B6D] via-[#162660] to-[#0074E5]" />
+                                <div className="absolute inset-0 bg-linear-to-r from-[#002B6D] via-[#162660] to-[#0074E5]" />
                                 
                                 {/* NỘI DUNG */}
                                 <div className="relative z-10 bg-[#000A1D] transition-all duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex items-start gap-10 py-12 md:py-16 lg:py-20 w-full group-hover:rounded-l-[110px] group-hover:rounded-r-[110px]">
-                                    <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-16 lg:gap-10 px-6 lg:pl-[10rem] lg:pr-20 w-full">
+                                    <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-16 lg:gap-10 px-6 lg:pl-40 lg:pr-20 w-full">
                                         <h2 className="text-4xl md:text-5xl lg:text-7xl text-white leading-[1.15] whitespace-pre-line flex-1 lg:translate-x-16 neulis-alt-extralight font-bold">
                                             {item.title}
                                         </h2>
@@ -221,14 +253,14 @@ export default function ServiceSection() {
                                 
                                 {/* LINE NGĂN */}
                                 {index !== services.length - 1 && (
-                                    <div className="absolute -bottom-[1.5px] left-0 w-full h-[2px] bg-gradient-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
+                                    <div className="absolute -bottom-[1.5px] left-0 w-full h-0.5 bg-linear-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
                                 )}
-                            </Link> // <-- Đóng thẻ Link
+                            </Link>
                         )
                     })}
                     
                     {/* LINE DƯỚI */}
-                    <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
+                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-[#002B6D] via-[#162660] to-[#0074E5] opacity-90 shadow-[0_0_12px_rgba(0,116,229,0.5)] z-50" />
                 </div>
             </section>
         </>

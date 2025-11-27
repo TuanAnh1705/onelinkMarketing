@@ -130,35 +130,37 @@ export function TeamSection() {
         </div>
       </div>
 
-      {/* --- Carousel Container --- */}
-      <div className="embla w-full overflow-hidden" ref={emblaRef}>
-        <div className="embla__container flex -ml-8">
-          {teamMembers.map((member) => (
-            <div
-              className="embla__slide relative min-w-0 shrink-0 grow-0
-                         basis-full pl-8 sm:basis-1/2 lg:basis-1/4"
-              key={member.id}
-            >
-              <div className="group text-left">
-                {/* Container chứa ảnh */}
-                <div className="relative w-full aspect-3/4 bg-gray-300 overflow-hidden mb-4 shadow-md">
-                  <Image
-                    src={member.imageUrl}
-                    alt={`Photo of ${member.name}`}
-                    fill
-                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
-                  />
+      {/* --- Carousel Container với padding 2 bên --- */}
+      <div className="px-4 sm:px-8 lg:px-5">
+        <div className="embla w-full overflow-hidden" ref={emblaRef}>
+          <div className="embla__container flex -ml-4 sm:-ml-6 lg:-ml-8">
+            {teamMembers.map((member) => (
+              <div
+                className="embla__slide relative min-w-0 shrink-0 grow-0
+                           basis-full pl-4 sm:pl-6 lg:pl-8 sm:basis-1/2 lg:basis-1/4"
+                key={member.id}
+              >
+                <div className="group text-left">
+                  {/* Container chứa ảnh */}
+                  <div className="relative w-full aspect-3/4 bg-gray-300 overflow-hidden mb-4 shadow-md">
+                    <Image
+                      src={member.imageUrl}
+                      alt={`Photo of ${member.name}`}
+                      fill
+                      className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+                    />
+                  </div>
+                  {/* Tên và Chức vụ */}
+                  <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">
+                    {member.name}
+                  </h3>
+                  <p className="neulis-alt-regular font-medium text-[#444444]">
+                    {member.position}
+                  </p>
                 </div>
-                {/* Tên và Chức vụ */}
-                <h3 className="archivo-expanded text-xl font-medium text-[#000A1D]">
-                  {member.name}
-                </h3>
-                <p className="neulis-alt-regular font-medium text-[#444444]">
-                  {member.position}
-                </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

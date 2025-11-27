@@ -21,16 +21,20 @@ export default function Home() {
   return (
     <div ref={containerRef}>
       <SectionHero />
-      <ParallaxImage/>
-      <PainPointSection/>
-      <AnimatedText/>
+      <ParallaxImage />
+      <PainPointSection />
+      <div className="hidden lg:block">
+        <AnimatedText />
+      </div>
       <SectionWork />
       <SectionProjects />
-      <ServiceSection/>
-      <TestimonialsSection/>
-      <FlowerReveal/>
-      <ImageBottomContainer/>
-      <GetAFree/>
+      <ServiceSection />
+      <TestimonialsSection />
+      <div className="hidden lg:block">
+        <FlowerReveal />
+      </div>
+      <ImageBottomContainer />
+      <GetAFree />
     </div>
   )
 }

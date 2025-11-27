@@ -52,7 +52,7 @@ export default function FaqAccordion() {
     setOpenIndex(openIndex === index ? null : index)
 
   return (
-    <div className="relative w-full z-20 mb-20">
+    <div className="relative w-full z-20 mb-20 md:mt-0 -mt-28">
       <div className="mx-auto max-w-5xl mt-60">
         {/* --- HEADER --- */}
         <div className="relative mb-12">

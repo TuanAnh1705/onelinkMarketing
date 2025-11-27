@@ -73,7 +73,7 @@ export default function GetAFree() {
     const marqueeItems = Array(8).fill(marqueeText)
 
     return (
-        <section className="relative flex flex-col items-center justify-center h-screen -mt-[160vh] md:-mt-[140vh] space-y-16 overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center h-screen -mt-80 md:-mt-[140vh] space-y-16 overflow-hidden">
             
             {/* ======= Main Button ======= */}
             {/* 👇 2. BỌC TOÀN BỘ NÚT BẰNG LINK TỚI /CONTACT 👇 */}
@@ -87,7 +87,7 @@ export default function GetAFree() {
                     {/* Text Wrapper */}
                     <div
                         // Chiều cao responsive
-                        className="relative overflow-hidden flex items-center justify-center h-[5rem] md:h-[7.5rem]"
+                        className="relative overflow-hidden flex items-center justify-center h-20 md:h-30"
                     >
                         <motion.div
                             className="flex flex-col items-center justify-center"
@@ -98,11 +98,11 @@ export default function GetAFree() {
                             transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                         >
                             {/* Cỡ chữ (text-2xl) responsive */}
-                            <div className="archivo-expanded text-xl md:text-6xl font-bold bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-[5rem] md:leading-[7.5rem] whitespace-nowrap">
+                            <div className="archivo-expanded text-xl md:text-6xl font-bold bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-20 md:leading-30 whitespace-nowrap">
                                 GET A FREE CONSULTATION
                             </div>
                             {/* Cỡ chữ (text-4xl) responsive */}
-                            <div className="archivo-expanded text-4xl md:text-7xl font-bold bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-[5rem] md:leading-[7.5rem]">
+                            <div className="archivo-expanded text-4xl md:text-7xl font-bold bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-20 md:leading-30">
                                 GO
                             </div>
                         </motion.div>
@@ -111,7 +111,7 @@ export default function GetAFree() {
                     {/* Gradient Line */}
                     <motion.div
                     suppressHydrationWarning
-                        className="h-[4px] rounded-full transition-all"
+                        className="h-1 rounded-full transition-all"
                         style={{
                             background: "linear-gradient(90deg, #0074E5 0%, #162660 100%)",
                         }}

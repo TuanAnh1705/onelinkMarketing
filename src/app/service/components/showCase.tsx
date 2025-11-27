@@ -14,7 +14,6 @@ const slides = [
     id: 1,
     title: "Tag.",
     subtitle: "Fitness",
-    description: "Digital Asset Development",
     year: "2025",
     image: "/assets/tag1.png",
   },
@@ -22,25 +21,22 @@ const slides = [
     id: 2,
     title: "Steel",
     subtitle: "Work Seattle",
-    description: "Digital Asset Development",
     year: "2025",
     image: "/assets/steel.png",
   },
   {
     id: 3,
-    title: "Tag.",
-    subtitle: "Fitness",
-    description: "Digital Asset Development",
+    title: "China",
+    subtitle: "Sourcing Co",
     year: "2025",
-    image: "/assets/tag1.png",
+    image: "/assets/cns1.png",
   },
   {
     id: 4,
-    title: "Steel",
-    subtitle: "Work Seattle",
-    description: "Digital Asset Development",
-    year: "2025",
-    image: "/assets/steel.png",
+    title: "Vietnam",
+    subtitle: "Sourcing Co",
+    year: "2023",
+    image: "/assets/vns1.png",
   },
 ]
 
@@ -257,7 +253,7 @@ export default function Showcase() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -311,9 +307,6 @@ export default function Showcase() {
                   {slides[currentSlide].subtitle}
                 </h2>
                 <div className="flex flex-wrap items-center gap-4 mb-8">
-                  <span className="neulis-alt-regular font-medium px-4 py-2 border border-white/30 text-white text-sm rounded-full">
-                    {slides[currentSlide].description}
-                  </span>
                   <span className="neulis-alt-regular font-medium px-4 py-2 border border-white/30 text-white text-sm rounded-full">
                     {slides[currentSlide].year}
                   </span>

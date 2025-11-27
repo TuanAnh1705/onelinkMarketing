@@ -28,7 +28,7 @@ export default function SectionWork() {
         target: section3Ref,
         offset: ["start start", "end start"],
     })
-    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["53%", "-23%"])
+    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["54%", "-22%"])
     const textX = useSpring(textXRaw, { stiffness: 60, damping: 20, mass: 1.2 })
     const yearsOpacity = useSpring(useTransform(scrollYProgress, [0.38, 0.42], [1, 0]), { stiffness: 80, damping: 25 })
     const workScale = useSpring(useTransform(scrollYProgress, [0.4, 0.7], [1, 0.3]), { stiffness: 80, damping: 25 })
@@ -39,7 +39,7 @@ export default function SectionWork() {
     const isDesktop = useMediaQuery("(min-width: 1024px)");
 
     return (
-        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[500px] md:-top-32 lg:-top-40">
+        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[300px] md:-top-32 lg:-top-40">
 
             {/* ✅ BỎ “pin/sticky” trên mobile */}
             <div className="lg:sticky top-0 h-screen flex flex-col items-center justify-center">
@@ -59,7 +59,7 @@ export default function SectionWork() {
                         }}
                         className="text-[11vw] lg:text-[15vw] font-bold text-[#000A1D] leading-none tracking-tight"
                     >
-                        OUR&nbsp;&nbsp;
+                        OUR&nbsp;
                     </motion.span>
 
                     <motion.span
@@ -100,10 +100,10 @@ export default function SectionWork() {
                         clipPath: isDesktop ? descriptionClip : undefined,
                         fontFamily: "'Neulis Alt Extralight', sans-serif"
                     }}
-                    className="absolute bottom-[1250px] left-1/2 -translate-x-1/2 lg:bottom-60 lg:right-90 lg:left-auto lg:translate-x-0"
+                    className="absolute bottom-[1440px] left-1/2 -translate-x-1/2 lg:bottom-60 lg:right-90 lg:left-auto lg:translate-x-0"
                 >
                     <Link href="/about">
-                        <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-gradient-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                        <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
                             <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
                                 Learn More About Us
                             </span>

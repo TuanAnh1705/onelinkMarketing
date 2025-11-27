@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { motion, useMotionValue, useAnimationFrame, useVelocity, useSpring } from "framer-motion"
+import { motion, useMotionValue, useAnimationFrame, useVelocity } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -20,47 +20,50 @@ const galleryImageData: GalleryImage[] = [
     { src: "/assets/ab7.png", alt: "Image 7" },
 ]
 
-export function StorySection() {
+// Component cho 1 row carousel
+function CarouselRow({ 
+    images, 
+    direction = "left",
+    imageWidth = 500,
+    gap = 20 
+}: { 
+    images: GalleryImage[]
+    direction?: "left" | "right"
+    imageWidth?: number
+    gap?: number
+}) {
     const [isDragging, setIsDragging] = useState(false)
-    const baseVelocity = -0.5 // Tốc độ tự động chạy (âm = sang trái)
+    const baseVelocity = direction === "left" ? -0.5 : 0.5
     const x = useMotionValue(0)
     const dragVelocityRef = useRef(0)
     
-    // Kích thước và tính toán
-    const imageWidth = 500
-    const gap = 20
     const itemWidth = imageWidth + gap
-    const originalArrayLength = galleryImageData.length
+    const originalArrayLength = images.length
     const totalWidth = originalArrayLength * itemWidth
 
-    // Duplicate images nhiều lần
     const duplicatedImages = [
-        ...galleryImageData,
-        ...galleryImageData,
-        ...galleryImageData,
-        ...galleryImageData,
-        ...galleryImageData,
-        ...galleryImageData,
+        ...images,
+        ...images,
+        ...images,
+        ...images,
+        ...images,
+        ...images,
     ]
 
-    // Theo dõi velocity khi drag để tạo momentum
     const velocity = useVelocity(x)
 
-    // Auto-scroll animation với infinite loop
     useAnimationFrame((t, delta) => {
         if (!isDragging) {
             const moveBy = baseVelocity * (delta / 16)
             let currentX = x.get()
             
-            // Thêm momentum từ drag vừa kết thúc
             if (Math.abs(dragVelocityRef.current) > 0.1) {
-                dragVelocityRef.current *= 0.95 // Giảm dần momentum
+                dragVelocityRef.current *= 0.95
                 currentX += dragVelocityRef.current * (delta / 16)
             }
             
             let newX = currentX + moveBy
 
-            // Wrap position seamlessly
             if (newX <= -totalWidth * 2) {
                 newX += totalWidth
             } else if (newX >= -totalWidth) {
@@ -71,22 +74,18 @@ export function StorySection() {
         }
     })
 
-    // Set vị trí ban đầu
     useEffect(() => {
         x.set(-totalWidth * 1.5)
     }, [x, totalWidth])
 
-    // Xử lý khi bắt đầu kéo
     const handleDragStart = () => {
         setIsDragging(true)
         dragVelocityRef.current = 0
     }
 
-    // Xử lý trong khi đang kéo
     const handleDrag = () => {
         const currentX = x.get()
         
-        // Wrap position ngay khi đang kéo để tránh giật
         if (currentX <= -totalWidth * 2.5) {
             x.set(currentX + totalWidth)
         } else if (currentX >= -totalWidth * 0.5) {
@@ -94,15 +93,12 @@ export function StorySection() {
         }
     }
 
-    // Xử lý khi kết thúc kéo
     const handleDragEnd = () => {
         setIsDragging(false)
         
-        // Lưu velocity để tạo momentum
         const currentVelocity = velocity.get()
-        dragVelocityRef.current = currentVelocity * 0.01 // Scale down để không quá nhanh
+        dragVelocityRef.current = currentVelocity * 0.01
         
-        // Wrap position về khoảng an toàn
         let currentX = x.get()
         
         if (currentX <= -totalWidth * 2) {
@@ -113,6 +109,48 @@ export function StorySection() {
         
         x.set(currentX)
     }
+
+    return (
+        <div className="relative cursor-grab active:cursor-grabbing">
+            <motion.div
+                style={{ x }}
+                drag="x"
+                dragElastic={0.05}
+                dragMomentum={true}
+                dragTransition={{ 
+                    power: 0.2,
+                    timeConstant: 200,
+                    modifyTarget: (target) => target
+                }}
+                onDragStart={handleDragStart}
+                onDrag={handleDrag}
+                onDragEnd={handleDragEnd}
+                className="flex items-center gap-5 will-change-transform"
+            >
+                {duplicatedImages.map((image, index) => (
+                    <div
+                        key={index}
+                        className="relative shrink-0 rounded-lg overflow-hidden w-[300px] h-[300px] md:w-[500px] md:h-[500px] select-none"
+                    >
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            className="object-cover pointer-events-none"
+                            draggable={false}
+                            priority={index < 8}
+                        />
+                    </div>
+                ))}
+            </motion.div>
+        </div>
+    )
+}
+
+export function StorySection() {
+    // Chia ảnh thành 2 nhóm cho mobile
+    const topRowImages = galleryImageData.filter((_, i) => i % 2 === 0)
+    const bottomRowImages = galleryImageData.filter((_, i) => i % 2 === 1)
 
     return (
         <section className="bg-white py-20 md:py-32 overflow-hidden -mt-36">
@@ -155,42 +193,15 @@ export function StorySection() {
                 </div>
             </div>
 
-            {/* Carousel với drag mượt mà và momentum */}
-            <div className="relative cursor-grab active:cursor-grabbing">
-                <motion.div
-                    style={{ x }}
-                    drag="x"
-                    dragElastic={0.05}
-                    dragMomentum={true}
-                    dragTransition={{ 
-                        power: 0.2,
-                        timeConstant: 200,
-                        modifyTarget: (target) => {
-                            // Không snap, để tự nhiên
-                            return target
-                        }
-                    }}
-                    onDragStart={handleDragStart}
-                    onDrag={handleDrag}
-                    onDragEnd={handleDragEnd}
-                    className="flex items-center gap-5 will-change-transform"
-                >
-                    {duplicatedImages.map((image, index) => (
-                        <div
-                            key={index}
-                            className="relative shrink-0 rounded-lg overflow-hidden w-[500px] h-[500px] select-none"
-                        >
-                            <Image
-                                src={image.src}
-                                alt={image.alt}
-                                fill
-                                className="object-cover pointer-events-none"
-                                draggable={false}
-                                priority={index < 8}
-                            />
-                        </div>
-                    ))}
-                </motion.div>
+            {/* Desktop: Single row carousel */}
+            <div className="hidden md:block">
+                <CarouselRow images={galleryImageData} direction="left" />
+            </div>
+
+            {/* Mobile: Two rows carousel */}
+            <div className="md:hidden space-y-5">
+                <CarouselRow images={topRowImages} direction="left" imageWidth={300} />
+                <CarouselRow images={bottomRowImages} direction="right" imageWidth={300} />
             </div>
         </section>
     )
