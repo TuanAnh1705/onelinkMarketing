@@ -67,12 +67,12 @@ const nextConfig = {
       },
       {
         source: '/review',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/review',
+        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/review',
         permanent: false,
       },
       {
         source: '/users-profile',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/authors',
+        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/authors',
         permanent: false,
       },
     ];
