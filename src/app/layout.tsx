@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-white!" style={{ colorScheme: 'light' }}>
       <head>
         <link
           rel="shortcut icon"
@@ -37,12 +37,11 @@ export default function RootLayout({
         />
       </head>
 
-      {/* THAY ĐỔI Ở ĐÂY: Thêm 'overflow-x-hidden'
-      */}
-      <body className={`${plus_jakarta_sans.className} overflow-x-hidden`}>
+      {/* Thêm !bg-white để override dark mode */}
+      <body className={`${plus_jakarta_sans.className} overflow-x-hidden bg-white!`}>
         <ThemeProvider theme={customTheme}>
           <Navbar />
-          <main className="pt-20 ">
+          <main className="pt-20 bg-white!">
             {children}
           </main>
           <Footer />

@@ -26,9 +26,9 @@ interface BlogPost {
   coverImage: string | null
   wpStatus: string
   wpCreatedAt: string
-  authors: Author[]
-  categories: Category[]
-  images: { id: number; url: string }[]
+  authors?: Author[] // ✅ Thêm optional
+  categories?: Category[] // ✅ Thêm optional
+  images?: { id: number; url: string }[] // ✅ Thêm optional
 }
 
 export default function BlogDetailSection({ id }: { id: string }) {
@@ -135,6 +135,11 @@ export default function BlogDetailSection({ id }: { id: string }) {
     )
   }
 
+  // ✅ Handle authors safely
+  const authorNames = post.authors && post.authors.length > 0
+    ? post.authors.map((author) => author.name).join(", ")
+    : "Unknown Author"
+
   return (
     <>
       {/* ✅ PARALLAX HERO IMAGE - Full Width - NO TEXT OVERLAY */}
@@ -161,14 +166,15 @@ export default function BlogDetailSection({ id }: { id: string }) {
 
             {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-6 text-[#666666] text-sm">
-              {post.authors && post.authors.length > 0 && (
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  <span className="neulis-alt-regular">
-                    {post.authors.map((author) => author.name).join(", ")}
-                  </span>
-                </div>
-              )}
+              {/* ✅ Authors - Safe check */}
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4" />
+                <span className="neulis-alt-regular">
+                  {authorNames}
+                </span>
+              </div>
+              
+              {/* ✅ Date - Safe check */}
               {post.wpCreatedAt && (
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />

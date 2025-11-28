@@ -8,7 +8,7 @@ export default function SectionHero() {
         <section className="min-h-[85vh] flex items-start px-4 sm:px-8 md:px-16 lg:px-24 pt-24 md:pt-32 relative z-10 isolate">
             {/* ... code bên trong giữ nguyên ... */}
 
-            <div className="bg-white relative max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
                 {/* --- CỘT TRÁI: HEADING --- */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}

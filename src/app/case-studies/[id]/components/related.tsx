@@ -15,7 +15,7 @@ interface BlogPost {
   title: string
   slug: string
   coverImage: string | null
-  authors: Author[]
+  authors?: Author[] // ✅ Thêm optional
 }
 
 export function RelatedPosts({ currentId }: { currentId?: string | number }) {
@@ -26,7 +26,6 @@ export function RelatedPosts({ currentId }: { currentId?: string | number }) {
     const fetchRelatedPosts = async () => {
       try {
         setLoading(true)
-        // ✅ SỬA: Gọi đúng endpoint /api/post (không có s)
         const response = await fetch("/api/post?per_page=4&published=true")
         const data = await response.json()
         
@@ -102,6 +101,11 @@ function PostCard({
   index: number
   totalItems: number
 }) {
+  // ✅ Handle trường hợp authors undefined hoặc empty
+  const authorNames = post.authors && post.authors.length > 0
+    ? post.authors.map((author) => author.name).join(", ")
+    : "Unknown Author"
+
   return (
     <Link href={`/case-studies/${post.id}`}>
       <motion.div
@@ -139,7 +143,7 @@ function PostCard({
         </h3>
 
         <p className="neulis-alt-regular mt-2 text-sm font-medium text-[#666666]">
-          By {post.authors.map((author) => author.name).join(", ")}
+          By {authorNames}
         </p>
       </motion.div>
     </Link>
