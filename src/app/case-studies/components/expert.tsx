@@ -5,9 +5,6 @@ import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-// ============================================================================
-// 🔹 Interfaces
-// ============================================================================
 interface Author {
   id: number
   name: string
@@ -33,9 +30,6 @@ interface BlogPost {
   categories: Category[]
 }
 
-// ============================================================================
-// 🔹 Component FilterTabs
-// ============================================================================
 function FilterTabs({
   categories,
   activeTab,
@@ -83,9 +77,6 @@ function FilterTabs({
   )
 }
 
-// ============================================================================
-// 🔹 Component PostCard - NO BADGE
-// ============================================================================
 function PostCard({ post, index }: { post: BlogPost; index: number }) {
   const authors = post.authors || []
   const authorNames = authors.length > 0 

@@ -71,9 +71,6 @@ const caseStudiesData: CaseStudyItem[][] = [
     ],
 ];
 
-// ============================================================================
-// 🔹 Component CaseStudies chính - (Giữ nguyên)
-// ============================================================================
 export default function CaseStudies() {
     const section4Ref = useRef<HTMLDivElement>(null)
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
