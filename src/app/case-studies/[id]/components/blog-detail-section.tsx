@@ -95,33 +95,32 @@ export default function BlogDetailSection({ id }: { id: string }) {
   }, [id])
 
   const parseOptions: HTMLReactParserOptions = {
-    replace: (domNode) => {
-      if (domNode instanceof Element && domNode.name === 'img') {
-        const { src, alt, width, height, class: className } = domNode.attribs
-        return (
-          <div className="my-8">
-            <img
-              src={src}
-              alt={alt || 'Blog image'}
-              width={width}
-              height={height}
-              className={`${className || ''}  bg-white/0`}
-              loading="lazy"
-              style={{
-                width: width ? `${width}px` : 'auto',
-                height: height ? `${height}px` : 'auto',
-                maxWidth: '100%'
-              }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-              }}
-            />
-          </div>
-        )
-      }
+  replace: (domNode) => {
+    if (domNode instanceof Element && domNode.name === 'img') {
+      const { src, alt, class: className } = domNode.attribs
+      return (
+        <div className="my-8">
+          <img
+            src={src}
+            alt={alt || 'Blog image'}
+            className={className || ''}
+            loading="lazy"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              display: 'block',
+              margin: '0 auto'
+            }}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement
+              target.style.display = 'none'
+            }}
+          />
+        </div>
+      )
     }
   }
+}
 
   if (loading) {
     return (
@@ -210,204 +209,202 @@ export default function BlogDetailSection({ id }: { id: string }) {
       </section>
 
       <style jsx global>{`
-        /* Blog Content Styles with !important */
-        .blog-content {
-          font-family: 'Neulis Alt', sans-serif !important;
-          font-size: 1.125rem !important;
-          line-height: 1.75rem !important;
-          color: #444444 !important;
-        }
+  /* Blog Content Styles with !important */
+  .blog-content {
+    font-family: 'Neulis Alt', sans-serif !important;
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+    color: #444444 !important;
+  }
 
-        .blog-content * {
-          max-width: 100% !important;
-        }
+  .blog-content * {
+    max-width: 100% !important;
+  }
 
-        /* Headings */
-        .blog-content h1,
-        .blog-content h2,
-        .blog-content h3,
-        .blog-content h4,
-        .blog-content h5,
-        .blog-content h6 {
-          font-family: 'Archivo Expanded', sans-serif !important;
-          font-weight: 500 !important;
-          color: #000A1D !important;
-          margin-top: 2.5rem !important;
-          margin-bottom: 1.25rem !important;
-        }
+  /* Headings */
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6 {
+    font-family: 'Archivo Expanded', sans-serif !important;
+    font-weight: 500 !important;
+    color: #000A1D !important;
+    margin-top: 2.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
 
-        .blog-content h1 {
-          font-size: 2.25rem !important;
-          line-height: 2.5rem !important;
-        }
+  .blog-content h1 {
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
+  }
 
-        .blog-content h2 {
-          font-size: 1.875rem !important;
-          line-height: 2.25rem !important;
-        }
+  .blog-content h2 {
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+  }
 
-        .blog-content h3 {
-          font-size: 1.5rem !important;
-          line-height: 2rem !important;
-        }
+  .blog-content h3 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
 
-        /* Paragraphs */
-        .blog-content p {
-          margin-bottom: 1.5rem !important;
-          line-height: 1.75 !important;
-          color: #444444 !important;
-        }
+  /* Paragraphs */
+  .blog-content p {
+    margin-bottom: 1.5rem !important;
+    line-height: 1.75 !important;
+    color: #444444 !important;
+  }
 
-        /* Links */
-        .blog-content a {
-          color: #0074E5 !important;
-          text-decoration: none !important;
-          transition: all 0.2s !important;
-        }
+  /* Links */
+  .blog-content a {
+    color: #0074E5 !important;
+    text-decoration: none !important;
+    transition: all 0.2s !important;
+  }
 
-        .blog-content a:hover {
-          text-decoration: underline !important;
-        }
+  .blog-content a:hover {
+    text-decoration: underline !important;
+  }
 
-        /* Strong/Bold */
-        .blog-content strong,
-        .blog-content b {
-          color: #000A1D !important;
-          font-weight: 600 !important;
-        }
+  /* Strong/Bold */
+  .blog-content strong,
+  .blog-content b {
+    color: #000A1D !important;
+    font-weight: 600 !important;
+  }
 
-        /* Lists - WordPress Bullets */
-        .blog-content ul,
-        .blog-content ol {
-          margin: 1.5rem 0 !important;
-          padding-left: 2.5rem !important;
-          color: #444444 !important;
-        }
+  /* Lists - WordPress Bullets */
+  .blog-content ul,
+  .blog-content ol {
+    margin: 1.5rem 0 !important;
+    padding-left: 2.5rem !important;
+    color: #444444 !important;
+  }
 
-        .blog-content ul {
-          list-style-type: disc !important;
-        }
+  .blog-content ul {
+    list-style-type: disc !important;
+  }
 
-        .blog-content ol {
-          list-style-type: decimal !important;
-        }
+  .blog-content ol {
+    list-style-type: decimal !important;
+  }
 
-        .blog-content li {
-          margin: 0.75rem 0 !important;
-          padding-left: 0.5rem !important;
-          line-height: 1.75 !important;
-        }
+  .blog-content li {
+    margin: 0.75rem 0 !important;
+    padding-left: 0.5rem !important;
+    line-height: 1.75 !important;
+  }
 
-        .blog-content ul ul,
-        .blog-content ol ol,
-        .blog-content ul ol,
-        .blog-content ol ul {
-          margin: 0.5rem 0 !important;
-          padding-left: 2rem !important;
-        }
+  .blog-content ul ul,
+  .blog-content ol ol,
+  .blog-content ul ol,
+  .blog-content ol ul {
+    margin: 0.5rem 0 !important;
+    padding-left: 2rem !important;
+  }
 
-        /* Images - Keep original WordPress dimensions */
-        .blog-content img {
-          display: block !important;
-          max-width: 100% !important;
-          height: auto !important;
-          margin: 2rem auto !important;
-          border-radius: 0.75rem !important;
-          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !important;
-        }
+  /* Images - NO border-radius, NO box-shadow, keep original size */
+  .blog-content img {
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 2rem auto !important;
+  }
 
-        .blog-content figure {
-          margin: 2rem 0 !important;
-        }
+  .blog-content figure {
+    margin: 2rem 0 !important;
+  }
 
-        .blog-content figcaption {
-          text-align: center !important;
-          font-size: 0.875rem !important;
-          color: #666666 !important;
-          margin-top: 0.5rem !important;
-          font-style: italic !important;
-        }
+  .blog-content figcaption {
+    text-align: center !important;
+    font-size: 0.875rem !important;
+    color: #666666 !important;
+    margin-top: 0.5rem !important;
+    font-style: italic !important;
+  }
 
-        /* Blockquotes */
-        .blog-content blockquote {
-          border-left: 4px solid #0074E5 !important;
-          padding-left: 1.5rem !important;
-          margin: 1.5rem 0 !important;
-          font-style: italic !important;
-          color: #666666 !important;
-          background-color: #f9fafb !important;
-          padding: 1.5rem !important;
-          border-radius: 0.5rem !important;
-        }
+  /* Blockquotes */
+  .blog-content blockquote {
+    border-left: 4px solid #0074E5 !important;
+    padding-left: 1.5rem !important;
+    margin: 1.5rem 0 !important;
+    font-style: italic !important;
+    color: #666666 !important;
+    background-color: #f9fafb !important;
+    padding: 1.5rem !important;
+    border-radius: 0.5rem !important;
+  }
 
-        /* Code */
-        .blog-content code {
-          background-color: #f3f4f6 !important;
-          padding: 0.125rem 0.5rem !important;
-          border-radius: 0.25rem !important;
-          font-size: 0.875rem !important;
-          color: #0074E5 !important;
-        }
+  /* Code */
+  .blog-content code {
+    background-color: #f3f4f6 !important;
+    padding: 0.125rem 0.5rem !important;
+    border-radius: 0.25rem !important;
+    font-size: 0.875rem !important;
+    color: #0074E5 !important;
+  }
 
-        .blog-content pre {
-          background-color: #1f2937 !important;
-          color: #f9fafb !important;
-          padding: 1.5rem !important;
-          border-radius: 0.75rem !important;
-          overflow-x: auto !important;
-          margin: 1.5rem 0 !important;
-        }
+  .blog-content pre {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+    padding: 1.5rem !important;
+    border-radius: 0.75rem !important;
+    overflow-x: auto !important;
+    margin: 1.5rem 0 !important;
+  }
 
-        .blog-content pre code {
-          background-color: transparent !important;
-          padding: 0 !important;
-          color: #f9fafb !important;
-        }
+  .blog-content pre code {
+    background-color: transparent !important;
+    padding: 0 !important;
+    color: #f9fafb !important;
+  }
 
-        /* Tables */
-        .blog-content table {
-          width: 100% !important;
-          border-collapse: collapse !important;
-          margin: 1.5rem 0 !important;
-        }
+  /* Tables */
+  .blog-content table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 1.5rem 0 !important;
+  }
 
-        .blog-content th,
-        .blog-content td {
-          padding: 0.75rem !important;
-          border: 1px solid #e5e7eb !important;
-        }
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem !important;
+    border: 1px solid #e5e7eb !important;
+  }
 
-        .blog-content th {
-          background-color: #f3f4f6 !important;
-          font-weight: 600 !important;
-        }
+  .blog-content th {
+    background-color: #f3f4f6 !important;
+    font-weight: 600 !important;
+  }
 
-        /* WordPress specific classes */
-        .blog-content .wp-block-image img {
-          display: block !important;
-        }
+  /* WordPress specific classes */
+  .blog-content .wp-block-image img {
+    display: block !important;
+  }
 
-        .blog-content .wp-caption {
-          max-width: 100% !important;
-        }
+  .blog-content .wp-caption {
+    max-width: 100% !important;
+  }
 
-        .blog-content .wp-caption-text {
-          text-align: center !important;
-          font-size: 0.875rem !important;
-          color: #666666 !important;
-          margin-top: 0.5rem !important;
-        }
+  .blog-content .wp-caption-text {
+    text-align: center !important;
+    font-size: 0.875rem !important;
+    color: #666666 !important;
+    margin-top: 0.5rem !important;
+  }
 
-        /* Handle iframe/embed */
-        .blog-content iframe,
-        .blog-content embed,
-        .blog-content video {
-          max-width: 100% !important;
-          height: auto !important;
-          margin: 2rem 0 !important;
-          border-radius: 0.75rem !important;
-        }
-      `}</style>
+  /* Handle iframe/embed */
+  .blog-content iframe,
+  .blog-content embed,
+  .blog-content video {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 2rem 0 !important;
+    border-radius: 0.75rem !important;
+  }
+`}</style>
     </>
   )
 }
