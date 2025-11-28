@@ -100,7 +100,7 @@ export default function SectionWork() {
                         clipPath: isDesktop ? descriptionClip : undefined,
                         fontFamily: "'Neulis Alt Extralight', sans-serif"
                     }}
-                    className="absolute bottom-[1650px] left-1/2 -translate-x-1/2 lg:bottom-60 lg:right-90 lg:left-auto lg:translate-x-0"
+                    className="absolute bottom-[1430px] left-1/2 -translate-x-1/2 lg:bottom-60 lg:right-90 lg:left-auto lg:translate-x-0"
                 >
                     <Link href="/about">
                         <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
