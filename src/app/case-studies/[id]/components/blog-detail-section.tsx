@@ -105,7 +105,7 @@ export default function BlogDetailSection({ id }: { id: string }) {
               alt={alt || 'Blog image'}
               width={width}
               height={height}
-              className={`${className || ''} rounded-xl shadow-lg`}
+              className={`${className || ''}  bg-white/0`}
               loading="lazy"
               style={{
                 width: width ? `${width}px` : 'auto',
