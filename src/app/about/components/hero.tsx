@@ -1,10 +1,8 @@
 "use client"
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-
 // Đường line gradient
 function GradientBorder() {
-    return <div className="h-[0.8px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+    return <div className="h-[0.8px] w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
 }
 
 // Section chính
@@ -14,7 +12,7 @@ export default function Hero() {
             <div className="max-w-7xl mx-auto relative">
                 {/* Header */}
                 <div className="mb-16">
-                    <h1 className="archivo-expanded text-5xl md:text-8xl font-bold text-center tracking-wider bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent ">
+                    <h1 className="archivo-expanded text-5xl md:text-8xl font-bold text-center tracking-wider bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent ">
                         MADE IN
                     </h1>
                     {/* THAY ĐỔI TẠI ĐÂY: Thay 'to-[60%]' thành 'to-[30%]' */}
