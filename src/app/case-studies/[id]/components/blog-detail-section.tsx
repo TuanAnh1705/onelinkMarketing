@@ -97,14 +97,21 @@ export default function BlogDetailSection({ id }: { id: string }) {
   const parseOptions: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.name === 'img') {
-        const { src, alt } = domNode.attribs
+        const { src, alt, width, height, class: className } = domNode.attribs
         return (
-          <div className="relative w-full my-8">
+          <div className="my-8">
             <img
               src={src}
               alt={alt || 'Blog image'}
-              className="w-full h-auto rounded-xl shadow-lg"
+              width={width}
+              height={height}
+              className={`${className || ''} rounded-xl shadow-lg`}
               loading="lazy"
+              style={{
+                width: width ? `${width}px` : 'auto',
+                height: height ? `${height}px` : 'auto',
+                maxWidth: '100%'
+              }}
               onError={(e) => {
                 const target = e.target as HTMLImageElement
                 target.style.display = 'none'
@@ -299,7 +306,7 @@ export default function BlogDetailSection({ id }: { id: string }) {
           padding-left: 2rem !important;
         }
 
-        /* Images - CRITICAL */
+        /* Images - Keep original WordPress dimensions */
         .blog-content img {
           display: block !important;
           max-width: 100% !important;
@@ -307,7 +314,6 @@ export default function BlogDetailSection({ id }: { id: string }) {
           margin: 2rem auto !important;
           border-radius: 0.75rem !important;
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !important;
-          object-fit: cover !important;
         }
 
         .blog-content figure {
