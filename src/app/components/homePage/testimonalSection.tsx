@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { motion, PanInfo, useMotionValue, useAnimationFrame } from "framer-motion"
 import { FaQuoteLeft, FaArrowLeft, FaArrowRight } from "react-icons/fa"
 import Image from "next/image"
@@ -38,9 +38,9 @@ const testimonials: Testimonial[] = [
         avatarSrc: "/assets/taxlogo.png",
     },
     {
-        text: "Before OneLink, our website was confusing. It failed to speak to our commercial clients and our residential customers. OneLink Marketing didn't just give us a redesign; they delivered a brilliant brand strategy. They understood our dual audience and built a custom site that speaks perfectly to both. The new platform is now a critical sales tool and has directly led to a significant increase in qualified bids.",
-        author: "Benjamin Thomas",
-        role: "Owner of Steel Works Seattle",
+        text: "Here at Steel Works Seattle we had a great experience working with OneLink Marketing. As a new business with very little experience in branding and marketing, we greatly appreciated the one on one meetings and attention to detail we never would have thought of. As we got closer to completion, the team took extreme care to finely tune every aspect of our website until it was exactly how we wanted it.",
+        author: "Trevor Torquato",
+        role: "Founder, Steel Works Seattle",
         isSquare: true,
         avatarSrc: "/assets/avatar-1.png",
     },
