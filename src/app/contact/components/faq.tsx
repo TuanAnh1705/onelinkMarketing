@@ -30,7 +30,7 @@ const faqData = [
     id: "03",
     question: "Is the initial consultation really free?",
     answer:
-      "Our efficient processes and experienced team allow us to deliver high-quality work at competitive rates without compromising on quality.",
+      "We offer it at no cost so you can clearly understand our approach, discuss your needs, and evaluate whether we’re the right partner—without any obligation.",
   },
   {
     id: "04",

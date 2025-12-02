@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 // --- COMPONENT CON: UspItem ---
 const UspItem = ({
     item,
@@ -141,19 +142,20 @@ export default function UspSectionForDigital() {
 
                 {/* Nút CTA */}
                 <div className="flex justify-center mt-20">
-                    <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                    <Link href="/contact">
+                        <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                            {/* Lớp chữ trên cùng */}
+                            <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
+                                Contact Us
+                            </span>
 
-                        {/* Lớp chữ trên cùng */}
-                        <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
-                            Contact Us
-                        </span>
+                            {/* Nền trắng trượt lên */}
+                            <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
 
-                        {/* Nền trắng trượt lên */}
-                        <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-
-                        {/* Viền hiện khi hover */}
-                        <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-500 z-10 pointer-events-none"></span>
-                    </button>
+                            {/* Viền hiện khi hover */}
+                            <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-500 z-10 pointer-events-none"></span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </section>

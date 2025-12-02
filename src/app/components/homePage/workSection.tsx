@@ -28,7 +28,7 @@ export default function SectionWork() {
         target: section3Ref,
         offset: ["start start", "end start"],
     })
-    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["54%", "-22%"])
+    const textXRaw = useTransform(scrollYProgress, [0, 0.4], ["56%", "-22%"])
     const textX = useSpring(textXRaw, { stiffness: 60, damping: 20, mass: 1.2 })
     const yearsOpacity = useSpring(useTransform(scrollYProgress, [0.38, 0.42], [1, 0]), { stiffness: 80, damping: 25 })
     const workScale = useSpring(useTransform(scrollYProgress, [0.4, 0.7], [1, 0.3]), { stiffness: 80, damping: 25 })
@@ -41,7 +41,7 @@ export default function SectionWork() {
     return (
         <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[250px] sm:-top-32 md:-top-40">
 
-            {/* ✅ BỎ “pin/sticky” trên mobile */}
+            {/* ✅ BỎ "pin/sticky" trên mobile */}
             <div className="lg:sticky top-0 h-screen flex flex-col items-center justify-center">
 
                 {/* CHỮ CHẠY NGANG */}
@@ -73,51 +73,55 @@ export default function SectionWork() {
                     </motion.span>
                 </motion.div>
 
-                {/* DESCRIPTION */}
+                {/* FLEXBOX CONTAINER cho DESCRIPTION + BUTTON */}
                 <motion.div
                     style={{
                         opacity: isDesktop ? descriptionOpacity : 1,
                         clipPath: isDesktop ? descriptionClip : undefined,
-                        fontFamily: "'Neulis Alt Regular', sans-serif"
-                    }}
-                    className="absolute left-6 right-6 mx-auto text-center max-w-md font-medium
-                    top-[43vh] sm:top-[55vh] md:top-[50vh]
-                    lg:bottom-80 lg:top-auto lg:right-24 lg:left-auto lg:mx-0 lg:text-left"
-                        >
-                    <p className="text-lg leading-relaxed text-[#444444]">
-                        We are <span className="font-bold">Onelink Marketing</span> - uniting strategy,
-                        creativity, and technical execution to transform
-                        bold ideas into lasting impact. Our experienced
-                        international team delivers global quality with
-                        a superior price/performance ratio.
-                    </p>
-                </motion.div>
-
-                {/* BUTTON */}
-                <motion.div
-                    style={{
-                        opacity: isDesktop ? descriptionOpacity : 1,
-                        clipPath: isDesktop ? descriptionClip : undefined,
-                        fontFamily: "'Neulis Alt Extralight', sans-serif"
                     }}
                     className="
+                        flex flex-col items-center lg:items-end
+                        gap-6 lg:gap-8
                         absolute 
-                        bottom-[170vh]      
-                        sm:bottom-[155vh]   
-                        md:bottom-[25vh]    
-                        left-1/2 -translate-x-1/2
-                        lg:right-90 lg:left-auto lg:translate-x-0
-                        "
+                        left-6 right-6 mx-auto
+                        top-[43vh] sm:top-[55vh] md:top-[50vh]
+                        lg:bottom-70 lg:top-auto lg:right-24 lg:left-auto lg:mx-0
+                        max-w-md
+                    "
                 >
-                    <Link href="/about">
-                        <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
-                            <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
-                                Learn More About Us
-                            </span>
-                            <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
-                            <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-300 z-10 pointer-events-none"></span>
-                        </button>
-                    </Link>
+                    {/* DESCRIPTION */}
+                    <div 
+                        style={{
+                            fontFamily: "'Neulis Alt Regular', sans-serif"
+                        }}
+                        className="text-center lg:text-left w-full"
+                    >
+                        <p className="text-lg leading-relaxed text-[#444444]">
+                            We are <span className="font-bold">Onelink Marketing</span> - uniting strategy,
+                            creativity, and technical execution to transform
+                            bold ideas into lasting impact. Our experienced
+                            international team delivers global quality with
+                            a superior price/performance ratio.
+                        </p>
+                    </div>
+
+                    {/* BUTTON */}
+                    <div
+                        style={{
+                            fontFamily: "'Neulis Alt Extralight', sans-serif"
+                        }}
+                        className="shrink-0 md:-translate-x-65"
+                    >
+                        <Link href="/about">
+                            <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">
+                                <span className="relative z-20 flex items-center justify-center w-full h-full transition-colors duration-500 group-hover:text-[#162660]">
+                                    Learn More About Us
+                                </span>
+                                <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-full z-10"></span>
+                                <span className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#444444] transition-colors duration-300 z-10 pointer-events-none"></span>
+                            </button>
+                        </Link>
+                    </div>
                 </motion.div>
             </div>
         </section>

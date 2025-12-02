@@ -204,7 +204,7 @@ export function ContactFormSection() {
     }
 
     return (
-        <section className="bg-white py-20 md:py-32 px-8 -mb-36 -mt-48 relative">
+        <section className="bg-white/0 py-20 md:py-32 px-8 -mb-36 -mt-48 relative">
             
             {/* Hiển thị Toast (Overlay ở giữa màn hình) */}
             <AnimatePresence>
