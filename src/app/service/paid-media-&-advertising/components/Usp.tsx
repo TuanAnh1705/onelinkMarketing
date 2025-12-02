@@ -100,7 +100,7 @@ export default function UspSectionForPaid() {
             className="bg-white py-32 md:py-40 px-8 md:px-16 lg:px-24 overflow-x-hidden"
         >
             <div className="max-w-7xl mx-auto">
-                <h2 className="archivo-expanded text-2xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12">
+                <h2 className="archivo-expanded text-2xl md:text-5xl lg:text-6xl font-medium leading-tight mb-12 text-[#000A1D]">
                     Maximizing Your Ad Spend
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
