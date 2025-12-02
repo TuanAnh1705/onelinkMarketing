@@ -79,7 +79,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Producing and scheduling engaging visuals, videos, and copy in a consistent content calendar.",
-    imageUrl: "/assets/25.png",
+    imageUrl: "/assets/38.png",
     link: "/case-studies",
   },
   {
@@ -92,7 +92,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Actively engaging with your audience, responding to feedback, and fostering a loyal brand community.",
-    imageUrl: "/assets/25.png",
+    imageUrl: "/assets/39.png",
     link: "/case-studies",
   },
   {
@@ -105,7 +105,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Tracking key metrics, analyzing performance, and providing actionable reports to demonstrate ROI.",
-    imageUrl: "/assets/25.png",
+    imageUrl: "/assets/40.png",
     link: "/case-studies",
   },
 ]

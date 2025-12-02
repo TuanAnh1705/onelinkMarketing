@@ -20,7 +20,7 @@ export function PartnerSection() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <h2 className="archivo-expanded text-4xl md:text-6xl text-white font-medium text-left md:text-center mb-16 md:mb-20">
-          Why We Are Your Ideal Partner?
+          Why We Are Your Ideal Partner
         </h2>
 
         {/* ================== FEATURE CARDS ================== */}
@@ -61,7 +61,7 @@ export function PartnerSection() {
                 className="relative w-full h-[140%] -top-[20%] will-change-transform"
               >
                 <Image
-                  src="/assets/5.jpg"
+                  src="/assets/6.png"
                   alt="Abstract gradient"
                   fill
                   className="object-cover"

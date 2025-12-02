@@ -79,7 +79,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "A deep dive into your market landscape and competitors to identify your unique space.",
-    imageUrl: "/assets/21.png",
+    imageUrl: "/assets/26.png",
     link: "/case-studies",
   },
   {
@@ -92,7 +92,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Crafting a clear, concise, and persuasive message that resonates with your target audience.",
-    imageUrl: "/assets/21.png",
+    imageUrl: "/assets/27.png",
     link: "/case-studies",
   },
   {
@@ -105,7 +105,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Developing a step-by-step, integrated marketing plan to launch your brand and drive sustainable growth.",
-    imageUrl: "/assets/21.png",
+    imageUrl: "/assets/28.png",
     link: "/case-studies",
   },
 ]

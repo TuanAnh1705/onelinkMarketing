@@ -39,7 +39,7 @@ export default function SectionWork() {
     const isDesktop = useMediaQuery("(min-width: 1024px)");
 
     return (
-        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[300px] md:-top-32 lg:-top-40">
+        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[250px] sm:-top-32 md:-top-40">
 
             {/* ✅ BỎ “pin/sticky” trên mobile */}
             <div className="lg:sticky top-0 h-screen flex flex-col items-center justify-center">
@@ -100,7 +100,14 @@ export default function SectionWork() {
                         clipPath: isDesktop ? descriptionClip : undefined,
                         fontFamily: "'Neulis Alt Extralight', sans-serif"
                     }}
-                    className="absolute bottom-[1430px] left-1/2 -translate-x-1/2 lg:bottom-60 lg:right-90 lg:left-auto lg:translate-x-0"
+                    className="
+                        absolute 
+                        bottom-[170vh]      
+                        sm:bottom-[155vh]   
+                        md:bottom-[25vh]    
+                        left-1/2 -translate-x-1/2
+                        lg:right-90 lg:left-auto lg:translate-x-0
+                        "
                 >
                     <Link href="/about">
                         <button className="relative overflow-hidden px-5 py-3.5 rounded-full font-semibold text-xs md:text-sm text-white bg-linear-to-r from-[#0074E5] to-[#162660] transition-colors duration-300 group">

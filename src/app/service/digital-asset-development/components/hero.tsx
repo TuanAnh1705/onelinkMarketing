@@ -67,21 +67,21 @@ const services: ServiceCardProps[] = [
     title: <>Website Design</>,
     description:
       "Designing high-performance websites that are optimized for SEO and UX.",
-    imageUrl: "/assets/22.png",
+    imageUrl: "/assets/29.png",
     link: "/case-studies",
   },
   {
     title: <>Landing Pages</>,
     description:
       "Creating targeted landing pages to convert visitors into leads efficiently.",
-    imageUrl: "/assets/22.png",
+    imageUrl: "/assets/30.png",
     link: "/case-studies",
   },
   {
     title: <>Digital Collateral</>,
     description:
       "Producing assets like Ebooks and whitepapers to nurture leads.",
-    imageUrl: "/assets/22.png",
+    imageUrl: "/assets/31.png",
     link: "/case-studies",
   },
 ]

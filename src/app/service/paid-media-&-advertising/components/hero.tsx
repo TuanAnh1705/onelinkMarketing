@@ -79,7 +79,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Constantly refining campaigns to lower costs and increase conversions.",
-    imageUrl: "/assets/24.png",
+    imageUrl: "/assets/35.png",
     link: "/case-studies",
   },
   {
@@ -92,7 +92,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Testing different creative and copy to find the most effective ad combination.",
-    imageUrl: "/assets/24.png",
+    imageUrl: "/assets/36.png",
     link: "/case-studies",
   },
   {
@@ -105,7 +105,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Transparent reporting and data-driven insights to help you make informed decisions.",
-    imageUrl: "/assets/24.png",
+    imageUrl: "/assets/37.png",
     link: "/case-studies",
   },
 ]

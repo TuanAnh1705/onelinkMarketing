@@ -59,7 +59,7 @@ const expertiseData = [
 
 // Đường line gradient
 function GradientBorder() {
-    return <div className="h-[1px] w-full bg-gradient-to-r from-[#0074E5] to-[#162660]" />
+    return <div className="h-px w-full bg-linear-to-r from-[#0074E5] to-[#162660]" />
 }
 
 // Item chuyên môn
@@ -96,7 +96,7 @@ const ExpertiseItem = memo(({ item, showLine }: { item: (typeof expertiseData)[0
                         {item.services.map((service, idx) => (
                             <li
                                 key={idx}
-                                className="neulis-alt-regular font-medium text-[#000000] text-sm md:text-base lg:text-lg leading-snug"
+                                className="neulis-alt-regular font-medium bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent text-sm md:text-base lg:text-lg leading-snug"
                             >
                                 {service}
                             </li>
@@ -136,7 +136,7 @@ const ExpertiseItem = memo(({ item, showLine }: { item: (typeof expertiseData)[0
                                     willChange: "transform, opacity",
                                 }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                             <motion.div
                                 className="absolute inset-0 flex items-center justify-start px-6"
                                 style={{
@@ -173,7 +173,7 @@ export default function ExpertiseSection() {
             <div className="max-w-7xl mx-auto relative">
                 {/* Header */}
                 <div className="mb-16">
-                    <h1 className="archivo-expanded text-4xl md:text-9xl font-bold text-center tracking-wider bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent mb-8">
+                    <h1 className="archivo-expanded text-4xl md:text-9xl font-bold text-center tracking-wider bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent mb-8">
                         EXPERTISE
                     </h1>
                     <GradientBorder />

@@ -34,7 +34,7 @@ export default function SectionHero() {
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                         className="text-center md:text-right"
                     >
-                        <p className="text-lg leading-relaxed">
+                        <p className="text-lg leading-relaxed text-[#2B2B2B]">
                             Onelink Marketing is <span className="text-xl font-bold">not just another</span>
                             <br />
                             <span className="text-xl font-bold">digital agency</span>. We are your end-to-end

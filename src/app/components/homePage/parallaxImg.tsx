@@ -28,7 +28,7 @@ export default function ParallaxImage() {
     }, [])
 
     return (
-        <div className="relative h-screen z-0 isolate -mt-[500px] md:-mt-[33vh]">
+        <div className="relative h-screen z-0 isolate -mt-[400px] md:-mt-[33vh]">
             <section className="relative h-[120vh] flex items-center justify-center overflow-hidden">
                 <div className="flex justify-center lg:justify-end w-full max-w-7xl mx-auto px-4 lg:px-0">
                     <div
@@ -39,7 +39,7 @@ export default function ParallaxImage() {
                     >
                         {/* PARALLAX IMAGE - Approach từ BlogSection */}
                         <div
-                            className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center"
+                            className="absolute top-0 left-0 w-full h-[150%] bg-gray-200 bg-no-repeat bg-cover bg-center translate-y-30 md:-translate-y-5"
                             style={{
                                 backgroundImage: `url(/assets/section1.png)`,
                                 transform: `translateY(${-200 + offsetY * 0.3}px)`,

@@ -20,13 +20,21 @@ export default function SectionProjects() {
 
   return (
     <motion.section
-      ref={section4Ref}
-      className="relative justify-center -mt-[1700px] md:-mt-96 z-10 bg-white pt-0 pb-32 px-8 md:px-16 lg:px-24"
-      onMouseMove={(e) => {
-        mouseX.set(e.clientX)
-        mouseY.set(e.clientY)
-      }}
-    >
+  ref={section4Ref}
+  className="
+    relative justify-center 
+    -mt-[1450px]     
+    min-[393px]:-mt-[1450px]   
+    min-[430px]:-mt-[1750px]   
+    md:-mt-96         
+    lg:-mt-60         
+    z-10 bg-white pt-0 pb-32 px-8 md:px-16 lg:px-24
+  "
+  onMouseMove={(e) => {
+    mouseX.set(e.clientX)
+    mouseY.set(e.clientY)
+  }}
+>
       {/* Custom cursor */}
       <motion.div
         className="fixed top-0 left-0 z-50 pointer-events-none flex items-center justify-center rounded-4xl bg-[#FFFFFF] border-none text-[#444444] text-sm shadow-lg px-5 py-3"

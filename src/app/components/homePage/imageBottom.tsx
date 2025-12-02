@@ -38,12 +38,12 @@ export default function ImageBottomContainer() {
     // Nội dung cố định
     const backgroundImage = "/assets/olmcont.png" 
     const topRightText = `We understand. \nWe are the solution.`
-    const bottomLeftText = `We provides a complete transformation. We solve the problem of fragmented marketing and weak brand identity`
+    const bottomLeftText = `We provide a complete transformation. We solve the problem of fragmented marketing and weak brand identity`
 
     return (
         <section
             ref={ref}
-            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-[40px] md:-top-[1000px]"
+            className="relative w-screen h-[110vh] md:h-[120vh] overflow-hidden flex items-center justify-center -top-10 md:-top-[1000px]"
         >
             {/* Example Background image */}
             <div

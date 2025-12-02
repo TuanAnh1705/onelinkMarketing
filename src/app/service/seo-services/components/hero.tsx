@@ -65,7 +65,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Developing content pillars, topic clusters, and unique angles to capture your target audience.",
-    imageUrl: "/assets/23.png",
+    imageUrl: "/assets/34.png",
     link: "/case-studies",
   },
   {
@@ -78,7 +78,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Crafting high-quality, SEO-standard articles and visuals that engage readers and drive conversions.",
-    imageUrl: "/assets/23.png",
+    imageUrl: "/assets/32.png",
     link: "/case-studies",
   },
   {
@@ -91,7 +91,7 @@ const services: ServiceCardProps[] = [
     ),
     description:
       "Optimizing your site's technical structure, content, and user experience for search engines.",
-    imageUrl: "/assets/23.png",
+    imageUrl: "/assets/33.png",
     link: "/case-studies",
   },
   {
@@ -109,7 +109,7 @@ const services: ServiceCardProps[] = [
   },
 ]
 
-const DEFAULT_SERVICE_IMAGE = "/assets/23.png"
+const DEFAULT_SERVICE_IMAGE = "/assets/34.png"
 
 //-----------------------------------------------------
 // MOBILE SERVICE CARD
