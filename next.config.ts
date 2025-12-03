@@ -42,37 +42,37 @@ const nextConfig = {
     return [
       {
         source: '/admin',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin',
+        destination: 'http://103.110.87.227:3000/admin',
         permanent: false,
       },
       {
         source: '/aboutUs',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/utilities/aboutUs',
+        destination: 'http://103.110.87.227:3000/admin/utilities/aboutUs',
         permanent: false,
       },
       {
         source: '/categories',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/categories',
+        destination: 'http://103.110.87.227:3000/admin/categories',
         permanent: false,
       },
       {
         source: '/blog',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/blog',
+        destination: 'hhttp://103.110.87.227:3000/admin/blog',
         permanent: false,
       },
       {
         source: '/preview',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/preview',
+        destination: 'http://103.110.87.227:3000/admin/preview',
         permanent: false,
       },
       {
         source: '/review',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/review',
+        destination: 'http://103.110.87.227:3000/admin/review',
         permanent: false,
       },
       {
         source: '/users-profile',
-        destination: 'https://onelinkmarketing-dashboard.vercel.app/admin/authors',
+        destination: 'http://103.110.87.227:3000/admin/authors',
         permanent: false,
       },
     ];
