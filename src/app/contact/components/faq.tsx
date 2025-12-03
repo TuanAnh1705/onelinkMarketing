@@ -24,7 +24,7 @@ const faqData = [
     id: "02",
     question: "How quickly can I expect a response?",
     answer:
-      "We provide detailed projections and work diligently to meet agreed-upon goals, with transparent reporting throughout the process.",
+      "Our team monitors inquiries constantly, so you’ll typically hear back from us within a few hours during business days. We aim to get your questions answered so we can get your project moving.",
   },
   {
     id: "03",
@@ -36,13 +36,13 @@ const faqData = [
     id: "04",
     question: "Do you have a physical office I can visit?",
     answer:
-      "We maintain strict quality standards across all projects with regular reviews, testing protocols, and continuous improvement practices.",
+      "\"We are everywhere you need us to be.\" Yes, we have a physical HQ in Danang, Vietnam and welcome your visit! However, we know you're busy, so we are also fully equipped for high-efficiency remote meetings via Zoom or Google Meet. Your choice.",
   },
   {
     id: "05",
     question: "What information should I prepare for the consultation?",
     answer:
-      "We work with businesses of all sizes across various industries, from startups to enterprise organizations.",
+      "\"Just bring your goals and your challenges.\" You don't need a perfect plan, that's exactly what we are here to build. If you have access to past campaign data or Google Analytics, that’s a great bonus, but your vision for where you want to take the business is the only requirement.",
   },
 ]
 
@@ -70,7 +70,7 @@ export default function Faq() {
               {/* Nút câu hỏi */}
               <button
                 onClick={() => toggleItem(index)}
-                className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-300 hover:bg-gray-50/50"
+                className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-300 hover:bg-white/0"
               >
                 <div className="flex items-center gap-6 pl-6">
                   <span className="archivo-expanded text-lg font-medium text-[#000000] min-w-[48px] text-left">
