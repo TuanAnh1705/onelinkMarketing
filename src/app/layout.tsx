@@ -24,6 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-white!" style={{ colorScheme: 'light' }}>
       <head>
+        <meta
+          name="viewport"
+          content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
         <link
           rel="shortcut icon"
           href="/assets/favicon-new.png"

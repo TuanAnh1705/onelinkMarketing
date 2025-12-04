@@ -42,37 +42,37 @@ const nextConfig = {
     return [
       {
         source: '/admin',
-        destination: 'http://103.110.87.227:3000/admin',
+        destination: 'http://103.110.87.227/admin',
         permanent: false,
       },
       {
         source: '/aboutUs',
-        destination: 'http://103.110.87.227:3000/admin/utilities/aboutUs',
+        destination: 'http://103.110.87.227/admin/utilities/aboutUs',
         permanent: false,
       },
       {
         source: '/categories',
-        destination: 'http://103.110.87.227:3000/admin/categories',
+        destination: 'http://103.110.87.227/admin/categories',
         permanent: false,
       },
       {
         source: '/blog',
-        destination: 'hhttp://103.110.87.227:3000/admin/blog',
+        destination: 'hhttp://103.110.87.227/admin/blog',
         permanent: false,
       },
       {
         source: '/preview',
-        destination: 'http://103.110.87.227:3000/admin/preview',
+        destination: 'http://103.110.87.227/admin/preview',
         permanent: false,
       },
       {
         source: '/review',
-        destination: 'http://103.110.87.227:3000/admin/review',
+        destination: 'http://103.110.87.227/admin/review',
         permanent: false,
       },
       {
         source: '/users-profile',
-        destination: 'http://103.110.87.227:3000/admin/authors',
+        destination: 'http://103.110.87.227/admin/authors',
         permanent: false,
       },
     ];
