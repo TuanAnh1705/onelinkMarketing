@@ -1,19 +1,32 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
 export function PartnerSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"])
+  // Tắt parallax trên mobile để tránh vấn đề
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["-30%", "30%"])
 
   return (
     <section className="bg-[#0a0e1a] text-white py-16 md:py-20">
@@ -54,11 +67,11 @@ export function PartnerSection() {
             {/* Hình bên trái với parallax effect */}
             <div
               ref={containerRef}
-              className="relative w-full max-w-md lg:w-[720px] h-[500px] lg:h-[800px] overflow-hidden shrink-0"
+              className="relative w-full max-w-md lg:w-[720px] h-[400px] lg:h-[800px] overflow-hidden shrink-0"
             >
               <motion.div
-                style={{ y }}
-                className="relative w-full h-[140%] -top-[20%] will-change-transform"
+                style={{ y: isMobile ? undefined : y }}
+                className="relative w-full h-full lg:h-[140%] lg:-top-[20%] will-change-transform"
               >
                 <Image
                   src="/assets/6.png"
@@ -72,7 +85,7 @@ export function PartnerSection() {
 
             {/* Cột phải: metrics */}
             {/* Bỏ h cố định, thêm mt-12 trên mobile */}
-            <div className="h-auto lg:h-[800px] flex-1 flex flex-col w-full max-w-md lg:max-w-none lg:w-auto mt-12 lg:mt-0">
+            <div className="h-auto lg:h-[800px] flex-1 flex flex-col w-full max-w-md lg:max-w-none lg:w-auto -mt-20 lg:mt-0">
               <div>
                 {/* Giảm font-size và căn giữa trên mobile */}
                 <h3 className="archivo-expanded text-3xl md:text-5xl lg:text-6xl font-medium mb-8 md:mb-12 leading-tight text-white md:text-left lg:text-left">

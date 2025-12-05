@@ -107,7 +107,7 @@ export default function MarqueeLogos() {
 
     return (
         // Container bọc ngoài
-        <div className="relative mt-40 w-full h-[100px] overflow-hidden bg-white flex items-center">
+        <div className="relative -mt-10 md:mt-30 w-full h-[100px] overflow-hidden bg-white flex items-center">
 
             {/* Dải marquee */}
             <motion.div

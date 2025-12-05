@@ -39,10 +39,10 @@ export default function SectionWork() {
     const isDesktop = useMediaQuery("(min-width: 1024px)");
 
     return (
-        <section ref={section3Ref} className="min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 -top-[250px] sm:-top-32 md:-top-40">
+        <section ref={section3Ref} className="md:min-h-[250vh] relative px-4 sm:px-8 md:px-16 lg:px-24 top-32 sm:-top-32 md:-top-40">
 
             {/* ✅ BỎ "pin/sticky" trên mobile */}
-            <div className="lg:sticky top-0 h-screen flex flex-col items-center justify-center">
+            <div className="lg:sticky top-0 md:h-screen flex flex-col items-center justify-center">
 
                 {/* CHỮ CHẠY NGANG */}
                 <motion.div
@@ -84,7 +84,7 @@ export default function SectionWork() {
                         gap-6 lg:gap-8
                         absolute 
                         left-6 right-6 mx-auto
-                        top-[43vh] sm:top-[55vh] md:top-[50vh]
+                        -top-10 sm:top-[55vh] md:top-[50vh]
                         lg:bottom-70 lg:top-auto lg:right-24 lg:left-auto lg:mx-0
                         max-w-md
                     "

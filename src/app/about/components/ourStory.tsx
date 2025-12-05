@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { motion, useMotionValue, useAnimationFrame, useVelocity } from "framer-motion"
+import { motion, useMotionValue, useAnimationFrame, useVelocity, useSpring } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -25,12 +25,14 @@ function CarouselRow({
     images, 
     direction = "left",
     imageWidth = 500,
-    gap = 20 
+    gap = 20,
+    onImageHover
 }: { 
     images: GalleryImage[]
     direction?: "left" | "right"
     imageWidth?: number
     gap?: number
+    onImageHover?: (isHovering: boolean) => void
 }) {
     const [isDragging, setIsDragging] = useState(false)
     const baseVelocity = direction === "left" ? -0.5 : 0.5
@@ -130,7 +132,9 @@ function CarouselRow({
                 {duplicatedImages.map((image, index) => (
                     <div
                         key={index}
-                        className="relative shrink-0 rounded-lg overflow-hidden w-[300px] h-[300px] md:w-[500px] md:h-[500px] select-none"
+                        className="relative shrink-0 rounded-lg overflow-hidden w-[300px] h-[300px] md:w-[500px] md:h-[500px] select-none cursor-none"
+                        onMouseEnter={() => onImageHover?.(true)}
+                        onMouseLeave={() => onImageHover?.(false)}
                     >
                         <Image
                             src={image.src}
@@ -148,12 +152,39 @@ function CarouselRow({
 }
 
 export function StorySection() {
+    const [hoveredCarousel, setHoveredCarousel] = useState(false)
+    const mouseX = useMotionValue(0)
+    const mouseY = useMotionValue(0)
+    const smoothX = useSpring(mouseX, { stiffness: 350, damping: 20 })
+    const smoothY = useSpring(mouseY, { stiffness: 350, damping: 20 })
+
     // Chia ảnh thành 2 nhóm cho mobile
     const topRowImages = galleryImageData.filter((_, i) => i % 2 === 0)
     const bottomRowImages = galleryImageData.filter((_, i) => i % 2 === 1)
 
     return (
-        <section className="bg-white py-20 md:py-32 overflow-hidden -mt-36">
+        <section 
+            className="bg-white py-20 md:py-32 overflow-hidden -mt-36"
+            onMouseMove={(e) => {
+                mouseX.set(e.clientX)
+                mouseY.set(e.clientY)
+            }}
+        >
+            {/* Custom cursor */}
+            <motion.div
+                className="fixed top-0 left-0 z-50 pointer-events-none flex items-center justify-center rounded-4xl bg-[#FFFFFF] border-none text-[#444444] text-sm shadow-lg px-5 py-3"
+                style={{
+                    x: smoothX,
+                    y: smoothY,
+                    translateX: "-50%",
+                    translateY: "-50%",
+                    scale: hoveredCarousel ? 1.1 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+                Drag
+            </motion.div>
+
             <div className="max-w-7xl mx-auto px-8 mb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                     <div className="flex items-start">
@@ -195,13 +226,27 @@ export function StorySection() {
 
             {/* Desktop: Single row carousel */}
             <div className="hidden md:block">
-                <CarouselRow images={galleryImageData} direction="left" />
+                <CarouselRow 
+                    images={galleryImageData} 
+                    direction="left" 
+                    onImageHover={setHoveredCarousel}
+                />
             </div>
 
             {/* Mobile: Two rows carousel */}
             <div className="md:hidden space-y-5">
-                <CarouselRow images={topRowImages} direction="left" imageWidth={300} />
-                <CarouselRow images={bottomRowImages} direction="right" imageWidth={300} />
+                <CarouselRow 
+                    images={topRowImages} 
+                    direction="left" 
+                    imageWidth={300} 
+                    onImageHover={setHoveredCarousel}
+                />
+                <CarouselRow 
+                    images={bottomRowImages} 
+                    direction="right" 
+                    imageWidth={300} 
+                    onImageHover={setHoveredCarousel}
+                />
             </div>
         </section>
     )

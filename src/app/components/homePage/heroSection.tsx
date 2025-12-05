@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 export default function SectionHero() {
     return (
         // ✅ THÊM 'isolate' ĐỂ BUỘC NÓ LÀM 1 LAYER Z-10 DUY NHẤT
-        <section className="min-h-[85vh] flex items-start px-4 sm:px-8 md:px-16 lg:px-24 pt-24 md:pt-32 relative z-10 isolate">
+        <section className="md:min-h-[85vh] flex items-start px-4 sm:px-8 md:px-16 lg:px-24 pt-24 md:pt-32 relative z-10 isolate">
             {/* ... code bên trong giữ nguyên ... */}
 
             <div className="relative max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">

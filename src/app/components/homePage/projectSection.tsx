@@ -24,7 +24,7 @@ export default function SectionProjects() {
   className="
     relative justify-center 
     -mt-[1450px]     
-    min-[393px]:-mt-[1450px]   
+    min-[393px]:mt-96   
     min-[430px]:-mt-[1750px]   
     md:-mt-96         
     lg:-mt-60         

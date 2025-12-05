@@ -229,7 +229,7 @@ export default function Showcase() {
     <section
       id="showcase"
       ref={sectionRef}
-      className={`relative h-screen w-full overflow-hidden ${isDesktop ? "bg-neutral-900" : "bg-black/90"}`}
+      className={`relative h-[600px] md:h-screen w-full overflow-hidden ${isDesktop ? "bg-neutral-900" : "bg-black/90"}`}
     >
       {/* Phần JSX bên dưới không đổi. 
         Nó sẽ tự động hiển thị slide 0 (vì 'currentSlide' không đổi)

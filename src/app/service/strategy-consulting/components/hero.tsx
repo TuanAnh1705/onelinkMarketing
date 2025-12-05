@@ -292,13 +292,13 @@ export default function HeroSection() {
                   >
                     {/* Overlay */}
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 p-6 
-                      bg-[#0074E5]/40
+                      className="absolute bottom-0 left-0 right-0 p-5
+                      bg-[#0074E5]/70
                       text-white flex flex-col justify-start"
                       variants={overlayVariants}
                       animate={animateState}
                     >
-                      <h3 className="archivo-expanded text-lg xl:text-xl font-bold leading-tight text-white">
+                      <h3 className="archivo-expanded text-lg xl:text-2xl font-bold leading-tight text-white">
                         {service.title}
                       </h3>
 
@@ -307,7 +307,7 @@ export default function HeroSection() {
                         variants={contentVariants}
                         animate={animateState}
                       >
-                        <p className="neulis-alt-regular text-md text-white ">
+                        <p className="neulis-alt-regular text-md md:text-xl text-white ">
                           {service.description}
                         </p>
 

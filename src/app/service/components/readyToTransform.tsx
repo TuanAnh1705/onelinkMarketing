@@ -67,7 +67,7 @@ export default function ReadyToTransform() {
     const isMobile = useMediaQuery("(max-width: 767px)")
 
     return (
-        <section className="relative flex flex-col items-center justify-center h-screen -mt-[20vh] space-y-5 overflow-hidden bg-white/0">
+        <section className="relative flex flex-col items-center justify-center min-h-fit py-24 md:h-screen -mt-10 md:-mt-[20vh] space-y-5 overflow-hidden bg-white/0">
             <div className="mb-16">
                 <h1 className="archivo-expanded text-3xl md:text-6xl font-medium text-center tracking-wider text-[#000A1D] mb-2">
                     Ready to Transform Your Brand?
@@ -89,7 +89,7 @@ export default function ReadyToTransform() {
                     {/* Text Wrapper */}
                     <div
                         // 4. 🚀 THAY ĐỔI: Chiều cao responsive
-                        className="relative overflow-hidden flex items-center justify-center h-[5rem] md:h-[7.5rem]"
+                        className="relative overflow-hidden flex items-center justify-center h-20 md:h-30"
                     // Bỏ style={{ height: "7.5rem" }}
                     >
                         <motion.div
@@ -101,11 +101,11 @@ export default function ReadyToTransform() {
                             transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                         >
                             {/* 5. 🚀 THAY ĐỔI: Cỡ chữ (text-xl) và line-height responsive */}
-                            <div className="archivo-expanded text-xl md:text-6xl font-bold bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-[5rem] md:leading-[7.5rem] whitespace-nowrap">
+                            <div className="archivo-expanded text-xl md:text-6xl font-bold bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-20 md:leading-30 whitespace-nowrap">
                                 GET A FREE CONSULTATION
                             </div>
                             {/* 6. 🚀 THAY ĐỔI: Cỡ chữ (text-4xl) và line-height responsive */}
-                            <div className="archivo-expanded text-4xl md:text-7xl font-bold bg-gradient-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-[5rem] md:leading-[7.5rem]">
+                            <div className="archivo-expanded text-4xl md:text-7xl font-bold bg-linear-to-r from-[#0074E5] to-[#162660] bg-clip-text text-transparent leading-20 md:leading-30">
                                 GO
                             </div>
                         </motion.div>
@@ -115,7 +115,7 @@ export default function ReadyToTransform() {
                     <motion.div
                         // 7. 🚀 THÊM suppressHydrationWarning
                         suppressHydrationWarning
-                        className="h-[4px] rounded-full transition-all"
+                        className="h-1 rounded-full transition-all"
                         style={{
                             background: "linear-gradient(90deg, #0074E5 0%, #162660 100%)",
                         }}
